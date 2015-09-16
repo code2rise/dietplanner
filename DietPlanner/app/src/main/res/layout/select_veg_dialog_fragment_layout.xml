@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginTop="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
+        android:layout_alignParentTop="true"
+        android:text="@string/select_vegetable_dialog_box_title"
+        android:textSize="@dimen/add_vegetable_dialog_title_textsize"
+        android:textColor="@color/dark_gray"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
+        android:layout_below="@id/tvTitle"
+        android:background="@color/dark_gray" />
+
+    <ListView
+        android:id="@+id/lvVegetableList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginBottom="@dimen/weeks_chooser_margin"
+        android:layout_below="@id/divider"
+        android:divider="@color/dark_gray"
+        android:dividerHeight="1dp"/>
+
+    <LinearLayout
+        android:id="@+id/llBottomBtnLayout"
+        android:layout_below="@id/lvVegetableList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginBottom="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_rounded_corner_btn"
+            android:text="@string/select_veg_ok_btn_title"
+            android:textColor="@color/dark_gray" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginBottom="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_rounded_corner_btn"
+            android:text="@string/cancel_veg_btn_title"
+            android:textColor="@color/dark_gray" />
+    </LinearLayout>
+</RelativeLayout>
