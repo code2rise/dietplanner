@@ -1,16 +1,21 @@
 package com.rise.dietplanner.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.model.DietPlanInfo;
+import com.rise.dietplanner.model.Vegetable;
 import com.rise.dietplanner.util.HandyFunctions;
 
 import java.util.ArrayList;
@@ -53,25 +58,73 @@ public class DietPlanGridAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        if(view == null) {
+        if (view == null) {
             view = inflater.inflate(R.layout.week_data_grid_view_item_layout, null);
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                    handyFunctions.dpToPx(48));
+                    handyFunctions.dpToPx(54));
 
             view.setLayoutParams(layoutParams);
         }
 
         DietPlanInfo dietPlanInfo = (DietPlanInfo) getItem(i);
+        ImageView imgAddVeg = (ImageView) view.findViewById(R.id.imgAddVeg);
+        TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        LinearLayout llSelectedVegContainer = (LinearLayout) view.findViewById(R.id.llSelectedVegContainer);
+        llSelectedVegContainer.setPadding(handyFunctions.dpToPx(5), handyFunctions.dpToPx(2),
+                                          handyFunctions.dpToPx(5), handyFunctions.dpToPx(2));
+        llSelectedVegContainer.removeAllViews();
 
-        if( dietPlanInfo.isHeader() ) {
-            TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
+        if (dietPlanInfo.isHeader()) {
             tvTitle.setText(dietPlanInfo.getTitle());
             tvTitle.setVisibility(View.VISIBLE);
-        }
-        else {
+            view.setBackgroundColor(Color.LTGRAY);
+        } else {
 
-            ImageView imgAddVeg = (ImageView) view.findViewById(R.id.imgAddVeg);
-            imgAddVeg.setVisibility(View.VISIBLE);
+            ArrayList<Vegetable> vegetables = dietPlanInfo.getSelectedVegetableArrayList();
+            if (vegetables != null && vegetables.size() > 0) {
+                StringBuilder sb = new StringBuilder();
+                int count = 0;
+
+                while (count < vegetables.size()) {
+
+                    Vegetable vegetable = vegetables.get(count);
+
+                    TextView tvVegetableName = new TextView(mContext);
+                    tvVegetableName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                    tvVegetableName.setSingleLine(true);
+                    tvVegetableName.setEllipsize(TextUtils.TruncateAt.END);
+                    tvVegetableName.setText(vegetable.getTitle());
+                    tvVegetableName.setPadding(handyFunctions.dpToPx(2), handyFunctions.dpToPx(0),
+                            handyFunctions.dpToPx(2), handyFunctions.dpToPx(0));
+                    tvVegetableName.setTextColor(mContext.getResources().getColor(R.color.white));
+
+                    if(count % 3 == 0) {
+                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.orange));
+                    }
+                    else if(count % 2 == 0) {
+                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.purple));
+                    }
+                    else {
+                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.bluish_green));
+                    }
+
+
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(handyFunctions.dpToPx(0), handyFunctions.dpToPx(1),
+                            handyFunctions.dpToPx(0), handyFunctions.dpToPx(1));
+
+                    llSelectedVegContainer.addView(tvVegetableName, layoutParams);
+
+                    count++;
+                }
+
+                llSelectedVegContainer.setVisibility(View.VISIBLE);
+                imgAddVeg.setVisibility(View.GONE);
+            } else {
+                imgAddVeg.setVisibility(View.VISIBLE);
+            }
         }
 
         return view;

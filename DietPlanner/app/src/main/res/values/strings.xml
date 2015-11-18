@@ -9,7 +9,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Add Vegetable pop up title hint -->
-    <string name="add_vegetable_title_hint">Vegetable Name</string>
+    <string name="add_vegetable_title_hint">Vegetable Name*</string>
     <string name="add_veg_btn_title">Add</string>
     <string name="cancel_veg_btn_title">Cancel</string>
     <string name="add_vegetable_dialog_box_title">Add Vegetable</string>
@@ -18,5 +18,50 @@
     <string name="select_vegetable_dialog_box_title">Select Vegetables</string>
     <string name="select_veg_ok_btn_title">Ok</string>
     <string name="tm_activity_not_found">Oops! Activity not found.</string>
+
+    <string-array name="vegetables_list">
+        <item>Mat Bean (Matki)</item>
+        <item>Green Gram (Moong Bean)</item>
+        <item>Beaten Rice (Poha)</item>
+        <item>Chickpeas Brown (Chana)</item>
+        <item>Black Gram Sabut (Urad Dal)</item>
+        <item>Black Eyed Beans (Chawli)</item>
+        <item>Chickpeas Green (Hara Chana)</item>
+        <item>Chickpeas White (Chhole)</item>
+        <item>Gram Flour (Besan)</item>
+        <item>Red Kidney Beans (Rajma)</item>
+        <item>Red Lentil (Masoor)</item>
+        <item>Refined Flour (Maida)</item>
+        <item>Split Green Gram (Moong Dal)</item>
+        <item>Split Black Gram (Urad Dal)</item>
+        <item>Split Red Gram (Tuvar Dal)</item>
+        <item>Split Red Lentil (Masoor Dal)</item>
+        <item>Pea (Matar)</item>
+        <item>Silk Squash (Gilki/Ghosale)</item>
+        <item>Pumpkin (Kaddu)</item>
+        <item>Bitter Gourd (Karela)</item>
+        <item>Cucumber (Kheera)</item>
+        <item>Bottle Gourd (Lauki/Bhopla)</item>
+        <item>Ridge Gourd (Torai/Dodke)</item>
+        <item>Ivy Gourd (Kundru/Tondli)</item>
+        <item>Colocasia leaves (ArbiKaSaag/Alu)</item>
+        <item>Green Amaranth (Chaurai/Rajgira)</item>
+        <item>Coriander (Dhaniya Patta)</item>
+        <item>Drumstick (Saragawa/Shevga)</item>
+        <item>Fenugreek (Methi)</item>
+        <item>Radish (Mooli/Mula)</item>
+        <item>Spinach (Paalak)</item>
+        <item>Cabbage (Patta Gobhi)</item>
+        <item>Mint Leaves (Pudina)</item>
+        <item>Mustard Leaves (Sarson Ka Saag)</item>
+        <item>Potato (Aaloo)</item>
+        <item>Carrot (Gaajar)</item>
+        <item>Sweet Potato (Ratale)</item>
+        <item>Beetroot (Beet)</item>
+        <item>Brinjal (Baingan)</item>
+        <item>Lady\'s Finger (Bhindi)</item>
+        <item>Cauliflower (Gobhi)</item>
+        <item>Capsicum (Shimla Mirch)</item>
+    </string-array>
 
 </resources>

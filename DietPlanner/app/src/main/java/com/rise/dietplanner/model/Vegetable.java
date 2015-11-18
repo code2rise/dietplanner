@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Vegetable {
     private String id;
     private String title;
+    private String nutrientInfo;
     private String imageUrl;
     private ArrayList<String> vegImageUrls = new ArrayList<>();
 
@@ -41,5 +42,13 @@ public class Vegetable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getNutrientInfo() {
+        return nutrientInfo;
+    }
+
+    public void setNutrientInfo(String nutrientInfo) {
+        this.nutrientInfo = nutrientInfo;
     }
 }

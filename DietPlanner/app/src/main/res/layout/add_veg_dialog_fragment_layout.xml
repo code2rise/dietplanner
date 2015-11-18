@@ -11,10 +11,11 @@
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_margin"
-        android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginBottom="5dp"
         android:text="@string/add_vegetable_dialog_box_title"
         android:textSize="@dimen/add_vegetable_dialog_title_textsize"
-        android:textColor="@color/dark_gray"/>
+        android:textColor="@color/dark_gray"
+        android:textStyle="bold"/>
 
     <View
         android:layout_width="match_parent"
@@ -52,8 +53,8 @@
 
         <ImageView
             android:id="@+id/imgVegetablePhoto"
-            android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_centerInParent="true"
             android:scaleType="center"
             android:src="@drawable/image" />
@@ -73,12 +74,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
         android:weightSum="1">
 
         <Button
             android:id="@+id/btnAdd"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:layout_margin="@dimen/add_vegetable_dialog_title_padding"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"
@@ -88,7 +90,7 @@
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:layout_margin="@dimen/add_vegetable_dialog_title_padding"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"

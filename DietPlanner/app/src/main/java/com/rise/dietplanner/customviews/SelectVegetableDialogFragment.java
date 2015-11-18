@@ -3,6 +3,7 @@ package com.rise.dietplanner.customviews;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.ListView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.SelectVegetableAdapter;
+import com.rise.dietplanner.db.DatabaseHelper;
+import com.rise.dietplanner.fragments.HomeFragment;
 import com.rise.dietplanner.model.Vegetable;
 
 import java.util.ArrayList;
@@ -19,12 +22,16 @@ import java.util.ArrayList;
 /**
  * Created by rise on 16/9/15.
  */
-public class SelectVegetableDialogFragment extends DialogFragment {
+public class SelectVegetableDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private View rootView = null;
     private ListView lvVegetableList = null;
     private Button btnOk = null;
     private Button btnCancel = null;
+    private SelectVegetableInterface selectVegetableInterface;
+    private DatabaseHelper mDatabaseHelper = null;
+    private ArrayList<Vegetable> selectedVegetables = new ArrayList<>();
+    private SelectVegetableAdapter selectVegetableAdapter = null;
 
     public SelectVegetableDialogFragment() {
         super();
@@ -39,26 +46,44 @@ public class SelectVegetableDialogFragment extends DialogFragment {
 
         lvVegetableList = (ListView) rootView.findViewById(R.id.lvVegetableList);
 
-        Vegetable veg1 = new Vegetable();
-        veg1.setTitle("Corn");
+        ArrayList<Vegetable> vegetablesList = new ArrayList<>();
+        mDatabaseHelper = new DatabaseHelper(getActivity());
+        vegetablesList = mDatabaseHelper.getVegetablesList();
 
-        Vegetable veg2 = new Vegetable();
-        veg2.setTitle("Spinach");
-
-        Vegetable veg3 = new Vegetable();
-        veg3.setTitle("Potato");
-
-        ArrayList<Vegetable> vegetables = new ArrayList<>();
-        vegetables.add(veg1);
-        vegetables.add(veg2);
-        vegetables.add(veg3);
-
-        SelectVegetableAdapter adapter = new SelectVegetableAdapter(getActivity(), vegetables);
-        lvVegetableList.setAdapter(adapter);
+        selectVegetableAdapter = new SelectVegetableAdapter(getActivity(), vegetablesList);
+        lvVegetableList.setAdapter(selectVegetableAdapter);
 
         btnOk = (Button) rootView.findViewById(R.id.btnOk);
+        btnOk.setOnClickListener(this);
         btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(this);
 
         return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.btnOk: {
+                selectVegetableInterface.selectVegetables(selectVegetableAdapter.getSelectedVegetables());
+                dismiss();
+                break;
+            }
+            case R.id.btnCancel: {
+                dismiss();
+                break;
+            }
+        }
+    }
+
+    public void setCommunicationInterface(SelectVegetableInterface selectVegetableInterface) {
+
+        this.selectVegetableInterface = selectVegetableInterface;
+    }
+
+    public interface SelectVegetableInterface {
+
+        public void selectVegetables(ArrayList<Vegetable> vegetablesInfo);
     }
 }

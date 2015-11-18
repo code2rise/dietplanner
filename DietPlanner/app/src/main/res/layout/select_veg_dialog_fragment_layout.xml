@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:text="@string/select_vegetable_dialog_box_title"
         android:textSize="@dimen/add_vegetable_dialog_title_textsize"
-        android:textColor="@color/dark_gray"/>
+        android:textColor="@color/dark_gray"
+        android:textStyle="bold"/>
 
     <View
         android:id="@+id/divider"
@@ -30,16 +31,19 @@
         android:id="@+id/lvVegetableList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:scrollbars="none"
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginBottom="@dimen/weeks_chooser_margin"
+        android:layout_marginTop="3dp"
         android:layout_below="@id/divider"
+        android:layout_above="@+id/llBottomBtnLayout"
         android:divider="@color/dark_gray"
         android:dividerHeight="1dp"/>
 
     <LinearLayout
-        android:id="@+id/llBottomBtnLayout"
-        android:layout_below="@id/lvVegetableList"
+        android:id="@id/llBottomBtnLayout"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -48,10 +52,10 @@
         <Button
             android:id="@+id/btnOk"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
             android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
-            android:layout_marginBottom="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"
             android:text="@string/select_veg_ok_btn_title"
@@ -60,10 +64,10 @@
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
-            android:layout_height="36dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
             android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
-            android:layout_marginBottom="@dimen/add_vegetable_dialog_title_padding"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"
             android:text="@string/cancel_veg_btn_title"

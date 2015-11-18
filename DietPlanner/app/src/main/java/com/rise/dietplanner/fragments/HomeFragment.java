@@ -2,6 +2,8 @@ package com.rise.dietplanner.fragments;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,6 +18,7 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.DietPlanGridAdapter;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.dietplanner.model.DietPlanInfo;
+import com.rise.dietplanner.model.Vegetable;
 
 import java.util.ArrayList;
 
@@ -27,7 +30,9 @@ import java.util.ArrayList;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener,
+        AdapterView.OnItemLongClickListener,
+        SelectVegetableDialogFragment.SelectVegetableInterface {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -38,12 +43,15 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private int selectedItem = -1;
 
     private OnFragmentInteractionListener mListener;
 
 //    private ArrayList<InfoModel>
     private View rootView = null;
     private GridView gvWeekData = null;
+    private DietPlanInfo[] dashboardData = null;
+    private DietPlanGridAdapter dietPlanGridAdapter = null;
 
     /**
      * Use this factory method to create a new instance of
@@ -88,12 +96,13 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         gvWeekData = (GridView) rootView.findViewById(R.id.gvWeekData);
 
-        DietPlanInfo[] dashboardData = getDashboardDietData();
-        DietPlanGridAdapter adapter = new DietPlanGridAdapter(getActivity(), dashboardData);
-        gvWeekData.setAdapter(adapter);
+        dashboardData = getDashboardDietData();
+        dietPlanGridAdapter = new DietPlanGridAdapter(getActivity(), dashboardData);
+        gvWeekData.setAdapter(dietPlanGridAdapter);
         gvWeekData.setVerticalSpacing(1);
         gvWeekData.setHorizontalSpacing(1);
         gvWeekData.setOnItemClickListener(this);
+        gvWeekData.setOnItemLongClickListener(this);
 
         return rootView;
     }
@@ -196,8 +205,28 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             return;
 
         dialogFragment = new SelectVegetableDialogFragment();
+        dialogFragment.setCommunicationInterface(this);
         dialogFragment.show(getFragmentManager(), "Select Vegetable");
-//        Toast.makeText(getActivity(), "Item clicked : " + i, Toast.LENGTH_LONG).show();
+        selectedItem = i;
+    }
+
+    @Override
+    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
+
+        DietPlanInfo dietPlanInfo = new DietPlanInfo();
+        dietPlanInfo.setSelectedVegetableArrayList(vegetablesInfo);
+        dietPlanInfo.setIsHeader(false);
+        dashboardData[selectedItem] = dietPlanInfo;
+        dietPlanGridAdapter.notifyDataSetChanged();
+
+        Toast.makeText(getActivity(), "Vegetables Selected!!", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Toast.makeText(getActivity(), "Position : " + i, Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     /**

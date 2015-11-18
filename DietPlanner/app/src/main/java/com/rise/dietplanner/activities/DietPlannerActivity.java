@@ -1,6 +1,7 @@
 package com.rise.dietplanner.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Spinner;
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.WeeksListAdapter;
 import com.rise.dietplanner.customviews.AddVegetableDialogFragment;
+import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.fragments.HomeFragment;
 import com.rise.dietplanner.model.Week;
 import com.rise.dietplanner.util.HandyFunctions;
@@ -31,25 +33,35 @@ public class DietPlannerActivity extends AppCompatActivity implements
     private static final int HOME_FRAGMENT = 1;
     private static final int SETTINGS_FRAGMENT = 2;
 
+    public static final String PREFERENCE_NAME = "DIET_PLANNER";
     private Spinner spWeeks = null;
     private AddVegetableDialogFragment dialogFragment = null;
     private ImageUtility imageUtility = null;
     private HandyFunctions handyFunctions = null;
+    private DatabaseHelper databaseHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_planner);
 
+        databaseHelper = new DatabaseHelper(this);
+        SharedPreferences preferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
+        boolean isFirstLogin = preferences.getBoolean("isFirstLogin", true);
+        if(isFirstLogin) {
+            databaseHelper.insertVegetablesInDatabase();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isFirstLogin", false);
+            editor.commit();
+        }
+
         imageUtility = new ImageUtility(getApplicationContext());
         handyFunctions = new HandyFunctions(getApplicationContext());
 
         spWeeks = (Spinner) findViewById(R.id.spWeeks);
-
         ArrayList<Week> weeks = getWeeksList();
         WeeksListAdapter adapter = new WeeksListAdapter(this, weeks);
         spWeeks.setAdapter(adapter);
-
         Calendar cal = Calendar.getInstance();
         spWeeks.setSelection(cal.get(Calendar.WEEK_OF_YEAR) - 1);
 
@@ -95,10 +107,11 @@ public class DietPlannerActivity extends AppCompatActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if(id == R.id.action_add) {
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        else
+        if(id == R.id.action_add) {
             dialogFragment = new AddVegetableDialogFragment();
             dialogFragment.show(getSupportFragmentManager(), "Add Vegetable");
 
@@ -161,7 +174,7 @@ public class DietPlannerActivity extends AppCompatActivity implements
 //            Bitmap bitmap = BitmapFactory.decodeFile(
 //                    Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
             //set image bitmap to image view
-            dialogFragment.setImgVegetableImage(decodedBitmap);
+            dialogFragment.setImgVegetableImage(decodedBitmap, capturedImagePath);
         }
 //        if(requestCode==2){
 //            //Create an instance of bundle and get the returned data

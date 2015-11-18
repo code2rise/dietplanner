@@ -8,9 +8,9 @@
         android:title="@string/action_add"
         app:showAsAction="withText|always" />
 
-    <item
+    <!--<item
         android:id="@+id/action_settings"
         android:orderInCategory="101"
         android:title="@string/action_settings"
-        app:showAsAction="withText|collapseActionView" />
+        app:showAsAction="withText|collapseActionView" />-->
 </menu>

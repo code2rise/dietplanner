@@ -14,11 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.rise.dietplanner.R;
+import com.rise.dietplanner.db.DatabaseHelper;
 
 import java.io.File;
 
@@ -30,9 +33,13 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
     private View rootView = null;
     private Button btnAdd = null;
     private Button btnCancel = null;
+    private EditText etVegetableName = null;
+    private AutoCompleteTextView etNutrients = null;
     private ImageView imgEditPhoto = null;
     private ImageView imgVegetablePhoto = null;
     private ICaptureImage iCaptureImage = null;
+    private DatabaseHelper mDatabaseHelper = null;
+    private String capturedImagePath = "";
 
     @Nullable
     @Override
@@ -48,10 +55,14 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
         btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
         imgEditPhoto = (ImageView) rootView.findViewById(R.id.imgEditPhoto);
         imgVegetablePhoto = (ImageView) rootView.findViewById(R.id.imgVegetablePhoto);
+        etVegetableName = (EditText) rootView.findViewById(R.id.etVegetableName);
+        etNutrients = (AutoCompleteTextView) rootView.findViewById(R.id.etNutrients);
 
         btnAdd.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         imgEditPhoto.setOnClickListener(this);
+
+        mDatabaseHelper = new DatabaseHelper(getActivity());
 
         return rootView;
     }
@@ -62,6 +73,11 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
             case R.id.btnAdd: {
 
                 Toast.makeText(getActivity(), "Add Vegetables!!", Toast.LENGTH_SHORT).show();
+                String vegetableName = etVegetableName.getText().toString();
+                String vegetableNutrients = etNutrients.getText().toString();
+                mDatabaseHelper.addVegetable(vegetableName, vegetableNutrients, capturedImagePath);
+
+                getDialog().dismiss();
                 break;
             }
             case R.id.btnCancel: {
@@ -89,8 +105,9 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
         public void captureImage();
     }
 
-    public void setImgVegetableImage(Bitmap bitmap) {
+    public void setImgVegetableImage(Bitmap bitmap, String capturedImagePath) {
 
         imgVegetablePhoto.setImageBitmap(bitmap);
+        this.capturedImagePath = capturedImagePath;
     }
 }
