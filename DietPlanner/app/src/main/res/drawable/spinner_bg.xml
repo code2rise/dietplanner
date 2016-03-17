@@ -11,11 +11,13 @@
 
                     <corners android:radius="5dp" />
 
-                    <padding android:bottom="3dp" android:left="3dp" android:right="3dp" android:top="3dp" />
+                    <padding android:bottom="3dp" android:left="3dp" android:right="10dp" android:top="3dp" />
                 </shape>
             </item>
             <item>
-                <bitmap android:gravity="center_vertical|right" android:src="@drawable/spinner_dropdown_icon" />
+                <!--<shape>-->
+                    <bitmap android:gravity="center_vertical|right" android:src="@drawable/spinner_dropdown_icon" />
+                <!--</shape>-->
             </item>
         </layer-list>
     </item>

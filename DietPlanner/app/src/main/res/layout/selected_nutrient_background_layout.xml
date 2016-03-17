@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvSelectedNutrient"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:drawableRight="@drawable/clear_selection"
+    android:background="@drawable/rounded_corner_label_background"
+    android:paddingLeft="@dimen/nutrient_list_autocomplete_item_top_padding"
+    android:paddingRight="@dimen/nutrient_list_autocomplete_item_top_padding"
+    android:paddingTop="@dimen/nutrient_list_autocomplete_item_top_padding"
+    android:paddingBottom="@dimen/nutrient_list_autocomplete_item_top_padding"/>

@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
+    android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
     android:orientation="vertical">
 
     <TextView
@@ -34,7 +36,7 @@
         android:scrollbars="none"
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
-        android:layout_marginBottom="@dimen/weeks_chooser_margin"
+        android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="3dp"
         android:layout_below="@id/divider"
         android:layout_above="@+id/llBottomBtnLayout"
@@ -55,7 +57,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
             android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"
             android:text="@string/select_veg_ok_btn_title"
@@ -67,7 +69,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
             android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
             android:layout_weight="0.5"
             android:background="@drawable/selector_rounded_corner_btn"
             android:text="@string/cancel_veg_btn_title"

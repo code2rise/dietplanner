@@ -20,6 +20,7 @@ import com.rise.dietplanner.customviews.AddVegetableDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.fragments.HomeFragment;
 import com.rise.dietplanner.model.Week;
+import com.rise.dietplanner.util.CalendarGenerator;
 import com.rise.dietplanner.util.HandyFunctions;
 import com.rise.dietplanner.util.ImageUtility;
 
@@ -49,7 +50,7 @@ public class DietPlannerActivity extends AppCompatActivity implements
         SharedPreferences preferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
         boolean isFirstLogin = preferences.getBoolean("isFirstLogin", true);
         if(isFirstLogin) {
-            databaseHelper.insertVegetablesInDatabase();
+            //databaseHelper.insertVegetablesInDatabase();
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isFirstLogin", false);
             editor.commit();
@@ -58,38 +59,14 @@ public class DietPlannerActivity extends AppCompatActivity implements
         imageUtility = new ImageUtility(getApplicationContext());
         handyFunctions = new HandyFunctions(getApplicationContext());
 
+        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
         spWeeks = (Spinner) findViewById(R.id.spWeeks);
-        ArrayList<Week> weeks = getWeeksList();
+        ArrayList<Week> weeks = calendarGenerator.getWeeksList();
         WeeksListAdapter adapter = new WeeksListAdapter(this, weeks);
         spWeeks.setAdapter(adapter);
-        Calendar cal = Calendar.getInstance();
-        spWeeks.setSelection(cal.get(Calendar.WEEK_OF_YEAR) - 1);
+        spWeeks.setSelection(calendarGenerator.getCurrentWeekNumber());
 
         setFragment(HOME_FRAGMENT);
-    }
-
-    private ArrayList<Week> getWeeksList() {
-
-        ArrayList<Week> weeks = new ArrayList<>(53);
-        Calendar now = null;
-        for (int index=1; index<=53; index++) {
-            Week week = new Week();
-            week.setWeekNumber(index);
-
-            now = Calendar.getInstance();
-            now.clear();
-            now.set(Calendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
-            now.set(Calendar.WEEK_OF_YEAR, index);
-            now.set(Calendar.DAY_OF_WEEK, now.getFirstDayOfWeek());
-            week.setStartOfWeek(now.getTime());
-
-            now.add(Calendar.DAY_OF_YEAR, 6);
-            week.setEndOfWeek(now.getTime());
-
-            weeks.add(week);
-        }
-
-        return weeks;
     }
 
     @Override
@@ -127,7 +104,8 @@ public class DietPlannerActivity extends AppCompatActivity implements
         switch (fragmentId) {
             case HOME_FRAGMENT:
             default: {
-                fragment = HomeFragment.newInstance();
+                Calendar cal = Calendar.getInstance();
+                fragment = HomeFragment.newInstance(cal.get(Calendar.WEEK_OF_YEAR) - 1);
                 break;
             }
         }

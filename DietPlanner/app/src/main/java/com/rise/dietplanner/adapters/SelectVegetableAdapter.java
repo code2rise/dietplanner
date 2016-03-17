@@ -64,13 +64,21 @@ public class SelectVegetableAdapter extends BaseAdapter {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked) {
-                    if( !selectedVegetables.contains(veg) ) {
+                if (isChecked) {
+                    if (!selectedVegetables.contains(veg)) {
+                        veg.setSelected(true);
                         selectedVegetables.add(veg);
+                    }
+                } else {
+                    if (selectedVegetables.contains(veg)) {
+                        veg.setSelected(false);
+                        selectedVegetables.remove(veg);
                     }
                 }
             }
         });
+
+        cbVegetableSelected.setChecked(veg.isSelected());
 
         return view;
     }

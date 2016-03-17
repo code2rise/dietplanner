@@ -2,6 +2,9 @@ package com.rise.dietplanner.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -99,15 +102,32 @@ public class DietPlanGridAdapter extends BaseAdapter {
                     tvVegetableName.setTextColor(mContext.getResources().getColor(R.color.white));
 
                     if(count % 3 == 0) {
-                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.orange));
+
+                        Drawable mDrawable = getVegetableBackground("#FA8258");
+                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            tvVegetableName.setBackgroundDrawable(mDrawable);
+                        } else {
+                            tvVegetableName.setBackground(mDrawable);
+                        }
                     }
                     else if(count % 2 == 0) {
-                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.purple));
+
+                        Drawable mDrawable = getVegetableBackground("#D358F7");
+                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            tvVegetableName.setBackgroundDrawable(mDrawable);
+                        } else {
+                            tvVegetableName.setBackground(mDrawable);
+                        }
                     }
                     else {
-                        tvVegetableName.setBackgroundColor(mContext.getResources().getColor(R.color.bluish_green));
-                    }
 
+                        Drawable mDrawable = getVegetableBackground("#04B486");
+                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            tvVegetableName.setBackgroundDrawable(mDrawable);
+                        } else {
+                            tvVegetableName.setBackground(mDrawable);
+                        }
+                    }
 
                     LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
@@ -128,5 +148,21 @@ public class DietPlanGridAdapter extends BaseAdapter {
         }
 
         return view;
+    }
+
+    private Drawable getVegetableBackground(String colorString) {
+
+        Drawable mDrawable = null;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mDrawable = mContext.getResources().getDrawable(R.drawable.selected_veg_indicator_drawable, mContext.getTheme());
+        }
+        else {
+            mDrawable = mContext.getResources().getDrawable(R.drawable.selected_veg_indicator_drawable);
+        }
+
+        PorterDuff.Mode mMode = PorterDuff.Mode.SRC_ATOP;
+        mDrawable.setColorFilter(Color.parseColor(colorString), mMode);
+
+        return mDrawable;
     }
 }

@@ -7,4 +7,5 @@
     <color name="bluish_green">#04B486</color>
     <color name="purple">#D358F7</color>
     <color name="orange">#FA8258</color>
+    <color name="transparent">#00000000</color>
 </resources>

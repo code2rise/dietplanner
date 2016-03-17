@@ -19,49 +19,49 @@
     <string name="select_veg_ok_btn_title">Ok</string>
     <string name="tm_activity_not_found">Oops! Activity not found.</string>
 
-    <string-array name="vegetables_list">
-        <item>Mat Bean (Matki)</item>
-        <item>Green Gram (Moong Bean)</item>
-        <item>Beaten Rice (Poha)</item>
-        <item>Chickpeas Brown (Chana)</item>
-        <item>Black Gram Sabut (Urad Dal)</item>
-        <item>Black Eyed Beans (Chawli)</item>
-        <item>Chickpeas Green (Hara Chana)</item>
-        <item>Chickpeas White (Chhole)</item>
-        <item>Gram Flour (Besan)</item>
-        <item>Red Kidney Beans (Rajma)</item>
-        <item>Red Lentil (Masoor)</item>
-        <item>Refined Flour (Maida)</item>
-        <item>Split Green Gram (Moong Dal)</item>
-        <item>Split Black Gram (Urad Dal)</item>
-        <item>Split Red Gram (Tuvar Dal)</item>
-        <item>Split Red Lentil (Masoor Dal)</item>
-        <item>Pea (Matar)</item>
-        <item>Silk Squash (Gilki/Ghosale)</item>
-        <item>Pumpkin (Kaddu)</item>
-        <item>Bitter Gourd (Karela)</item>
-        <item>Cucumber (Kheera)</item>
-        <item>Bottle Gourd (Lauki/Bhopla)</item>
-        <item>Ridge Gourd (Torai/Dodke)</item>
-        <item>Ivy Gourd (Kundru/Tondli)</item>
-        <item>Colocasia leaves (ArbiKaSaag/Alu)</item>
-        <item>Green Amaranth (Chaurai/Rajgira)</item>
-        <item>Coriander (Dhaniya Patta)</item>
-        <item>Drumstick (Saragawa/Shevga)</item>
-        <item>Fenugreek (Methi)</item>
-        <item>Radish (Mooli/Mula)</item>
-        <item>Spinach (Paalak)</item>
-        <item>Cabbage (Patta Gobhi)</item>
-        <item>Mint Leaves (Pudina)</item>
-        <item>Mustard Leaves (Sarson Ka Saag)</item>
-        <item>Potato (Aaloo)</item>
-        <item>Carrot (Gaajar)</item>
-        <item>Sweet Potato (Ratale)</item>
-        <item>Beetroot (Beet)</item>
-        <item>Brinjal (Baingan)</item>
-        <item>Lady\'s Finger (Bhindi)</item>
-        <item>Cauliflower (Gobhi)</item>
-        <item>Capsicum (Shimla Mirch)</item>
-    </string-array>
+    <!--<string-array name="vegetables_list">
+        <item>Mat Bean</item>
+        <item>Green Gram</item>
+        <item>Beaten Rice</item>
+        <item>Chickpeas Brown</item>
+        <item>Black Gram Sabut</item>
+        <item>Black Eyed Beans</item>
+        <item>Chickpeas Green</item>
+        <item>Chickpeas White</item>
+        <item>Gram Flour</item>
+        <item>Red Kidney Beans</item>
+        <item>Red Lentil</item>
+        <item>Refined Flour</item>
+        <item>Split Green Gram</item>
+        <item>Split Black Gram</item>
+        <item>Split Red Gram</item>
+        <item>Split Red Lentil</item>
+        <item>Pea</item>
+        <item>Silk Squash</item>
+        <item>Pumpkin</item>
+        <item>Bitter Gourd</item>
+        <item>Cucumber</item>
+        <item>Bottle Gourd</item>
+        <item>Ridge Gourd</item>
+        <item>Ivy Gourd</item>
+        <item>Colocasia leaves</item>
+        <item>Green Amaranth</item>
+        <item>Coriander</item>
+        <item>Drumstick</item>
+        <item>Fenugreek</item>
+        <item>Radish</item>
+        <item>Spinach</item>
+        <item>Cabbage</item>
+        <item>Mint Leaves</item>
+        <item>Mustard Leaves</item>
+        <item>Potato</item>
+        <item>Carrot</item>
+        <item>Sweet Potato</item>
+        <item>Beetroot</item>
+        <item>Brinjal</item>
+        <item>Lady\'s Finger</item>
+        <item>Cauliflower</item>
+        <item>Capsicum</item>
+    </string-array>-->
 
 </resources>

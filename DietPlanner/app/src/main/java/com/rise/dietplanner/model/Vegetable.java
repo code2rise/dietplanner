@@ -11,6 +11,7 @@ public class Vegetable {
     private String nutrientInfo;
     private String imageUrl;
     private ArrayList<String> vegImageUrls = new ArrayList<>();
+    private boolean isSelected = false;
 
     public String getId() {
         return id;
@@ -50,5 +51,13 @@ public class Vegetable {
 
     public void setNutrientInfo(String nutrientInfo) {
         this.nutrientInfo = nutrientInfo;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean isSelected) {
+        this.isSelected = isSelected;
     }
 }

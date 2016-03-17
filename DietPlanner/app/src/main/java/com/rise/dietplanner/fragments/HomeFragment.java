@@ -17,10 +17,15 @@ import android.widget.Toast;
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.DietPlanGridAdapter;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
+import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.model.DietPlanInfo;
 import com.rise.dietplanner.model.Vegetable;
+import com.rise.dietplanner.model.Week;
+import com.rise.dietplanner.util.CalendarGenerator;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,16 +38,9 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener,
         SelectVegetableDialogFragment.SelectVegetableInterface {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private SelectVegetableDialogFragment dialogFragment;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     private int selectedItem = -1;
 
     private OnFragmentInteractionListener mListener;
@@ -52,41 +50,29 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     private GridView gvWeekData = null;
     private DietPlanInfo[] dashboardData = null;
     private DietPlanGridAdapter dietPlanGridAdapter = null;
+    private DatabaseHelper mDatabaseHelper = null;
+    private int weekNumber;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
+    public static HomeFragment newInstance(int weekNumber) {
         HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putInt("WeekNumber", weekNumber);
+        fragment.setArguments(bundle);
         return fragment;
-    }
-
-    public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        return fragment;
-    }
-
-    public HomeFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        Bundle bundle = getArguments();
+        if(bundle != null) {
+            weekNumber = bundle.getInt("WeekNumber");
         }
+    }
+
+    public HomeFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -96,6 +82,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         gvWeekData = (GridView) rootView.findViewById(R.id.gvWeekData);
 
+        mDatabaseHelper = new DatabaseHelper(getActivity());
         dashboardData = getDashboardDietData();
         dietPlanGridAdapter = new DietPlanGridAdapter(getActivity(), dashboardData);
         gvWeekData.setAdapter(dietPlanGridAdapter);
@@ -158,18 +145,21 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         dietPlanInfoList[24] = gridTitle9;
         dietPlanInfoList[28] = gridTitle10;
 
+        Week currentWeek = CalendarGenerator.getInstance().getCurrentWeek();
         int gridItemCount = 32;
         int counter = 4;
-
         while (counter <= gridItemCount) {
             if(counter % 4 == 0) {
                 counter++;
                 continue;
             }
+
             DietPlanInfo dietPlanInfo = new DietPlanInfo();
             dietPlanInfoList[counter] = dietPlanInfo;
             counter++;
         }
+
+        mDatabaseHelper.getSelectedVegatbles(currentWeek);
 
         return dietPlanInfoList;
     }
@@ -213,13 +203,30 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
 
+        // Current week number
+        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
+        Week week = calendarGenerator.getCurrentWeek();
+
+        // 4 represents number of columns in grid view.
+        int day = selectedItem / 4;
+        Calendar startOfWeek = Calendar.getInstance();
+        startOfWeek.setTime(week.getStartOfWeek());
+        startOfWeek.add(Calendar.DAY_OF_WEEK, day);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String date = formatter.format(startOfWeek.getTime());
+
+        // TODO Save these values to database table DietPlan
+        long timestamp = startOfWeek.getTimeInMillis();
+        int meal = selectedItem-(day*4);
+
+        mDatabaseHelper.addSelectedVegetables(meal, timestamp, vegetablesInfo);
+
         DietPlanInfo dietPlanInfo = new DietPlanInfo();
         dietPlanInfo.setSelectedVegetableArrayList(vegetablesInfo);
         dietPlanInfo.setIsHeader(false);
         dashboardData[selectedItem] = dietPlanInfo;
         dietPlanGridAdapter.notifyDataSetChanged();
-
-        Toast.makeText(getActivity(), "Vegetables Selected!!", Toast.LENGTH_LONG).show();
     }
 
     @Override

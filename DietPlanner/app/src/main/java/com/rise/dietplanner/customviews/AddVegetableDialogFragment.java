@@ -9,21 +9,31 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.DialogFragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.rise.dietplanner.R;
+import com.rise.dietplanner.adapters.NutrientListAutoCompleteAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
+import com.rise.dietplanner.model.Nutrient;
+import com.wefika.flowlayout.FlowLayout;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by rise on 28/8/15.
@@ -37,15 +47,20 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
     private AutoCompleteTextView etNutrients = null;
     private ImageView imgEditPhoto = null;
     private ImageView imgVegetablePhoto = null;
+    private FlowLayout llNutrientAutoCompleteContainer = null;
     private ICaptureImage iCaptureImage = null;
     private DatabaseHelper mDatabaseHelper = null;
+    private LayoutInflater inflater = null;
     private String capturedImagePath = "";
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         super.onCreateView(inflater, container, savedInstanceState);
+
+        mDatabaseHelper = new DatabaseHelper(getActivity());
+        this.inflater = inflater;
 
         rootView = inflater.inflate(R.layout.add_veg_dialog_fragment_layout, null);
         getDialog().setTitle(getResources().getString(R.string.add_vegetable_dialog_box_title));
@@ -57,14 +72,56 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
         imgVegetablePhoto = (ImageView) rootView.findViewById(R.id.imgVegetablePhoto);
         etVegetableName = (EditText) rootView.findViewById(R.id.etVegetableName);
         etNutrients = (AutoCompleteTextView) rootView.findViewById(R.id.etNutrients);
+        llNutrientAutoCompleteContainer = (FlowLayout) rootView.findViewById(R.id.llNutrientAutoCompleteContainer);
+
+        final ArrayList<Nutrient> nutrientsList = mDatabaseHelper.getNutrientsList();
+        NutrientListAutoCompleteAdapter adapter = new NutrientListAutoCompleteAdapter(getActivity(),
+                R.layout.nutrient_autocomplete_list_item_layout, nutrientsList);
+        etNutrients.setAdapter(adapter);
+        etNutrients.setDropDownAnchor(llNutrientAutoCompleteContainer.getId());
+        etNutrients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                etNutrients.setText("");
+                etNutrients.setHint("");
+
+                if(llNutrientAutoCompleteContainer.getChildCount() > 0) {
+                    addSelectedVegetableLabel(nutrientsList.get(i).getNutrientName());
+                }
+            }
+        });
 
         btnAdd.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
         imgEditPhoto.setOnClickListener(this);
 
-        mDatabaseHelper = new DatabaseHelper(getActivity());
-
         return rootView;
+    }
+
+    private void addSelectedVegetableLabel(String nutrientName) {
+
+        TextView tvSelectedNutrient = (TextView) inflater.inflate(R.layout.selected_nutrient_background_layout, null);
+        FlowLayout.LayoutParams selectedNutrientLayoutParams = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        selectedNutrientLayoutParams.setMargins(
+                getActivity().getResources().getDimensionPixelSize(R.dimen.nutrient_list_autocomplete_item_margin),
+                getActivity().getResources().getDimensionPixelSize(R.dimen.nutrient_list_autocomplete_item_margin),
+                getActivity().getResources().getDimensionPixelSize(R.dimen.nutrient_list_autocomplete_item_margin),
+                getActivity().getResources().getDimensionPixelSize(R.dimen.nutrient_list_autocomplete_item_margin));
+        tvSelectedNutrient.setLayoutParams(selectedNutrientLayoutParams);
+        tvSelectedNutrient.setText(nutrientName);
+        llNutrientAutoCompleteContainer.addView(tvSelectedNutrient, llNutrientAutoCompleteContainer.getChildCount()-1);
+
+        tvSelectedNutrient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                llNutrientAutoCompleteContainer.removeView(view);
+
+                if(llNutrientAutoCompleteContainer.getChildCount() == 1) {
+                    etNutrients.setHint(getActivity().getResources().getString(R.string.add_nutrient_hint));
+                }
+            }
+        });
     }
 
     @Override

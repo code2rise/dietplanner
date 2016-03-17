@@ -66,6 +66,9 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
 
         switch (view.getId()) {
             case R.id.btnOk: {
+
+                // TODO Update the vegetable database here.
+
                 selectVegetableInterface.selectVegetables(selectVegetableAdapter.getSelectedVegetables());
                 dismiss();
                 break;
