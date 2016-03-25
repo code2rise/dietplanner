@@ -15,6 +15,8 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.SelectVegetableAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.fragments.HomeFragment;
+import com.rise.dietplanner.interfaces.SelectVegetableInterface;
+import com.rise.dietplanner.model.DietPlanInfo;
 import com.rise.dietplanner.model.Vegetable;
 
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
     private DatabaseHelper mDatabaseHelper = null;
     private ArrayList<Vegetable> selectedVegetables = new ArrayList<>();
     private SelectVegetableAdapter selectVegetableAdapter = null;
+    private ArrayList<Vegetable> vegetablesList = new ArrayList<>();
 
     public SelectVegetableDialogFragment() {
         super();
@@ -46,11 +49,18 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
 
         lvVegetableList = (ListView) rootView.findViewById(R.id.lvVegetableList);
 
-        ArrayList<Vegetable> vegetablesList = new ArrayList<>();
         mDatabaseHelper = new DatabaseHelper(getActivity());
         vegetablesList = mDatabaseHelper.getVegetablesList();
+        for (Vegetable selectedVegetable : selectedVegetables) {
+            for(Vegetable vegetable : vegetablesList) {
+                if(selectedVegetable.getTitle().equals(vegetable.getTitle())) {
+                    vegetable.setSelected(true);
+                    break;
+                }
+            }
+        }
 
-        selectVegetableAdapter = new SelectVegetableAdapter(getActivity(), vegetablesList);
+        selectVegetableAdapter = new SelectVegetableAdapter(getActivity(), vegetablesList, selectedVegetables);
         lvVegetableList.setAdapter(selectVegetableAdapter);
 
         btnOk = (Button) rootView.findViewById(R.id.btnOk);
@@ -85,8 +95,10 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
         this.selectVegetableInterface = selectVegetableInterface;
     }
 
-    public interface SelectVegetableInterface {
+    public void setSelectedVegetables(DietPlanInfo dietPlanInfo) {
 
-        public void selectVegetables(ArrayList<Vegetable> vegetablesInfo);
+        if(dietPlanInfo != null && dietPlanInfo.getMeal() != null) {
+            selectedVegetables = dietPlanInfo.getMeal().getVegetables();
+        }
     }
 }

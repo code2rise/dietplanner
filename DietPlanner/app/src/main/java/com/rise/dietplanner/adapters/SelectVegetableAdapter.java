@@ -24,11 +24,11 @@ public class SelectVegetableAdapter extends BaseAdapter {
     private ArrayList<Vegetable> vegetables;
     private ArrayList<Vegetable> selectedVegetables = null;
 
-    public SelectVegetableAdapter(Context mContext, ArrayList<Vegetable> vegetables)  {
+    public SelectVegetableAdapter(Context mContext, ArrayList<Vegetable> vegetables, ArrayList<Vegetable> selectedVegetables)  {
         this.mContext = mContext;
         this.vegetables = vegetables;
         this.inflater = LayoutInflater.from(mContext);
-        selectedVegetables = new ArrayList<>();
+        this.selectedVegetables = selectedVegetables;
     }
 
     @Override
@@ -60,19 +60,41 @@ public class SelectVegetableAdapter extends BaseAdapter {
         tvVegetableName.setText(veg.getTitle());
 
         CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
+        if (veg.isSelected()) {
+            cbVegetableSelected.setChecked(true);
+        }
+        else {
+            cbVegetableSelected.setChecked(false);
+        }
+
         cbVegetableSelected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    if (!selectedVegetables.contains(veg)) {
+
+                    boolean isVegetableExist = false;
+                    for(Vegetable vegetable : selectedVegetables) {
+                        if (vegetable.getId() == veg.getId()) {
+                            isVegetableExist = true;
+                            break;
+                        }
+                    }
+
+                    if (!isVegetableExist) {
                         veg.setSelected(true);
                         selectedVegetables.add(veg);
                     }
                 } else {
-                    if (selectedVegetables.contains(veg)) {
-                        veg.setSelected(false);
-                        selectedVegetables.remove(veg);
+                    int index = 0;
+                    for(Vegetable vegetable : selectedVegetables) {
+                        if (vegetable.getId() == veg.getId()) {
+                            veg.setSelected(false);
+                            selectedVegetables.remove(index);
+                            break;
+                        }
+
+                        index++;
                     }
                 }
             }

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.model.DietPlanInfo;
+import com.rise.dietplanner.model.Meal;
 import com.rise.dietplanner.model.Vegetable;
 import com.rise.dietplanner.util.HandyFunctions;
 
@@ -83,65 +84,71 @@ public class DietPlanGridAdapter extends BaseAdapter {
             view.setBackgroundColor(Color.LTGRAY);
         } else {
 
-            ArrayList<Vegetable> vegetables = dietPlanInfo.getSelectedVegetableArrayList();
-            if (vegetables != null && vegetables.size() > 0) {
-                StringBuilder sb = new StringBuilder();
-                int count = 0;
+            Meal meal = dietPlanInfo.getMeal();
 
-                while (count < vegetables.size()) {
+            if(meal != null) {
+                ArrayList<Vegetable> vegetables = meal.getVegetables();
+                if (vegetables != null && vegetables.size() > 0) {
+                    StringBuilder sb = new StringBuilder();
+                    int count = 0;
 
-                    Vegetable vegetable = vegetables.get(count);
+                    while (count < vegetables.size()) {
 
-                    TextView tvVegetableName = new TextView(mContext);
-                    tvVegetableName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
-                    tvVegetableName.setSingleLine(true);
-                    tvVegetableName.setEllipsize(TextUtils.TruncateAt.END);
-                    tvVegetableName.setText(vegetable.getTitle());
-                    tvVegetableName.setPadding(handyFunctions.dpToPx(2), handyFunctions.dpToPx(0),
-                            handyFunctions.dpToPx(2), handyFunctions.dpToPx(0));
-                    tvVegetableName.setTextColor(mContext.getResources().getColor(R.color.white));
+                        Vegetable vegetable = vegetables.get(count);
 
-                    if(count % 3 == 0) {
+                        TextView tvVegetableName = new TextView(mContext);
+                        tvVegetableName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+                        tvVegetableName.setSingleLine(true);
+                        tvVegetableName.setEllipsize(TextUtils.TruncateAt.END);
+                        tvVegetableName.setText(vegetable.getTitle());
+                        tvVegetableName.setPadding(handyFunctions.dpToPx(2), handyFunctions.dpToPx(0),
+                                handyFunctions.dpToPx(2), handyFunctions.dpToPx(0));
+                        tvVegetableName.setTextColor(mContext.getResources().getColor(R.color.white));
 
-                        Drawable mDrawable = getVegetableBackground("#FA8258");
-                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            tvVegetableName.setBackgroundDrawable(mDrawable);
-                        } else {
-                            tvVegetableName.setBackground(mDrawable);
+                        if(count % 3 == 0) {
+
+                            Drawable mDrawable = getVegetableBackground("#FA8258");
+                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                tvVegetableName.setBackgroundDrawable(mDrawable);
+                            } else {
+                                tvVegetableName.setBackground(mDrawable);
+                            }
                         }
-                    }
-                    else if(count % 2 == 0) {
+                        else if(count % 2 == 0) {
 
-                        Drawable mDrawable = getVegetableBackground("#D358F7");
-                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            tvVegetableName.setBackgroundDrawable(mDrawable);
-                        } else {
-                            tvVegetableName.setBackground(mDrawable);
+                            Drawable mDrawable = getVegetableBackground("#D358F7");
+                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                tvVegetableName.setBackgroundDrawable(mDrawable);
+                            } else {
+                                tvVegetableName.setBackground(mDrawable);
+                            }
                         }
-                    }
-                    else {
+                        else {
 
-                        Drawable mDrawable = getVegetableBackground("#04B486");
-                        if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                            tvVegetableName.setBackgroundDrawable(mDrawable);
-                        } else {
-                            tvVegetableName.setBackground(mDrawable);
+                            Drawable mDrawable = getVegetableBackground("#04B486");
+                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                                tvVegetableName.setBackgroundDrawable(mDrawable);
+                            } else {
+                                tvVegetableName.setBackground(mDrawable);
+                            }
                         }
+
+                        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT);
+                        layoutParams.setMargins(handyFunctions.dpToPx(0), handyFunctions.dpToPx(1),
+                                handyFunctions.dpToPx(0), handyFunctions.dpToPx(1));
+
+                        llSelectedVegContainer.addView(tvVegetableName, layoutParams);
+
+                        count++;
                     }
 
-                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    layoutParams.setMargins(handyFunctions.dpToPx(0), handyFunctions.dpToPx(1),
-                            handyFunctions.dpToPx(0), handyFunctions.dpToPx(1));
-
-                    llSelectedVegContainer.addView(tvVegetableName, layoutParams);
-
-                    count++;
+                    llSelectedVegContainer.setVisibility(View.VISIBLE);
+                    imgAddVeg.setVisibility(View.GONE);
+                } else {
+                    imgAddVeg.setVisibility(View.VISIBLE);
                 }
-
-                llSelectedVegContainer.setVisibility(View.VISIBLE);
-                imgAddVeg.setVisibility(View.GONE);
             } else {
                 imgAddVeg.setVisibility(View.VISIBLE);
             }
@@ -164,5 +171,9 @@ public class DietPlanGridAdapter extends BaseAdapter {
         mDrawable.setColorFilter(Color.parseColor(colorString), mMode);
 
         return mDrawable;
+    }
+
+    public void updateMealsDetails(DietPlanInfo[] dashboardData) {
+        this.dashboardData = dashboardData;
     }
 }

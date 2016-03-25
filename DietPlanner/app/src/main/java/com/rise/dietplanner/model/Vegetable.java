@@ -6,18 +6,18 @@ import java.util.ArrayList;
  * Created by rise on 16/9/15.
  */
 public class Vegetable {
-    private String id;
+    private int id;
     private String title;
     private String nutrientInfo;
     private String imageUrl;
     private ArrayList<String> vegImageUrls = new ArrayList<>();
     private boolean isSelected = false;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

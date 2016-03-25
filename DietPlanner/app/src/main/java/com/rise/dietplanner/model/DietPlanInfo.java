@@ -1,5 +1,6 @@
 package com.rise.dietplanner.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -9,6 +10,7 @@ public class DietPlanInfo {
 
     private boolean isHeader = false;
     private String title = "";
+    private Meal meal;
     private ArrayList<Vegetable> selectedVegetableArrayList = new ArrayList<>();
 
     public String getTitle() {
@@ -25,6 +27,14 @@ public class DietPlanInfo {
 
     public void setIsHeader(boolean isHeader) {
         this.isHeader = isHeader;
+    }
+
+    public Meal getMeal() {
+        return meal;
+    }
+
+    public void setMeal(Meal meal) {
+        this.meal = meal;
     }
 
     public ArrayList<Vegetable> getSelectedVegetableArrayList() {

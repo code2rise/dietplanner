@@ -1,9 +1,6 @@
 package com.rise.dietplanner.fragments;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,7 +15,10 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.DietPlanGridAdapter;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
+import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.DietPlanInfo;
+import com.rise.dietplanner.model.Meal;
+import com.rise.dietplanner.model.Meals;
 import com.rise.dietplanner.model.Vegetable;
 import com.rise.dietplanner.model.Week;
 import com.rise.dietplanner.util.CalendarGenerator;
@@ -37,7 +37,7 @@ import java.util.Calendar;
  */
 public class HomeFragment extends Fragment implements AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener,
-        SelectVegetableDialogFragment.SelectVegetableInterface {
+        SelectVegetableInterface {
 
     private SelectVegetableDialogFragment dialogFragment;
 
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             counter++;
         }
 
-        mDatabaseHelper.getSelectedVegatbles(currentWeek);
+        dietPlanInfoList = mDatabaseHelper.getSelectedVegatbles(currentWeek, dietPlanInfoList);
 
         return dietPlanInfoList;
     }
@@ -195,6 +195,11 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             return;
 
         dialogFragment = new SelectVegetableDialogFragment();
+        if(dashboardData != null) {
+            DietPlanInfo dietPlanInfo = dashboardData[i];
+            dialogFragment.setSelectedVegetables(dietPlanInfo);
+        }
+
         dialogFragment.setCommunicationInterface(this);
         dialogFragment.show(getFragmentManager(), "Select Vegetable");
         selectedItem = i;
@@ -208,24 +213,40 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         Week week = calendarGenerator.getCurrentWeek();
 
         // 4 represents number of columns in grid view.
-        int day = selectedItem / 4;
+        int day = (selectedItem / 4);
         Calendar startOfWeek = Calendar.getInstance();
         startOfWeek.setTime(week.getStartOfWeek());
-        startOfWeek.add(Calendar.DAY_OF_WEEK, day);
+
+        // Subtracting 1 from calculated day as grid row index starts at 0.
+        startOfWeek.add(Calendar.DAY_OF_WEEK, day-1);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
         String date = formatter.format(startOfWeek.getTime());
+
+        // Get selected meal timing
+        Meals selectedMeal;
+        if ((selectedItem-(day*4)) % 3 == 1) {
+            selectedMeal = Meals.BREAKFAST;
+        } else if ((selectedItem-(day*4)) % 3 == 2) {
+            selectedMeal = Meals.LUNCH;
+        }
+        else {
+            selectedMeal = Meals.DINNER;
+        }
 
         // TODO Save these values to database table DietPlan
         long timestamp = startOfWeek.getTimeInMillis();
         int meal = selectedItem-(day*4);
 
-        mDatabaseHelper.addSelectedVegetables(meal, timestamp, vegetablesInfo);
+        Meal selectedMealInfo = new Meal();
+        selectedMealInfo.setMealCode(selectedMeal.name());
+        selectedMealInfo.setMealDateTime(timestamp);
+        selectedMealInfo.setVegetables(vegetablesInfo);
 
-        DietPlanInfo dietPlanInfo = new DietPlanInfo();
-        dietPlanInfo.setSelectedVegetableArrayList(vegetablesInfo);
-        dietPlanInfo.setIsHeader(false);
-        dashboardData[selectedItem] = dietPlanInfo;
+        mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
+
+        dashboardData = getDashboardDietData();
+        dietPlanGridAdapter.updateMealsDetails(dashboardData);
         dietPlanGridAdapter.notifyDataSetChanged();
     }
 
