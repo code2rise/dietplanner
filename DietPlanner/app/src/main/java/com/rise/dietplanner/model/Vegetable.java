@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Vegetable {
     private int id;
     private String title;
-    private String nutrientInfo;
-    private String imageUrl;
-    private ArrayList<String> vegImageUrls = new ArrayList<>();
+    private ArrayList<Nutrient> nutrientsList = new ArrayList<>();
+    private String imageUrl = "";
+//    private ArrayList<String> vegImageUrls = new ArrayList<>();
     private boolean isSelected = false;
 
     public int getId() {
@@ -29,13 +29,13 @@ public class Vegetable {
         this.title = title;
     }
 
-    public ArrayList<String> getVegImageUrls() {
-        return vegImageUrls;
-    }
-
-    public void setVegImageUrls(ArrayList<String> vegImageUrls) {
-        this.vegImageUrls = vegImageUrls;
-    }
+//    public ArrayList<String> getVegImageUrls() {
+//        return vegImageUrls;
+//    }
+//
+//    public void setVegImageUrls(ArrayList<String> vegImageUrls) {
+//        this.vegImageUrls = vegImageUrls;
+//    }
 
     public String getImageUrl() {
         return imageUrl;
@@ -45,19 +45,19 @@ public class Vegetable {
         this.imageUrl = imageUrl;
     }
 
-    public String getNutrientInfo() {
-        return nutrientInfo;
-    }
-
-    public void setNutrientInfo(String nutrientInfo) {
-        this.nutrientInfo = nutrientInfo;
-    }
-
     public boolean isSelected() {
         return isSelected;
     }
 
     public void setSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public ArrayList<Nutrient> getNutrientsList() {
+        return nutrientsList;
+    }
+
+    public void setNutrientsList(ArrayList<Nutrient> nutrientsList) {
+        this.nutrientsList = nutrientsList;
     }
 }

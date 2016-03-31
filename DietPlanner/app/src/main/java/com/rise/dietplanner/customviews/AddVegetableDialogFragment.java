@@ -30,6 +30,7 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.NutrientListAutoCompleteAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.model.Nutrient;
+import com.rise.dietplanner.model.Vegetable;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.io.File;
@@ -52,6 +53,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
     private DatabaseHelper mDatabaseHelper = null;
     private LayoutInflater inflater = null;
     private String capturedImagePath = "";
+    private ArrayList<Nutrient> selectedNutrientsList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -87,6 +89,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
 
                 if(llNutrientAutoCompleteContainer.getChildCount() > 0) {
                     addSelectedVegetableLabel(nutrientsList.get(i).getNutrientName());
+                    selectedNutrientsList.add(nutrientsList.get(i));
                 }
             }
         });
@@ -129,10 +132,15 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
         switch (view.getId()) {
             case R.id.btnAdd: {
 
-                Toast.makeText(getActivity(), "Add Vegetables!!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Add Vegetables!!", Toast.LENGTH_SHORT).show();
                 String vegetableName = etVegetableName.getText().toString();
-                String vegetableNutrients = etNutrients.getText().toString();
-                mDatabaseHelper.addVegetable(vegetableName, vegetableNutrients, capturedImagePath);
+
+                Vegetable vegetable = new Vegetable();
+                vegetable.setTitle(vegetableName);
+                vegetable.setNutrientsList(selectedNutrientsList);
+                vegetable.setImageUrl(capturedImagePath);
+
+                mDatabaseHelper.addVegetable(vegetable);
 
                 getDialog().dismiss();
                 break;

@@ -197,11 +197,17 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         dialogFragment = new SelectVegetableDialogFragment();
         if(dashboardData != null) {
             DietPlanInfo dietPlanInfo = dashboardData[i];
-            dialogFragment.setSelectedVegetables(dietPlanInfo);
+
+            if(dietPlanInfo.getMeal() != null && dietPlanInfo.getMeal().getVegetables().size() > 0) {
+                Toast.makeText(getActivity(), "Display vegetable details!!", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                dialogFragment.setSelectedVegetables(dietPlanInfo);
+                dialogFragment.setCommunicationInterface(this);
+                dialogFragment.show(getFragmentManager(), "Select Vegetable");
+            }
         }
 
-        dialogFragment.setCommunicationInterface(this);
-        dialogFragment.show(getFragmentManager(), "Select Vegetable");
         selectedItem = i;
     }
 

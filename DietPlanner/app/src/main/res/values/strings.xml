@@ -14,6 +14,7 @@
     <string name="cancel_veg_btn_title">Cancel</string>
     <string name="add_vegetable_dialog_box_title">Add Vegetable</string>
     <string name="add_nutrient_hint">Vegetable Nutrients</string>
+    <string name="selected_vegetables_title">Vegetables</string>
 
     <string name="select_vegetable_dialog_box_title">Select Vegetables</string>
     <string name="select_veg_ok_btn_title">Ok</string>

@@ -66,23 +66,27 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         database.endTransaction();
     }*/
 
-    public void addVegetable(String vegetableName, String vegetableNutrients, String vegetableImagePath) {
+    public void addVegetable(Vegetable vegetable) {
 
         SQLiteDatabase database = this.getWritableDatabase();
 
         database.beginTransaction();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("VegetableName", vegetableName);
-        contentValues.put("VegNameDevnagari", vegetableName);
+        contentValues.put("VegetableName", vegetable.getTitle());
+        contentValues.put("VegNameDevnagari", vegetable.getTitle());
 //        contentValues.put("VegetableNutrient", vegetableNutrients);
-        contentValues.put("VegetableImagePath", vegetableImagePath);
+        contentValues.put("VegetableImagePath", vegetable.getImageUrl());
 
         long vegId = database.insert("Vegetables", "null", contentValues);
 
-        ContentValues vegNutrientContentValues = new ContentValues();
-        vegNutrientContentValues.put("NutrientName", vegetableNutrients);
-        vegNutrientContentValues.put("VegId", vegId);
-        database.insert("VegNutrients", "null", vegNutrientContentValues);
+        for(int index=0; index<vegetable.getNutrientsList().size(); index++) {
+
+            Nutrient nutrient = vegetable.getNutrientsList().get(index);
+            ContentValues vegNutrientContentValues = new ContentValues();
+            vegNutrientContentValues.put("NutrientId", nutrient.getNutrientId());
+            vegNutrientContentValues.put("VegId", vegId);
+            database.insert("VegNutrients", "null", vegNutrientContentValues);
+        }
 
         database.setTransactionSuccessful();
         database.endTransaction();
@@ -102,8 +106,10 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             vegetable.setTitle(mCursor.getString(mCursor.getColumnIndex("VegetableName")));
             vegetable.setImageUrl(mCursor.getString(mCursor.getColumnIndex("VegetableImagePath")));
 
-            String vegNutrientQuery = "SELECT * FROM VegNutrients";
-            Cursor vegNutrientCursor = database.rawQuery(vegNutrientQuery, new String[]{});
+            String vegNutrientQuery = "SELECT Nutrients.Id, Nutrients.NutrientName FROM VegNutrients, Nutrients " +
+                                      "WHERE Nutrients.Id = VegNutrients.NutrientId AND VegNutrients.VegId = ?";
+
+            Cursor vegNutrientCursor = database.rawQuery(vegNutrientQuery, new String[]{String.valueOf(vegetable.getId())});
 
             StringBuilder nutrientInfoString = new StringBuilder();
             while (vegNutrientCursor.moveToNext()) {
@@ -114,7 +120,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                 nutrientInfoString.append(vegNutrientCursor.getString(vegNutrientCursor.getColumnIndex("NutrientName")));
             }
 
-            vegetable.setNutrientInfo(nutrientInfoString.toString());
+//            vegetable.setNutrientInfo(nutrientInfoString.toString());
 
             vegetablesList.add(vegetable);
         }
@@ -170,7 +176,10 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         database.beginTransaction();
 
-        database.delete("Meals", "MealDateTime=?", new String[] {String.valueOf(selectedMealInfo.getMealDateTime())});
+        database.delete("Meals", "MealDateTime=? AND MealCode=?", new String[] {
+                String.valueOf(selectedMealInfo.getMealDateTime()),
+                String.valueOf(selectedMealInfo.getMealCode())
+        });
 
         Calendar calendar = Calendar.getInstance();
         ContentValues mealContentValues = new ContentValues();
@@ -229,7 +238,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                     meal.setMealCode(mealCode);
                     meal.setMealDateTime(startOfWeek.getTimeInMillis());
 
-                    String getVegetablesListQuery = "SELECT Vegetables.Id, Vegetables.VegetableName " +
+                    String getVegetablesListQuery = "SELECT Vegetables.Id, Vegetables.VegetableName, Vegetables.VegetableImagePath " +
                             "FROM MealVegetables, vegetables Where " +
                             "MealVegetables.VegId = vegetables.Id AND MealVegetables.MealId = ?";
                     Cursor getVegetablesListCursor = database.rawQuery(getVegetablesListQuery,
@@ -240,10 +249,12 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
                         int vegId = getVegetablesListCursor.getInt(getVegetablesListCursor.getColumnIndex("Id"));
                         String vegName = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableName"));
+                        String vegetableImagePath = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableImagePath"));
 
                         Vegetable vegetable = new Vegetable();
                         vegetable.setId(vegId);
                         vegetable.setTitle(vegName);
+                        vegetable.setImageUrl(vegetableImagePath);
                         vegetableList.add(vegetable);
                     }
 
@@ -273,23 +284,5 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         }
 
         return dietPlanInfoList;
-    }
-
-    public void updateSelectedVegetables(ArrayList<Vegetable> vegetables, long timestamp, int dietId) {
-        SQLiteDatabase database = this.getWritableDatabase();
-        database.beginTransaction();
-
-        int count = 0;
-        while (count < vegetables.size()) {
-            Vegetable vegetable = vegetables.get(count);
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("VegId", vegetable.getId());
-            contentValues.put("Timestamp", timestamp);
-            database.update("DietPlan", contentValues, "Id=?", new String[] {String.valueOf(dietId)});
-            count++;
-        }
-
-        database.setTransactionSuccessful();
-        database.endTransaction();
     }
 }
