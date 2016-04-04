@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.DietPlanGridAdapter;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
+import com.rise.dietplanner.customviews.ShowVegetablesListDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.DietPlanInfo;
@@ -199,7 +200,10 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
             DietPlanInfo dietPlanInfo = dashboardData[i];
 
             if(dietPlanInfo.getMeal() != null && dietPlanInfo.getMeal().getVegetables().size() > 0) {
-                Toast.makeText(getActivity(), "Display vegetable details!!", Toast.LENGTH_SHORT).show();
+                ShowVegetablesListDialogFragment showVegetablesListDialogFragment = new ShowVegetablesListDialogFragment();
+                showVegetablesListDialogFragment.setSelectedVegetable(dietPlanInfo);
+                showVegetablesListDialogFragment.setCommunicationInterface(this);
+                showVegetablesListDialogFragment.show(getFragmentManager(), "Show Vegetables");
             }
             else {
                 dialogFragment.setSelectedVegetables(dietPlanInfo);

@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.SelectVegetableAdapter;
+import com.rise.dietplanner.adapters.SelectedVegetablesViewPagerAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.DietPlanInfo;
@@ -30,6 +32,7 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
     private ViewPager vegetableListPager = null;
     private SelectVegetableInterface selectVegetableInterface;
     private DatabaseHelper mDatabaseHelper = null;
+    private DietPlanInfo selectedDietInfo = null;
     private ArrayList<Vegetable> selectedVegetables = new ArrayList<>();
     private SelectVegetableAdapter selectVegetableAdapter = null;
     private ArrayList<Vegetable> vegetablesList = new ArrayList<>();
@@ -46,6 +49,11 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         vegetableListPager = (ViewPager) rootView.findViewById(R.id.vegetable_list_pager);
+        vegetableListPager.setLayoutParams(new LinearLayout.LayoutParams(
+                getResources().getDimensionPixelSize(R.dimen.show_selected_veg_details_dialog_width),
+                getResources().getDimensionPixelSize(R.dimen.show_selected_veg_details_dialog_height)));
+        SelectedVegetablesViewPagerAdapter adapter = new SelectedVegetablesViewPagerAdapter(getActivity(), selectedVegetables);
+        vegetableListPager.setAdapter(adapter);
 
         imgEdit = (ImageView) rootView.findViewById(R.id.btn_edit);
         imgEdit.setOnClickListener(this);
@@ -60,8 +68,12 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
             case R.id.btn_edit: {
 
                 // TODO Update the vegetable database here.
+                SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
+                dialogFragment.setSelectedVegetables(selectedDietInfo);
+                dialogFragment.setCommunicationInterface(selectVegetableInterface);
+                dialogFragment.show(getFragmentManager(), "Select Vegetable");
 
-                selectVegetableInterface.selectVegetables(selectVegetableAdapter.getSelectedVegetables());
+//                selectVegetableInterface.selectVegetables(selectVegetableAdapter.getSelectedVegetables());
                 dismiss();
                 break;
             }
@@ -80,6 +92,7 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
     public void setSelectedVegetable(DietPlanInfo dietPlanInfo) {
 
         if(dietPlanInfo != null && dietPlanInfo.getMeal() != null) {
+            selectedDietInfo = dietPlanInfo;
             selectedVegetables = dietPlanInfo.getMeal().getVegetables();
         }
     }
