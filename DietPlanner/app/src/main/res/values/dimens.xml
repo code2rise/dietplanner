@@ -15,10 +15,20 @@
     <dimen name="add_vegetable_dialog_title_textsize">20sp</dimen>
     <dimen name="diet_plan_week_header_textsize">17sp</dimen>
 
+    <dimen name="nutrient_list_autocomplete_item_padding">10dp</dimen>
     <dimen name="nutrient_list_autocomplete_item_left_padding">10dp</dimen>
     <dimen name="nutrient_list_autocomplete_item_top_padding">5dp</dimen>
     <dimen name="nutrient_list_autocomplete_item_margin">2dp</dimen>
 
     <dimen name="show_selected_veg_details_dialog_width">280dp</dimen>
     <dimen name="show_selected_veg_details_dialog_height">340dp</dimen>
+
+    <dimen name="vegetable_row_height">54dp</dimen>
+    <dimen name="diet_dashboard_item_margin">2dp</dimen>
+
+    <dimen name="selected_veg_list_label_left_margin">5dp</dimen>
+    <dimen name="selected_veg_list_label_top_margin">2dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="daily_diet_card_view_height">100dp</dimen>
 </resources>

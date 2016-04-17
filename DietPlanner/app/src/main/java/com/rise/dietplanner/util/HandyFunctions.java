@@ -11,7 +11,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.Patterns;
 import android.widget.Toast;
@@ -272,7 +276,23 @@ public class HandyFunctions {
 	    }
 	    return properties;
 	}
-		
+
+	public Drawable getVegetableBackground(String colorString) {
+
+		Drawable mDrawable = null;
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			mDrawable = _context.getResources().getDrawable(R.drawable.selected_veg_indicator_drawable, _context.getTheme());
+		}
+		else {
+			mDrawable = _context.getResources().getDrawable(R.drawable.selected_veg_indicator_drawable);
+		}
+
+		PorterDuff.Mode mMode = PorterDuff.Mode.SRC_ATOP;
+		mDrawable.setColorFilter(Color.parseColor(colorString), mMode);
+
+		return mDrawable;
+	}
+
 	public int dpToPx(int dp)
 	{
 	    return (int) (dp * Resources.getSystem().getDisplayMetrics().density);

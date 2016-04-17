@@ -63,9 +63,9 @@ public class DietPlanGridAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         if (view == null) {
-            view = inflater.inflate(R.layout.week_data_grid_view_item_layout, null);
+            view = inflater.inflate(R.layout.week_data_grid_view_item_layout, viewGroup, false);
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                    handyFunctions.dpToPx(54));
+                    (int) mContext.getResources().getDimension(R.dimen.vegetable_row_height));
 
             view.setLayoutParams(layoutParams);
         }

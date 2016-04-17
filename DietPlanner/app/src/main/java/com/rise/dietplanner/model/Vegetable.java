@@ -60,4 +60,8 @@ public class Vegetable {
     public void setNutrientsList(ArrayList<Nutrient> nutrientsList) {
         this.nutrientsList = nutrientsList;
     }
+
+    public String toString() {
+        return this.title;
+    }
 }

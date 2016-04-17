@@ -95,6 +95,10 @@ public class SelectedVegetablesViewPagerAdapter extends PagerAdapter {
                 e.printStackTrace();
             }
         }
+        else {
+            Bitmap imageBitmap = BitmapFactory.decodeFile(vegetable.getImageUrl());
+            imgVegetablePhoto.setImageBitmap(imageBitmap);
+        }
 
 //        Uri fileUri = Uri.parse(vegetable.getImageUrl());
 //        Bitmap vegetableBitmap = BitmapFactory.decodeFile();

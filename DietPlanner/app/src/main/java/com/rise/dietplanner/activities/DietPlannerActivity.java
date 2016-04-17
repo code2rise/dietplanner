@@ -12,13 +12,17 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.WeeksListAdapter;
 import com.rise.dietplanner.customviews.AddVegetableDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
+import com.rise.dietplanner.fragments.DailyDietFragment;
 import com.rise.dietplanner.fragments.HomeFragment;
+import com.rise.dietplanner.fragments.WeeklyDietFragment;
 import com.rise.dietplanner.model.Week;
 import com.rise.dietplanner.util.CalendarGenerator;
 import com.rise.dietplanner.util.HandyFunctions;
@@ -31,8 +35,10 @@ import java.util.Calendar;
 public class DietPlannerActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener, AddVegetableDialogFragment.ICaptureImage {
 
-    private static final int HOME_FRAGMENT = 1;
-    private static final int SETTINGS_FRAGMENT = 2;
+    private static final String HOME_FRAGMENT = "HOME_FRAGMENT";
+    private static final String WEEKLY_DIET_FRAGMENT = "WEEKLY_DIET_FRAGMENT";
+    private static final String DAILY_DIET_FRAGMENT = "DAILY_DIET_FRAGMENT";
+    private static final int SETTINGS_FRAGMENT = 4;
 
     public static final String PREFERENCE_NAME = "DIET_PLANNER";
     private Spinner spWeeks = null;
@@ -65,8 +71,31 @@ public class DietPlannerActivity extends AppCompatActivity implements
         WeeksListAdapter adapter = new WeeksListAdapter(this, weeks);
         spWeeks.setAdapter(adapter);
         spWeeks.setSelection(calendarGenerator.getCurrentWeekNumber());
+//        spWeeks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("weekIndex", i);
+//                fragment.setArguments(bundle);
+//                switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
 
-        setFragment(HOME_FRAGMENT);
+//        int currentWeekIndex = CalendarGenerator.getInstance().getCurrentWeekNumber();
+//        WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("weekIndex", currentWeekIndex);
+//        fragment.setArguments(bundle);
+//        switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
+
+        DailyDietFragment fragment = DailyDietFragment.newInstance();
+        switchFragment(fragment, DAILY_DIET_FRAGMENT);
     }
 
     @Override
@@ -98,20 +127,10 @@ public class DietPlannerActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void setFragment(int fragmentId) {
-        Fragment fragment = null;
-
-        switch (fragmentId) {
-            case HOME_FRAGMENT:
-            default: {
-                Calendar cal = Calendar.getInstance();
-                fragment = HomeFragment.newInstance(cal.get(Calendar.WEEK_OF_YEAR) - 1);
-                break;
-            }
-        }
+    private void switchFragment(Fragment fragment, String fragmentTag) {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.flFragmentContainer, fragment);
+        fragmentTransaction.replace(R.id.flFragmentContainer, fragment, fragmentTag);
         fragmentTransaction.commit();
     }
 

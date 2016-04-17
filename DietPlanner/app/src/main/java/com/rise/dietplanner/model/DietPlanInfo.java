@@ -11,7 +11,6 @@ public class DietPlanInfo {
     private boolean isHeader = false;
     private String title = "";
     private Meal meal;
-    private ArrayList<Vegetable> selectedVegetableArrayList = new ArrayList<>();
 
     public String getTitle() {
         return title;
@@ -35,13 +34,5 @@ public class DietPlanInfo {
 
     public void setMeal(Meal meal) {
         this.meal = meal;
-    }
-
-    public ArrayList<Vegetable> getSelectedVegetableArrayList() {
-        return selectedVegetableArrayList;
-    }
-
-    public void setSelectedVegetableArrayList(ArrayList<Vegetable> selectedVegetableArrayList) {
-        this.selectedVegetableArrayList = selectedVegetableArrayList;
     }
 }

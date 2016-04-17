@@ -40,9 +40,8 @@ public class DatabaseHelper extends SQLiteAssetHelper {
     }
 
     @Override
-    public synchronized void close()
-    {
-        if(mDataBase != null)
+    public synchronized void close() {
+        if (mDataBase != null)
             mDataBase.close();
         super.close();
     }
@@ -79,7 +78,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
         long vegId = database.insert("Vegetables", "null", contentValues);
 
-        for(int index=0; index<vegetable.getNutrientsList().size(); index++) {
+        for (int index = 0; index < vegetable.getNutrientsList().size(); index++) {
 
             Nutrient nutrient = vegetable.getNutrientsList().get(index);
             ContentValues vegNutrientContentValues = new ContentValues();
@@ -107,14 +106,14 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             vegetable.setImageUrl(mCursor.getString(mCursor.getColumnIndex("VegetableImagePath")));
 
             String vegNutrientQuery = "SELECT Nutrients.Id, Nutrients.NutrientName FROM VegNutrients, Nutrients " +
-                                      "WHERE Nutrients.Id = VegNutrients.NutrientId AND VegNutrients.VegId = ?";
+                    "WHERE Nutrients.Id = VegNutrients.NutrientId AND VegNutrients.VegId = ?";
 
             Cursor vegNutrientCursor = database.rawQuery(vegNutrientQuery, new String[]{String.valueOf(vegetable.getId())});
 
             StringBuilder nutrientInfoString = new StringBuilder();
             while (vegNutrientCursor.moveToNext()) {
 
-                if(nutrientInfoString.length() > 0) {
+                if (nutrientInfoString.length() > 0) {
                     nutrientInfoString.append(", ");
                 }
                 nutrientInfoString.append(vegNutrientCursor.getString(vegNutrientCursor.getColumnIndex("NutrientName")));
@@ -176,7 +175,7 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         SQLiteDatabase database = this.getWritableDatabase();
         database.beginTransaction();
 
-        database.delete("Meals", "MealDateTime=? AND MealCode=?", new String[] {
+        database.delete("Meals", "MealDateTime=? AND MealCode=?", new String[]{
                 String.valueOf(selectedMealInfo.getMealDateTime()),
                 String.valueOf(selectedMealInfo.getMealCode())
         });
@@ -218,16 +217,16 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         Calendar endOfWeek = Calendar.getInstance();
         endOfWeek.setTime(endDate);
 
-        if(startOfWeek.before(endOfWeek)) {
+        if (startOfWeek.before(endOfWeek)) {
 
             dayInWeek = 1;
-            while( !startOfWeek.after(endOfWeek) ) {
+            while (!startOfWeek.after(endOfWeek)) {
 
                 String query = "SELECT * FROM meals Where Meals.MealDateTime = ?";
                 Cursor getMealListCursor = database.rawQuery(query, new String[]{String.valueOf(startOfWeek.getTimeInMillis())});
 
                 int count = 0;
-                while(count < getMealListCursor.getCount()) {
+                while (count < getMealListCursor.getCount()) {
 
                     getMealListCursor.moveToNext();
                     int mealId = getMealListCursor.getInt(getMealListCursor.getColumnIndex("Id"));
@@ -262,11 +261,11 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                     weeklyMeals.add(meal);
 
                     int index = 0;
-                    if(meal.getMealCode().equals(Meals.BREAKFAST.name())) {
+                    if (meal.getMealCode().equals(Meals.BREAKFAST.name())) {
                         index = 1;
-                    } else if(meal.getMealCode().equals(Meals.LUNCH.name())) {
+                    } else if (meal.getMealCode().equals(Meals.LUNCH.name())) {
                         index = 2;
-                    } else if(meal.getMealCode().equals(Meals.DINNER.name())) {
+                    } else if (meal.getMealCode().equals(Meals.DINNER.name())) {
                         index = 3;
                     }
 
@@ -284,5 +283,58 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         }
 
         return dietPlanInfoList;
+    }
+
+    public ArrayList<Meal> getMealInformation(Date selectedDate) {
+
+        ArrayList<Meal> dailyMeals = new ArrayList<>();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        Calendar date = Calendar.getInstance();
+        date.setTime(selectedDate);
+
+        String query = "SELECT * FROM meals Where Meals.MealDateTime = ?";
+        Cursor getMealListCursor = database.rawQuery(query, new String[]{String.valueOf(date.getTimeInMillis())});
+
+        int count = 0;
+        while (count < getMealListCursor.getCount()) {
+
+            getMealListCursor.moveToNext();
+            int mealId = getMealListCursor.getInt(getMealListCursor.getColumnIndex("Id"));
+            String mealCode = getMealListCursor.getString(getMealListCursor.getColumnIndex("MealCode"));
+
+            Meal meal = new Meal();
+            meal.setMealId(mealId);
+            meal.setMealCode(mealCode);
+            meal.setMealDateTime(date.getTimeInMillis());
+
+            String getVegetablesListQuery = "SELECT Vegetables.Id, Vegetables.VegetableName, Vegetables.VegetableImagePath " +
+                    "FROM MealVegetables, vegetables Where " +
+                    "MealVegetables.VegId = vegetables.Id AND MealVegetables.MealId = ?";
+            Cursor getVegetablesListCursor = database.rawQuery(getVegetablesListQuery,
+                    new String[]{String.valueOf(mealId)});
+
+            ArrayList<Vegetable> vegetableList = new ArrayList<>();
+            while (getVegetablesListCursor.moveToNext()) {
+
+                int vegId = getVegetablesListCursor.getInt(getVegetablesListCursor.getColumnIndex("Id"));
+                String vegName = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableName"));
+                String vegetableImagePath = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableImagePath"));
+
+                Vegetable vegetable = new Vegetable();
+                vegetable.setId(vegId);
+                vegetable.setTitle(vegName);
+                vegetable.setImageUrl(vegetableImagePath);
+                vegetableList.add(vegetable);
+            }
+
+            meal.setVegetables(vegetableList);
+            dailyMeals.add(meal);
+
+            count++;
+        }
+
+        return dailyMeals;
     }
 }

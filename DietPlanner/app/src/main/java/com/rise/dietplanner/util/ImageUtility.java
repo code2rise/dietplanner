@@ -38,9 +38,8 @@ public class ImageUtility {
 	private HandyFunctions handyFunctions = null;
 	
 	public ImageUtility(Context context) {
-//		root = context.getFilesDir().toString();
-		root = Environment.getExternalStorageDirectory().toString();
-		PROFILE_PIC_FOLDER_PATH = root + "/Mhealth/Profile/";
+		root = context.getFilesDir().toString();
+//		root = Environment.getExternalStorageDirectory().toString();
 		CAPTURED_IMAGE_FOLDER_PATH = root + "/DietPlanner/Captured/";
 		
 		handyFunctions = new HandyFunctions(context);
@@ -98,7 +97,7 @@ public class ImageUtility {
 			e.printStackTrace();
 		}
 
-		return finalSavedImgName;
+		return file.getAbsolutePath();
 	}
 
 	public static Bitmap getRoundedRectBitmap(Bitmap bitmap, int pixels) {

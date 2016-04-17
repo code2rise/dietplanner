@@ -13,6 +13,7 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.model.Vegetable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Rupesh Chavan on 16/9/15.
@@ -49,7 +50,7 @@ public class SelectVegetableAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
 
         if(view == null) {
             view = inflater.inflate(R.layout.select_vegetable_list_item_layout, null);
@@ -61,9 +62,11 @@ public class SelectVegetableAdapter extends BaseAdapter {
 
         CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
         if (veg.isSelected()) {
+            cbVegetableSelected.setOnCheckedChangeListener(null);
             cbVegetableSelected.setChecked(true);
         }
         else {
+            cbVegetableSelected.setOnCheckedChangeListener(null);
             cbVegetableSelected.setChecked(false);
         }
 
@@ -71,8 +74,9 @@ public class SelectVegetableAdapter extends BaseAdapter {
 
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
 
+                Vegetable veg = vegetables.get(i);
+                if (isChecked) {
                     boolean isVegetableExist = false;
                     for(Vegetable vegetable : selectedVegetables) {
                         if (vegetable.getId() == veg.getId()) {

@@ -49,6 +49,8 @@ public class NutrientListAutoCompleteAdapter extends ArrayAdapter<Nutrient> {
 
         if(view == null) {
             view = inflater.inflate(layoutResourceId, viewGroup, false);
+//            view.setPadding();
+
             viewHolder = new ViewHolder();
             viewHolder.tvNutrientName = (TextView) view.findViewById(R.id.tv_nutrient_name);
             view.setTag(viewHolder);
