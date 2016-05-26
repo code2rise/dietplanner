@@ -8,6 +8,18 @@
         android:title="@string/action_add"
         app:showAsAction="withText|always" />
 
+    <item
+        android:id="@+id/action_weekly_view"
+        android:orderInCategory="200"
+        android:title="@string/action_weekly_view"
+        app:showAsAction="withText|never" />
+
+    <item
+        android:id="@+id/action_daily_view"
+        android:orderInCategory="200"
+        android:title="@string/action_daily_view"
+        app:showAsAction="withText|never" />
+
     <!--<item
         android:id="@+id/action_settings"
         android:orderInCategory="101"

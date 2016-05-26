@@ -74,8 +74,8 @@ public class DietPlanGridAdapter extends BaseAdapter {
         ImageView imgAddVeg = (ImageView) view.findViewById(R.id.imgAddVeg);
         TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         LinearLayout llSelectedVegContainer = (LinearLayout) view.findViewById(R.id.llSelectedVegContainer);
-        llSelectedVegContainer.setPadding(handyFunctions.dpToPx(5), handyFunctions.dpToPx(2),
-                                          handyFunctions.dpToPx(5), handyFunctions.dpToPx(2));
+        llSelectedVegContainer.setPadding(handyFunctions.dpToPx(5), handyFunctions.dpToPx(0),
+                                          handyFunctions.dpToPx(5), handyFunctions.dpToPx(0));
         llSelectedVegContainer.removeAllViews();
 
         if (dietPlanInfo.isHeader()) {
@@ -136,7 +136,7 @@ public class DietPlanGridAdapter extends BaseAdapter {
                         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT);
-                        layoutParams.setMargins(handyFunctions.dpToPx(0), handyFunctions.dpToPx(1),
+                        layoutParams.setMargins(handyFunctions.dpToPx(0), handyFunctions.dpToPx(0),
                                 handyFunctions.dpToPx(0), handyFunctions.dpToPx(1));
 
                         llSelectedVegContainer.addView(tvVegetableName, layoutParams);

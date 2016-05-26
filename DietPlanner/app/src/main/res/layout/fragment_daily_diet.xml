@@ -7,22 +7,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
 
         <TextView
             android:id="@+id/tv_selected_day"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/daily_diet_date_view_height"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
             android:background="@color/gray"
             android:gravity="center"
-            android:padding="10dp"
             android:text="Dummy Date here!"
-            android:textSize="20dp" />
+            android:textSize="24dp" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/daily_diet_list"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:orientation="vertical"
+            android:paddingTop="3dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/daily_diet_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp" />
+
+        </RelativeLayout>
+
+
     </LinearLayout>
 </FrameLayout>

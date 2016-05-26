@@ -8,13 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.DailyDietListRecyclerviewAdapter;
 import com.rise.dietplanner.customviews.OnSwipeTouchListener;
+import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
+import com.rise.dietplanner.interfaces.SelectVegetableInterface;
+import com.rise.dietplanner.model.DietPlanInfo;
 import com.rise.dietplanner.model.Meal;
+import com.rise.dietplanner.model.Vegetable;
 import com.rise.dietplanner.util.HandyFunctions;
 
 import java.text.ParseException;
@@ -28,7 +33,7 @@ import java.util.Date;
  * Use the {@link DailyDietFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DailyDietFragment extends Fragment {
+public class DailyDietFragment extends Fragment implements View.OnClickListener, SelectVegetableInterface {
 
     private View rootView = null;
     private TextView tvSelectedDay = null;
@@ -80,7 +85,6 @@ public class DailyDietFragment extends Fragment {
         calendar.set(Calendar.MILLISECOND, 0);
 
         tvSelectedDay.setText(dateFormatter.format(calendar.getTime()));
-
         tvSelectedDay.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
             public void onSwipeTop() {
 
@@ -102,9 +106,15 @@ public class DailyDietFragment extends Fragment {
 
                     meals = databaseHelper.getMealInformation(cal.getTime());
 
-                    DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
-                            getActivity(), meals);
-                    dailyDietListRecyclerview.setAdapter(adapter);
+                    if(meals.size() > 0) {
+                        DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
+                                getActivity(), meals);
+                        dailyDietListRecyclerview.setAdapter(adapter);
+                        dailyDietListRecyclerview.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        dailyDietListRecyclerview.setVisibility(View.GONE);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -126,9 +136,15 @@ public class DailyDietFragment extends Fragment {
 
                     meals = databaseHelper.getMealInformation(cal.getTime());
 
-                    DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
-                            getActivity(), meals);
-                    dailyDietListRecyclerview.setAdapter(adapter);
+                    if(meals.size() > 0) {
+                        DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
+                                getActivity(), meals);
+                        dailyDietListRecyclerview.setAdapter(adapter);
+                        dailyDietListRecyclerview.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        dailyDietListRecyclerview.setVisibility(View.GONE);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -142,11 +158,41 @@ public class DailyDietFragment extends Fragment {
         DatabaseHelper databaseHelper = new DatabaseHelper(getActivity());
         meals = databaseHelper.getMealInformation(calendar.getTime());
 
-        DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
-                getActivity(), meals);
-        dailyDietListRecyclerview.setAdapter(adapter);
+        if(meals.size() > 0) {
+            DailyDietListRecyclerviewAdapter adapter = new DailyDietListRecyclerviewAdapter(
+                    getActivity(), meals);
+            dailyDietListRecyclerview.setAdapter(adapter);
+            dailyDietListRecyclerview.setVisibility(View.VISIBLE);
+        }
+        else {
+            dailyDietListRecyclerview.setVisibility(View.GONE);
+        }
+
 
         return rootView;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+//            case R.id.btnSelectMealVegetable: {
+//
+//                SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
+//                DietPlanInfo dietPlanInfo = null;
+//                dialogFragment.setSelectedVegetables(dietPlanInfo);
+//                dialogFragment.setCommunicationInterface(DailyDietFragment.this);
+//                dialogFragment.show(getFragmentManager(), "Select Vegetable");
+//
+//                break;
+//            }
+            default: {
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
+
+    }
 }

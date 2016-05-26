@@ -5,17 +5,25 @@
     android:orientation="horizontal"
     android:weightSum="1">
 
+    <ImageView
+        android:id="@+id/imgVegetablePhoto"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_weight="0.2"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/food"/>
+    
     <TextView
         android:id="@+id/tvVegetableName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_weight="0.9"
+        android:layout_weight="0.7"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="Corn"
-        android:textSize="@dimen/diet_plan_week_header_textsize"/>
+        android:textSize="@dimen/vegetable_list_item_textsize"/>
 
     <CheckBox
         android:id="@+id/cbVegetableSelected"

@@ -8,6 +8,12 @@
     <dimen name="add_vegetable_dialog_margin">10dp</dimen>
     <dimen name="add_vegetable_dialog_margin_negative">-10dp</dimen>
 
+    <!-- Select Vegetable Dialogbox -->
+    <dimen name="select_veg_popup_header_top_margin">15dp</dimen>
+    <dimen name="select_veg_popup_header_bottom_margin">15dp</dimen>
+    <dimen name="select_veg_dialog_title_textsize">22sp</dimen>
+
+    <dimen name="week_name_margin">3dp</dimen>
     <dimen name="weeks_chooser_margin">5dp</dimen>
     <dimen name="week_list_spinner_item_padding">7dp</dimen>
 
@@ -30,5 +36,7 @@
     <dimen name="selected_veg_list_label_top_margin">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="vegetable_list_item_textsize">20sp</dimen>
     <dimen name="daily_diet_card_view_height">100dp</dimen>
+    <dimen name="daily_diet_date_view_height">90dp</dimen>
 </resources>

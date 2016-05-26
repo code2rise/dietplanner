@@ -16,6 +16,8 @@ import com.rise.dietplanner.model.Week;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by rise on 28/9/15.
@@ -287,8 +289,6 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
     public ArrayList<Meal> getMealInformation(Date selectedDate) {
 
-        ArrayList<Meal> dailyMeals = new ArrayList<>();
-
         SQLiteDatabase database = getReadableDatabase();
 
         Calendar date = Calendar.getInstance();
@@ -296,6 +296,17 @@ public class DatabaseHelper extends SQLiteAssetHelper {
 
         String query = "SELECT * FROM meals Where Meals.MealDateTime = ?";
         Cursor getMealListCursor = database.rawQuery(query, new String[]{String.valueOf(date.getTimeInMillis())});
+
+        ArrayList<Meal> mealList = new ArrayList<>();
+        Meal breakfast = new Meal();
+        breakfast.setMealCode(Meals.BREAKFAST.name());
+        Meal lunch = new Meal();
+        lunch.setMealCode(Meals.LUNCH.name());
+        Meal dinner = new Meal();
+        dinner.setMealCode(Meals.DINNER.name());
+        mealList.add(breakfast);
+        mealList.add(lunch);
+        mealList.add(dinner);
 
         int count = 0;
         while (count < getMealListCursor.getCount()) {
@@ -305,6 +316,16 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             String mealCode = getMealListCursor.getString(getMealListCursor.getColumnIndex("MealCode"));
 
             Meal meal = new Meal();
+            if(mealCode.equalsIgnoreCase(Meals.BREAKFAST.name())) {
+                meal = mealList.get(0);
+            }
+            else if(mealCode.equalsIgnoreCase(Meals.LUNCH.name())) {
+                meal = mealList.get(1);
+            }
+            else if(mealCode.equalsIgnoreCase(Meals.DINNER.name())) {
+                meal = mealList.get(2);
+            }
+
             meal.setMealId(mealId);
             meal.setMealCode(mealCode);
             meal.setMealDateTime(date.getTimeInMillis());
@@ -330,11 +351,9 @@ public class DatabaseHelper extends SQLiteAssetHelper {
             }
 
             meal.setVegetables(vegetableList);
-            dailyMeals.add(meal);
-
             count++;
         }
 
-        return dailyMeals;
+        return mealList;
     }
 }

@@ -72,7 +72,8 @@ public class DietVegListRecyclerviewAdapter extends RecyclerView.Adapter<DietVeg
 
         ViewGroup.LayoutParams cardViewParent = holder.mealVegetableDetailCardviewLayout.getLayoutParams();
         cardViewParent.width = (int) (mContext.getResources().getDisplayMetrics().widthPixels - (2 * mContext.getResources().getDisplayMetrics().density));
-        cardViewParent.width = cardViewParent.width - new HandyFunctions(mContext).dpToPx(10);
+//        cardViewParent.width = cardViewParent.width - new HandyFunctions(mContext).dpToPx(10);
+        cardViewParent.width = cardViewParent.width - new HandyFunctions(mContext).dpToPx(20);
 
         String protocol = "file:///android_asset/";
         if(vegetable.getImageUrl().contains(protocol)) {

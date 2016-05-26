@@ -11,11 +11,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.rise.dietplanner.R;
+import com.rise.dietplanner.adapters.WeeksListAdapter;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.dietplanner.customviews.ShowVegetablesListDialogFragment;
 import com.rise.dietplanner.db.DatabaseHelper;
@@ -39,14 +42,17 @@ import java.util.Calendar;
  */
 public class WeeklyDietFragment extends Fragment implements SelectVegetableInterface {
 
-    private int selectedItem = -1;
-    private DatabaseHelper mDatabaseHelper = null;
-    private DietPlanInfo[] dashboardData = null;
     private View rootView = null;
     private GridLayout glWeeklyDietDetails = null;
     private LayoutInflater inflater = null;
-    private SelectVegetableDialogFragment dialogFragment;
+    private Spinner spWeeks = null;
+
     private HandyFunctions handyFunctions = null;
+    private DatabaseHelper mDatabaseHelper = null;
+    private DietPlanInfo[] dashboardData = null;
+    private SelectVegetableDialogFragment dialogFragment;
+
+    private int selectedItem = -1;
     private int selectedWeekIndex;
 
     public WeeklyDietFragment() {
@@ -68,11 +74,6 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        if(bundle != null) {
-            selectedWeekIndex = bundle.getInt("weekIndex");
-        }
     }
 
     @Override
@@ -85,6 +86,28 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
         rootView = inflater.inflate(R.layout.fragment_diet_planner_weekly_layout, null);
         glWeeklyDietDetails = (GridLayout) rootView.findViewById(R.id.gl_weekly_diet_details);
 
+        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
+        spWeeks = (Spinner) rootView.findViewById(R.id.spWeeks);
+        ArrayList<Week> weeks = calendarGenerator.getWeeksList();
+        WeeksListAdapter adapter = new WeeksListAdapter(getActivity(), weeks);
+        spWeeks.setAdapter(adapter);
+        spWeeks.setSelection(calendarGenerator.getCurrentWeekNumber());
+        spWeeks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedWeekIndex = i;
+                Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
+                displayWeeklyDietDashboard(selectedWeek);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        selectedWeekIndex = CalendarGenerator.getInstance().getCurrentWeekNumber();
+
 //        dashboardData = getDashboardDietData();
         Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
         displayWeeklyDietDashboard(selectedWeek);
@@ -93,6 +116,10 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     }
 
     private void displayWeeklyDietDashboard(Week selectedWeek) {
+
+        if(glWeeklyDietDetails != null) {
+            glWeeklyDietDetails.removeAllViews();
+        }
 
         dashboardData = getDashboardDietData(selectedWeek);
         for(int index=0; index<dashboardData.length; index++) {
@@ -308,7 +335,6 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
         // Current week number
         CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
-//        Week week = calendarGenerator.getCurrentWeek();
         Week week = calendarGenerator.getWeekDetails(selectedWeekIndex);
 
         // 4 represents number of columns in grid view.

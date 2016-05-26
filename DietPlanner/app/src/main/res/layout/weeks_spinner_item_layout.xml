@@ -9,15 +9,15 @@
         android:id="@+id/tvWeekname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/weeks_chooser_margin"
+        android:layout_margin="@dimen/week_name_margin"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"/>
 
     <TextView
         android:id="@+id/tvWeekDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/weeks_chooser_margin"
-        android:layout_marginRight="@dimen/weeks_chooser_margin"
-        android:layout_marginTop="@dimen/weeks_chooser_margin"
+        android:layout_marginBottom="@dimen/week_name_margin"
+        android:layout_marginRight="@dimen/week_name_margin"
+        android:layout_marginTop="@dimen/week_name_margin"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"/>
 </LinearLayout>

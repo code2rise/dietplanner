@@ -1,17 +1,23 @@
 package com.rise.dietplanner.adapters;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.model.Vegetable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -59,6 +65,27 @@ public class SelectVegetableAdapter extends BaseAdapter {
         final Vegetable veg = (Vegetable) getItem(i);
         TextView tvVegetableName = (TextView) view.findViewById(R.id.tvVegetableName);
         tvVegetableName.setText(veg.getTitle());
+
+        ImageView imgVegetablePhoto = (ImageView) view.findViewById(R.id.imgVegetablePhoto);
+        if(veg.getImageUrl() != null && !veg.getImageUrl().equals("")) {
+            String protocol = "file:///android_asset/";
+            if(veg.getImageUrl().contains(protocol)) {
+
+                try {
+                    String imageUrl = veg.getImageUrl().substring(protocol.length());
+                    AssetManager assetManager = mContext.getAssets();
+                    InputStream inputStream = assetManager.open(imageUrl);
+                    Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                    imgVegetablePhoto.setImageBitmap(imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Bitmap imageBitmap = BitmapFactory.decodeFile(veg.getImageUrl());
+                imgVegetablePhoto.setImageBitmap(imageBitmap);
+            }
+        }
 
         CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
         if (veg.isSelected()) {

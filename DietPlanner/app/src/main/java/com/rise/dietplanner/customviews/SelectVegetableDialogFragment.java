@@ -101,4 +101,8 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
             selectedVegetables = dietPlanInfo.getMeal().getVegetables();
         }
     }
+
+    public void setSelectedVegetables(ArrayList<Vegetable> vegetablesList) {
+        selectedVegetables = vegetablesList;
+    }
 }

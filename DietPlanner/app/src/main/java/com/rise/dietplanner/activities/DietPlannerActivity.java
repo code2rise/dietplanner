@@ -41,7 +41,6 @@ public class DietPlannerActivity extends AppCompatActivity implements
     private static final int SETTINGS_FRAGMENT = 4;
 
     public static final String PREFERENCE_NAME = "DIET_PLANNER";
-    private Spinner spWeeks = null;
     private AddVegetableDialogFragment dialogFragment = null;
     private ImageUtility imageUtility = null;
     private HandyFunctions handyFunctions = null;
@@ -65,37 +64,8 @@ public class DietPlannerActivity extends AppCompatActivity implements
         imageUtility = new ImageUtility(getApplicationContext());
         handyFunctions = new HandyFunctions(getApplicationContext());
 
-        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
-        spWeeks = (Spinner) findViewById(R.id.spWeeks);
-        ArrayList<Week> weeks = calendarGenerator.getWeeksList();
-        WeeksListAdapter adapter = new WeeksListAdapter(this, weeks);
-        spWeeks.setAdapter(adapter);
-        spWeeks.setSelection(calendarGenerator.getCurrentWeekNumber());
-//        spWeeks.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("weekIndex", i);
-//                fragment.setArguments(bundle);
-//                switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
-
-//        int currentWeekIndex = CalendarGenerator.getInstance().getCurrentWeekNumber();
-//        WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("weekIndex", currentWeekIndex);
-//        fragment.setArguments(bundle);
-//        switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
-
-        DailyDietFragment fragment = DailyDietFragment.newInstance();
-        switchFragment(fragment, DAILY_DIET_FRAGMENT);
+        WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
+        switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
     }
 
     @Override
@@ -123,15 +93,31 @@ public class DietPlannerActivity extends AppCompatActivity implements
 
             return true;
         }
+        else if(id == R.id.action_weekly_view) {
+
+            WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
+            switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
+            return true;
+        }
+        else if(id == R.id.action_daily_view) {
+
+            DailyDietFragment fragment = DailyDietFragment.newInstance();
+            switchFragment(fragment, DAILY_DIET_FRAGMENT);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void switchFragment(Fragment fragment, String fragmentTag) {
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.flFragmentContainer, fragment, fragmentTag);
-        fragmentTransaction.commit();
+        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+
+        if(currentFragment == null) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.flFragmentContainer, fragment, fragmentTag);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
