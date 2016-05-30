@@ -1,7 +1,10 @@
 package com.rise.dietplanner.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
@@ -72,7 +76,7 @@ public class DailyDietListRecyclerviewAdapter extends
     }
 
     @Override
-    public void onBindViewHolder(CustomerViewHolder holder, int position) {
+    public void onBindViewHolder(CustomerViewHolder holder, final int position) {
 
         final Meal meal = meals.get(position);
 
@@ -80,16 +84,27 @@ public class DailyDietListRecyclerviewAdapter extends
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 mContext.getResources().getDimensionPixelSize(R.dimen.daily_diet_card_view_height)));
 
-        if(meal.getVegetables() != null) {
+        if (meal.getVegetables() != null) {
             holder.addMealCardviewLayout.setVisibility(View.GONE);
             holder.dietVegetableListRecyclerview.setVisibility(View.VISIBLE);
 
-            DietVegListRecyclerviewAdapter adapter = new DietVegListRecyclerviewAdapter(mContext, meal);
+            DietVegListRecyclerviewAdapter adapter = new DietVegListRecyclerviewAdapter(mContext, this, meal);
             holder.dietVegetableListRecyclerview.setAdapter(adapter);
-        }
-        else {
+        } else {
             holder.addMealCardviewLayout.setVisibility(View.VISIBLE);
             holder.dietVegetableListRecyclerview.setVisibility(View.GONE);
+
+            // Get selected meal timing
+            Meals selectedMeal;
+            if (position % 3 == 1) {
+                selectedMeal = Meals.BREAKFAST;
+            } else if (position % 3 == 2) {
+                selectedMeal = Meals.LUNCH;
+            } else {
+                selectedMeal = Meals.DINNER;
+            }
+
+            meal.setMealCode(selectedMeal.name());
 
             String mealCode = meal.getMealCode();
             holder.tvPrepareMeal.setText(mContext.getString(R.string.add_daily_meal_msg)
@@ -101,13 +116,17 @@ public class DailyDietListRecyclerviewAdapter extends
             holder.addMealCardviewLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
-//                    dialogFragment.setSelectedVegetables(meal.getVegetables());
-//                    dialogFragment.setCommunicationInterface(DailyDietListRecyclerviewAdapter.this);
-//                    dialogFragment.show(getFragmentManager(), "Select Vegetable");
+                    displayVegetableSelectionPopup(meal);
                 }
             });
         }
+    }
+
+    private void displayVegetableSelectionPopup(Meal meal) {
+        SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
+        dialogFragment.setSelectedMeal(meal);
+        dialogFragment.setCommunicationInterface(DailyDietListRecyclerviewAdapter.this);
+        dialogFragment.show(((AppCompatActivity) mContext).getSupportFragmentManager(), "Select Vegetable");
     }
 
     @Override
@@ -116,7 +135,7 @@ public class DailyDietListRecyclerviewAdapter extends
     }
 
     @Override
-    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
+    public void selectVegetables(Meal selectedMeal) {
 //        // Current week number
 //        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
 //        Week week = calendarGenerator.getWeekDetails(selectedWeekIndex);

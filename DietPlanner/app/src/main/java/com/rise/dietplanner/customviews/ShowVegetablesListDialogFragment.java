@@ -18,6 +18,7 @@ import com.rise.dietplanner.adapters.SelectedVegetablesViewPagerAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.DietPlanInfo;
+import com.rise.dietplanner.model.Meal;
 import com.rise.dietplanner.model.Vegetable;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
     private ViewPager vegetableListPager = null;
     private SelectVegetableInterface selectVegetableInterface;
     private DatabaseHelper mDatabaseHelper = null;
-    private DietPlanInfo selectedDietInfo = null;
+//    private DietPlanInfo selectedDietInfo = null;
+    private Meal selectedMeal = null;
     private ArrayList<Vegetable> selectedVegetables = new ArrayList<>();
     private SelectVegetableAdapter selectVegetableAdapter = null;
     private ArrayList<Vegetable> vegetablesList = new ArrayList<>();
@@ -47,6 +49,10 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
         rootView = inflater.inflate(R.layout.selected_veg_dialog_fragment_layout, null);
         getDialog().setTitle(getResources().getString(R.string.selected_vegetables_title));
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+
+        if(selectedMeal != null && selectedMeal.getVegetables() != null) {
+            selectedVegetables = selectedMeal.getVegetables();
+        }
 
         vegetableListPager = (ViewPager) rootView.findViewById(R.id.vegetable_list_pager);
         vegetableListPager.setLayoutParams(new LinearLayout.LayoutParams(
@@ -69,7 +75,7 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
 
                 // TODO Update the vegetable database here.
                 SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
-                dialogFragment.setSelectedVegetables(selectedDietInfo);
+                dialogFragment.setSelectedMeal(selectedMeal);
                 dialogFragment.setCommunicationInterface(selectVegetableInterface);
                 dialogFragment.show(getFragmentManager(), "Select Vegetable");
 
@@ -89,11 +95,19 @@ public class ShowVegetablesListDialogFragment extends DialogFragment implements 
         this.selectVegetableInterface = selectVegetableInterface;
     }
 
-    public void setSelectedVegetable(DietPlanInfo dietPlanInfo) {
+//    public void setSelectedVegetable(DietPlanInfo dietPlanInfo) {
+//
+//        if(dietPlanInfo != null && dietPlanInfo.getMeal() != null) {
+//            selectedDietInfo = dietPlanInfo;
+//            selectedVegetables = dietPlanInfo.getMeal().getVegetables();
+//        }
+//    }
 
-        if(dietPlanInfo != null && dietPlanInfo.getMeal() != null) {
-            selectedDietInfo = dietPlanInfo;
-            selectedVegetables = dietPlanInfo.getMeal().getVegetables();
-        }
+    public Meal getSelectedMeal() {
+        return selectedMeal;
+    }
+
+    public void setSelectedMeal(Meal selectedMeal) {
+        this.selectedMeal = selectedMeal;
     }
 }

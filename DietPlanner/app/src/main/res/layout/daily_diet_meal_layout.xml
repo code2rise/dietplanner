@@ -8,6 +8,7 @@
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
     android:layout_marginStart="1dp"
+    android:clickable="false"
     android:orientation="vertical"
     app:cardCornerRadius="1dp">
 

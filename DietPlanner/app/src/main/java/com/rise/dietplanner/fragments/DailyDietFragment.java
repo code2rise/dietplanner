@@ -168,7 +168,6 @@ public class DailyDietFragment extends Fragment implements View.OnClickListener,
             dailyDietListRecyclerview.setVisibility(View.GONE);
         }
 
-
         return rootView;
     }
 
@@ -192,7 +191,7 @@ public class DailyDietFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
+    public void selectVegetables(Meal meal) {
 
     }
 }

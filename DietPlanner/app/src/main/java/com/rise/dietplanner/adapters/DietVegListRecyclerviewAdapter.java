@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rise.dietplanner.R;
+import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
+import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.Meal;
 import com.rise.dietplanner.model.Vegetable;
 import com.rise.dietplanner.util.HandyFunctions;
@@ -31,10 +34,12 @@ public class DietVegListRecyclerviewAdapter extends RecyclerView.Adapter<DietVeg
     private Context mContext = null;
     private LayoutInflater inflater = null;
     private Meal meal = null;
+    private SelectVegetableInterface selectVegetableInterface = null;
 
-    public DietVegListRecyclerviewAdapter(Context mContext, Meal meal) {
+    public DietVegListRecyclerviewAdapter(Context mContext, SelectVegetableInterface selectVegetableInterface, Meal meal) {
         this.mContext = mContext;
         this.meal = meal;
+        this.selectVegetableInterface = selectVegetableInterface;
 
         inflater = LayoutInflater.from(mContext);
     }
@@ -99,10 +104,24 @@ public class DietVegListRecyclerviewAdapter extends RecyclerView.Adapter<DietVeg
         holder.tvNutrientsList.setText("Nutrient Information Unavailable!");
 
         holder.tvMealName.setText(meal.getMealCode());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                displayVegetableSelectionPopup(meal);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return meal.getVegetables().size();
+    }
+
+    private void displayVegetableSelectionPopup(Meal meal) {
+        SelectVegetableDialogFragment dialogFragment = new SelectVegetableDialogFragment();
+        dialogFragment.setSelectedMeal(meal);
+        dialogFragment.setCommunicationInterface(selectVegetableInterface);
+        dialogFragment.show(((AppCompatActivity) mContext).getSupportFragmentManager(), "Select Vegetable");
     }
 }

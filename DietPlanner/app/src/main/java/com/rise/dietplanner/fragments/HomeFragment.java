@@ -27,6 +27,7 @@ import com.rise.dietplanner.util.CalendarGenerator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -149,13 +150,23 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         Week currentWeek = CalendarGenerator.getInstance().getCurrentWeek();
         int gridItemCount = 32;
         int counter = 4;
+        long dayOfWeek = 0l;
+        Calendar startOfWeek = Calendar.getInstance();
+        startOfWeek.setTime(currentWeek.getStartOfWeek());
         while (counter <= gridItemCount) {
             if(counter % 4 == 0) {
+
+                startOfWeek.add(Calendar.DAY_OF_WEEK, 1);
+                dayOfWeek = startOfWeek.getTimeInMillis();
                 counter++;
                 continue;
             }
 
             DietPlanInfo dietPlanInfo = new DietPlanInfo();
+            Meal meal = new Meal();
+            meal.setMealDateTime(dayOfWeek);
+            dietPlanInfo.setMeal(meal);
+
             dietPlanInfoList[counter] = dietPlanInfo;
             counter++;
         }
@@ -201,12 +212,12 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
 
             if(dietPlanInfo.getMeal() != null && dietPlanInfo.getMeal().getVegetables().size() > 0) {
                 ShowVegetablesListDialogFragment showVegetablesListDialogFragment = new ShowVegetablesListDialogFragment();
-                showVegetablesListDialogFragment.setSelectedVegetable(dietPlanInfo);
+                showVegetablesListDialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                 showVegetablesListDialogFragment.setCommunicationInterface(this);
                 showVegetablesListDialogFragment.show(getFragmentManager(), "Show Vegetables");
             }
             else {
-                dialogFragment.setSelectedVegetables(dietPlanInfo);
+                dialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                 dialogFragment.setCommunicationInterface(this);
                 dialogFragment.show(getFragmentManager(), "Select Vegetable");
             }
@@ -216,22 +227,23 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
     }
 
     @Override
-    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
+    public void selectVegetables(Meal meal) {
 
         // Current week number
-        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
-        Week week = calendarGenerator.getCurrentWeek();
+//        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
+//        Week week = calendarGenerator.getCurrentWeek();
 
         // 4 represents number of columns in grid view.
         int day = (selectedItem / 4);
-        Calendar startOfWeek = Calendar.getInstance();
-        startOfWeek.setTime(week.getStartOfWeek());
+//        Calendar startOfWeek = Calendar.getInstance();
+//        startOfWeek.setTime(week.getStartOfWeek());
 
         // Subtracting 1 from calculated day as grid row index starts at 0.
-        startOfWeek.add(Calendar.DAY_OF_WEEK, day-1);
+//        startOfWeek.add(Calendar.DAY_OF_WEEK, day-1);
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String date = formatter.format(startOfWeek.getTime());
+//        String date = formatter.format(startOfWeek.getTime());
+        String date = formatter.format(meal.getMealDateTime());
 
         // Get selected meal timing
         Meals selectedMeal;
@@ -245,13 +257,14 @@ public class HomeFragment extends Fragment implements AdapterView.OnItemClickLis
         }
 
         // TODO Save these values to database table DietPlan
-        long timestamp = startOfWeek.getTimeInMillis();
-        int meal = selectedItem-(day*4);
+//        long timestamp = startOfWeek.getTimeInMillis();
+//        int meal = selectedItem-(day*4);
+        long timestamp = meal.getMealDateTime();
 
         Meal selectedMealInfo = new Meal();
         selectedMealInfo.setMealCode(selectedMeal.name());
         selectedMealInfo.setMealDateTime(timestamp);
-        selectedMealInfo.setVegetables(vegetablesInfo);
+        selectedMealInfo.setVegetables(meal.getVegetables());
 
         mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
 

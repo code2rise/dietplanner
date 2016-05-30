@@ -34,6 +34,7 @@ import com.rise.dietplanner.util.HandyFunctions;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -108,7 +109,6 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
         selectedWeekIndex = CalendarGenerator.getInstance().getCurrentWeekNumber();
 
-//        dashboardData = getDashboardDietData();
         Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
         displayWeeklyDietDashboard(selectedWeek);
 
@@ -139,7 +139,7 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
                 Meal meal = dashboardData[index].getMeal();
 
-                if(meal != null && meal.getVegetables().size() > 0) {
+                if(meal != null && meal.getVegetables() != null && meal.getVegetables().size() > 0) {
                     ArrayList<Vegetable> vegetables = meal.getVegetables();
 
                     llSelectedVegContainer.setVisibility(View.VISIBLE);
@@ -216,20 +216,22 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
                         if(dashboardData != null) {
                             dietPlanInfo = dashboardData[selectedItem];
 
-                            if(dietPlanInfo.getMeal() != null && dietPlanInfo.getMeal().getVegetables().size() > 0) {
+                            if(dietPlanInfo.getMeal() != null &&
+                                    dietPlanInfo.getMeal().getVegetables() != null &&
+                                    dietPlanInfo.getMeal().getVegetables().size() > 0) {
                                 ShowVegetablesListDialogFragment showVegetablesListDialogFragment = new ShowVegetablesListDialogFragment();
-                                showVegetablesListDialogFragment.setSelectedVegetable(dietPlanInfo);
+                                showVegetablesListDialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                                 showVegetablesListDialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                                 showVegetablesListDialogFragment.show(getFragmentManager(), "Show Vegetables");
                             }
                             else {
-                                dialogFragment.setSelectedVegetables(dietPlanInfo);
+                                dialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                                 dialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                                 dialogFragment.show(getFragmentManager(), "Select Vegetable");
                             }
                         }
                         else {
-                            dialogFragment.setSelectedVegetables(dietPlanInfo);
+                            dialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                             dialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                             dialogFragment.show(getFragmentManager(), "Select Vegetable");
                         }
@@ -249,16 +251,6 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
             dashboardGridItemLayout.setLayoutParams(layoutParams);
 
             glWeeklyDietDetails.addView(dashboardGridItemLayout);
-        }
-    }
-
-    private void updateDashboardView() {
-
-        if(glWeeklyDietDetails != null) {
-            for(int index=0; index<glWeeklyDietDetails.getChildCount(); index++) {
-                View view = glWeeklyDietDetails.getChildAt(index);
-                view.invalidate();
-            }
         }
     }
 
@@ -315,13 +307,27 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 //        Week currentWeek = CalendarGenerator.getInstance().getCurrentWeek();
         int gridItemCount = 32;
         int counter = 4;
+        Calendar startOfWeek = Calendar.getInstance();
+        startOfWeek.setTime(selectedWeek.getStartOfWeek());
+        long dayOfWeek = startOfWeek.getTimeInMillis();
+
         while (counter <= gridItemCount) {
             if(counter % 4 == 0) {
+
+                if(counter / 4 > 1 ) {
+                    startOfWeek.add(Calendar.DAY_OF_WEEK, 1);
+                    dayOfWeek = startOfWeek.getTimeInMillis();
+                }
+
                 counter++;
                 continue;
             }
 
             DietPlanInfo dietPlanInfo = new DietPlanInfo();
+            Meal meal = new Meal();
+            meal.setMealDateTime(dayOfWeek);
+            dietPlanInfo.setMeal(meal);
+
             dietPlanInfoList[counter] = dietPlanInfo;
             counter++;
         }
@@ -332,21 +338,12 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     }
 
     @Override
-    public void selectVegetables(ArrayList<Vegetable> vegetablesInfo) {
-        // Current week number
-        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
-        Week week = calendarGenerator.getWeekDetails(selectedWeekIndex);
+    public void selectVegetables(Meal meal) {
 
         // 4 represents number of columns in grid view.
         int day = (selectedItem / 4);
         Calendar startOfWeek = Calendar.getInstance();
-        startOfWeek.setTime(week.getStartOfWeek());
-
-        // Subtracting 1 from calculated day as grid row index starts at 0.
-        startOfWeek.add(Calendar.DAY_OF_WEEK, day-1);
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-        String date = formatter.format(startOfWeek.getTime());
+        startOfWeek.setTime(new Date(meal.getMealDateTime()));
 
         // Get selected meal timing
         Meals selectedMeal;
@@ -361,12 +358,11 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
         // TODO Save these values to database table DietPlan
         long timestamp = startOfWeek.getTimeInMillis();
-        int meal = selectedItem-(day*4);
 
         Meal selectedMealInfo = new Meal();
         selectedMealInfo.setMealCode(selectedMeal.name());
         selectedMealInfo.setMealDateTime(timestamp);
-        selectedMealInfo.setVegetables(vegetablesInfo);
+        selectedMealInfo.setVegetables(meal.getVegetables());
 
         mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
 
