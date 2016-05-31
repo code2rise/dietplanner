@@ -38,10 +38,8 @@ public class DailyDietFragment extends Fragment implements View.OnClickListener,
     private View rootView = null;
     private TextView tvSelectedDay = null;
     private RecyclerView dailyDietListRecyclerview = null;
-
     private DatabaseHelper databaseHelper = null;
     private SimpleDateFormat dateFormatter = null;
-
     private ArrayList<Meal> meals = new ArrayList<>();
 
     public DailyDietFragment() {

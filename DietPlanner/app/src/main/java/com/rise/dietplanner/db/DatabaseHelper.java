@@ -300,10 +300,13 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         ArrayList<Meal> mealList = new ArrayList<>();
         Meal breakfast = new Meal();
         breakfast.setMealCode(Meals.BREAKFAST.name());
+        breakfast.setMealDateTime(selectedDate.getTime());
         Meal lunch = new Meal();
         lunch.setMealCode(Meals.LUNCH.name());
+        lunch.setMealDateTime(selectedDate.getTime());
         Meal dinner = new Meal();
         dinner.setMealCode(Meals.DINNER.name());
+        dinner.setMealDateTime(selectedDate.getTime());
         mealList.add(breakfast);
         mealList.add(lunch);
         mealList.add(dinner);

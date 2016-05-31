@@ -12,46 +12,37 @@
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
-            android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
-            android:layout_marginTop="@dimen/add_vegetable_dialog_margin"
-            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="@dimen/add_vegetable_dialog_title_left_margin"
+            android:layout_marginRight="@dimen/select_veg_popup_header_top_margin"
+            android:layout_marginTop="@dimen/add_vegetable_dialog_title_top_margin"
+            android:layout_marginBottom="@dimen/add_veg_dialog_header_bottom_margin"
             android:text="@string/add_vegetable_dialog_box_title"
+            android:textAllCaps="true"
             android:textSize="@dimen/add_vegetable_dialog_title_textsize"
-            android:textColor="@color/dark_gray"
-            android:textStyle="bold"/>
+            android:textColor="@color/dark_gray"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
             android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
+            android:layout_marginBottom="5dp"
             android:background="@color/dark_gray" />
 
         <EditText
             android:id="@+id/etVegetableName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
             android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
             android:background="@drawable/rounded_corner_edittext_background"
             android:hint="@string/add_vegetable_title_hint" />
 
-        <!--<LinearLayout
-            android:id="@+id/llNutrientAutoCompleteContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
-            android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
-            android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
-            android:orientation="vertical"
-            android:background="@drawable/rounded_corner_edittext_background">-->
-
         <com.wefika.flowlayout.FlowLayout
             android:id="@+id/llNutrientAutoCompleteContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
             android:layout_marginRight="@dimen/add_vegetable_dialog_margin_negative"
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
@@ -65,8 +56,6 @@
                     android:background="@color/transparent"/>
 
         </com.wefika.flowlayout.FlowLayout>
-        <!--</LinearLayout>-->
-
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -77,11 +66,12 @@
 
             <ImageView
                 android:id="@+id/imgVegetablePhoto"
-                android:layout_width="250dp"
+                android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_centerInParent="true"
-                android:scaleType="center"
-                android:src="@drawable/image" />
+                android:scaleType="fitXY"
+                android:src="@drawable/vegetables"
+                android:background="@drawable/rounded_corner_edittext_background"/>
 
             <ImageView
                 android:id="@+id/imgEditPhoto"
@@ -98,14 +88,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
             android:layout_marginBottom="5dp"
             android:weightSum="1">
 
             <Button
                 android:id="@+id/btnAdd"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_margin="@dimen/add_vegetable_dialog_title_padding"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/add_vegetable_dialog_button_margin"
+                android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
+                android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_rounded_corner_btn"
                 android:text="@string/add_veg_btn_title"
@@ -114,8 +107,10 @@
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_margin="@dimen/add_vegetable_dialog_title_padding"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/add_vegetable_dialog_title_padding"
+                android:layout_marginRight="@dimen/add_vegetable_dialog_button_margin"
+                android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_rounded_corner_btn"
                 android:text="@string/cancel_veg_btn_title"

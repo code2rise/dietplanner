@@ -6,19 +6,24 @@
     <dimen name="add_vegetable_dialog_title_padding">10dp</dimen>
     <dimen name="dot">2dp</dimen>
     <dimen name="add_vegetable_dialog_margin">10dp</dimen>
+    <dimen name="add_vegetable_dialog_title_top_margin">10dp</dimen>
+    <dimen name="add_vegetable_dialog_title_left_margin">15dp</dimen>
     <dimen name="add_vegetable_dialog_margin_negative">-10dp</dimen>
+    <dimen name="add_vegetable_dialog_button_margin">15dp</dimen>
+    <dimen name="add_veg_dialog_header_bottom_margin">10dp</dimen>
+    <dimen name="add_vegetable_dialog_title_textsize">20sp</dimen>
 
     <!-- Select Vegetable Dialogbox -->
     <dimen name="select_veg_popup_header_top_margin">15dp</dimen>
-    <dimen name="select_veg_popup_header_bottom_margin">15dp</dimen>
-    <dimen name="select_veg_dialog_title_textsize">22sp</dimen>
+    <dimen name="select_veg_dialog_title_left_margin">20dp</dimen>
+    <dimen name="select_veg_popup_header_bottom_margin">10dp</dimen>
+    <dimen name="select_veg_dialog_title_textsize">20sp</dimen>
 
     <dimen name="week_name_margin">3dp</dimen>
     <dimen name="weeks_chooser_margin">5dp</dimen>
     <dimen name="week_list_spinner_item_padding">7dp</dimen>
 
     <dimen name="week_chooser_spinner_item_textsize">16sp</dimen>
-    <dimen name="add_vegetable_dialog_title_textsize">20sp</dimen>
     <dimen name="diet_plan_week_header_textsize">17sp</dimen>
 
     <dimen name="nutrient_list_autocomplete_item_padding">10dp</dimen>

@@ -3,6 +3,7 @@ package com.rise.dietplanner.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -19,6 +20,7 @@ import com.rise.dietplanner.R;
 import com.rise.dietplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.dietplanner.customviews.SnappyLinearLayoutManager;
 import com.rise.dietplanner.customviews.SnappyRecyclerView;
+import com.rise.dietplanner.db.DatabaseHelper;
 import com.rise.dietplanner.interfaces.SelectVegetableInterface;
 import com.rise.dietplanner.model.DietPlanInfo;
 import com.rise.dietplanner.model.Meal;
@@ -31,6 +33,7 @@ import com.rise.dietplanner.util.HandyFunctions;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by rise on 16/4/16.
@@ -42,11 +45,13 @@ public class DailyDietListRecyclerviewAdapter extends
     private Context mContext = null;
     private LayoutInflater inflater = null;
     private ArrayList<Meal> meals = null;
+    private DatabaseHelper mDatabaseHelper = null;
 
     public DailyDietListRecyclerviewAdapter(Context mContext, ArrayList<Meal> meals) {
         this.mContext = mContext;
         this.meals = meals;
         inflater = LayoutInflater.from(mContext);
+        mDatabaseHelper = new DatabaseHelper(mContext);
     }
 
     class CustomerViewHolder extends RecyclerView.ViewHolder {
@@ -96,9 +101,9 @@ public class DailyDietListRecyclerviewAdapter extends
 
             // Get selected meal timing
             Meals selectedMeal;
-            if (position % 3 == 1) {
+            if (position % 3 == 0) {
                 selectedMeal = Meals.BREAKFAST;
-            } else if (position % 3 == 2) {
+            } else if (position % 3 == 1) {
                 selectedMeal = Meals.LUNCH;
             } else {
                 selectedMeal = Meals.DINNER;
@@ -136,48 +141,11 @@ public class DailyDietListRecyclerviewAdapter extends
 
     @Override
     public void selectVegetables(Meal selectedMeal) {
-//        // Current week number
-//        CalendarGenerator calendarGenerator = CalendarGenerator.getInstance();
-//        Week week = calendarGenerator.getWeekDetails(selectedWeekIndex);
-//
-//        // 4 represents number of columns in grid view.
-//        int day = (selectedItem / 4);
-//        Calendar startOfWeek = Calendar.getInstance();
-//        startOfWeek.setTime(week.getStartOfWeek());
-//
-//        // Subtracting 1 from calculated day as grid row index starts at 0.
-//        startOfWeek.add(Calendar.DAY_OF_WEEK, day-1);
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
-//        String date = formatter.format(startOfWeek.getTime());
-//
-//        // Get selected meal timing
-//        Meals selectedMeal;
-//        if ((selectedItem-(day*4)) % 3 == 1) {
-//            selectedMeal = Meals.BREAKFAST;
-//        } else if ((selectedItem-(day*4)) % 3 == 2) {
-//            selectedMeal = Meals.LUNCH;
-//        }
-//        else {
-//            selectedMeal = Meals.DINNER;
-//        }
-//
-//        // TODO Save these values to database table DietPlan
-//        long timestamp = startOfWeek.getTimeInMillis();
-//        int meal = selectedItem-(day*4);
-//
-//        Meal selectedMealInfo = new Meal();
-//        selectedMealInfo.setMealCode(selectedMeal.name());
-//        selectedMealInfo.setMealDateTime(timestamp);
-//        selectedMealInfo.setVegetables(vegetablesInfo);
-//
-//        mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
-//
-//        if(glWeeklyDietDetails != null) {
-//            glWeeklyDietDetails.removeAllViews();
-//
-//            Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
-//            displayWeeklyDietDashboard(selectedWeek);
-//        }
+
+        // Update meal information in the database.
+        mDatabaseHelper.addSelectedVegetables(selectedMeal);
+        mDatabaseHelper.close();
+
+        notifyDataSetChanged();
     }
 }
