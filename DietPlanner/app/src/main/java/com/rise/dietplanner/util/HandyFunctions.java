@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -52,6 +53,20 @@ public class HandyFunctions {
 		// "https://play.google.com/store/apps/details?id="
 		// + _context.getPackageName();
 		formatter = new SimpleDateFormat(DATE_FORMATTER);
+	}
+
+	/**
+	 * Checking device has camera hardware or not
+	 * */
+	private boolean isDeviceSupportCamera() {
+		if (_context.getPackageManager().hasSystemFeature(
+				PackageManager.FEATURE_CAMERA)) {
+			// this device has a camera
+			return true;
+		} else {
+			// no camera on this device
+			return false;
+		}
 	}
 
 	@SuppressWarnings("static-access")

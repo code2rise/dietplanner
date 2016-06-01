@@ -42,7 +42,7 @@
         <com.wefika.flowlayout.FlowLayout
             android:id="@+id/llNutrientAutoCompleteContainer"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
             android:layout_marginRight="@dimen/add_vegetable_dialog_margin_negative"
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"

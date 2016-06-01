@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.WeeksListAdapter;
@@ -29,8 +30,11 @@ import com.rise.dietplanner.util.HandyFunctions;
 import com.rise.dietplanner.util.ImageUtility;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class DietPlannerActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener, AddVegetableDialogFragment.ICaptureImage {
@@ -40,11 +44,20 @@ public class DietPlannerActivity extends AppCompatActivity implements
     private static final String DAILY_DIET_FRAGMENT = "DAILY_DIET_FRAGMENT";
     private static final int SETTINGS_FRAGMENT = 4;
 
+    // Activity request codes
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+
+    // directory name to store captured images and videos
+    private static final String IMAGE_DIRECTORY_NAME = "MealPlanner/Images";
+    private Uri fileUri; // file url to store image/video
+
     public static final String PREFERENCE_NAME = "DIET_PLANNER";
     private AddVegetableDialogFragment dialogFragment = null;
     private ImageUtility imageUtility = null;
     private HandyFunctions handyFunctions = null;
     private DatabaseHelper databaseHelper = null;
+    private File capturedImagePath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,64 +143,26 @@ public class DietPlannerActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
         //if request code is same we pass as argument in startActivityForResult
         if(requestCode==1){
-            //create instance of File with same name we created before to get image from storage
-//            File file = new File(Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
 
-//            //Crop the captured image using an other intent
-//            try {
-//                /*the user's device may not support cropping*/
-//                cropCapturedImage(Uri.fromFile(file));
-//            }
-//            catch(ActivityNotFoundException aNFE){
-//                //display an error message if user device doesn't support
-//                String errorMessage = "Sorry - your device doesn't support the crop action!";
-//                Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
-//                toast.show();
-//            }
+            if(resultCode == RESULT_OK) {
 
-            //Create an instance of bundle and get the returned data
-//            Bundle extras = data.getExtras();
-            //get the cropped bitmap from extras
-//            Bitmap originalBitmap = extras.getParcelable("data");
+                Bitmap decodedBitmap = imageUtility.decodeFile(capturedImagePath);
+                String capturedImagePath = imageUtility.saveCapturedImage(decodedBitmap);
 
-            File file = new File(Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
-            Bitmap decodedBitmap = imageUtility.decodeFile(file);
-            String capturedImagePath = imageUtility.saveCapturedImage(decodedBitmap);
-
-//            Bitmap bitmap = BitmapFactory.decodeFile(
-//                    Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
-            //set image bitmap to image view
-            dialogFragment.setImgVegetableImage(decodedBitmap, capturedImagePath);
+                //set image bitmap to image view
+                dialogFragment.setImgVegetableImage(decodedBitmap, capturedImagePath);
+            }
+            else if(resultCode == RESULT_CANCELED) {
+                // Do nothing
+            }
+            else {
+                // failed to capture image
+                Toast.makeText(getApplicationContext(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
         }
-//        if(requestCode==2){
-//            //Create an instance of bundle and get the returned data
-//            Bundle extras = data.getExtras();
-//            //get the cropped bitmap from extras
-//            Bitmap thePic = extras.getParcelable("data");
-//            //set image bitmap to image view
-//            dialogFragment.setImgVegetableImage(thePic);
-//        }
     }
-
-//    //create helping method cropCapturedImage(Uri picUri)
-//    public void cropCapturedImage(Uri picUri){
-//        //call the standard crop action intent
-//        Intent cropIntent = new Intent("com.android.camera.action.CROP");
-//        //indicate image type and Uri of image
-//        cropIntent.setDataAndType(picUri, "image/*");
-//        //set crop properties
-//        cropIntent.putExtra("crop", "true");
-//        //indicate aspect of desired crop
-//        cropIntent.putExtra("aspectX", 1);
-//        cropIntent.putExtra("aspectY", 1);
-//        //indicate output X and Y
-//        cropIntent.putExtra("outputX", 256);
-//        cropIntent.putExtra("outputY", 256);
-//        //retrieve data on return
-//        cropIntent.putExtra("return-data", true);
-//        //start the activity - we handle returning in onActivityResult
-//        startActivityForResult(cropIntent, 2);
-//    }
 
     @Override
     public void captureImage() {
@@ -197,12 +172,28 @@ public class DietPlannerActivity extends AppCompatActivity implements
          * as argument to launch camera
         */
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+
         /*create instance of File with name img.jpg*/
-        File file = new File(Environment.getExternalStorageDirectory()+File.separator + "img.jpg");
+        capturedImagePath = getVegetableImagePath();
         /*put uri as extra in intent object*/
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-//        intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(capturedImagePath));
         /*start activity for result pass intent as argument and request code */
         startActivityForResult(intent, 1);
+    }
+
+    private File getVegetableImagePath() {
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+
+        File appDirectory = new File(Environment.getExternalStorageDirectory() + File.separator +
+                "MealPlanner" + File.separator);
+        if( !appDirectory.exists() ) {
+            appDirectory.mkdir();
+        }
+
+        File capturedImageFile = new File(appDirectory.getAbsolutePath() + timeStamp + ".jpg");
+
+        return capturedImageFile;
     }
 }
