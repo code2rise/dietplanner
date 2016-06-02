@@ -29,7 +29,7 @@
         android:layout_below="@id/tvTitle"
         android:background="@color/dark_gray" />
 
-    <ListView
+    <!--<ListView
         android:id="@+id/lvVegetableList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,20 @@
         android:layout_below="@id/divider"
         android:layout_above="@+id/llBottomBtnLayout"
         android:divider="@color/dark_gray"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp"/>-->
+    
+    <GridView
+        android:id="@+id/gvVegetableList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/divider"
+        android:layout_above="@+id/llBottomBtnLayout"/>
 
     <LinearLayout
         android:id="@id/llBottomBtnLayout"

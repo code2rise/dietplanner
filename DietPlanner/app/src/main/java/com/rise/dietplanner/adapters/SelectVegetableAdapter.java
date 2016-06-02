@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,7 +89,7 @@ public class SelectVegetableAdapter extends BaseAdapter {
             }
         }
 
-        CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
+        /*CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
         if (veg.isSelected()) {
             cbVegetableSelected.setOnCheckedChangeListener(null);
             cbVegetableSelected.setChecked(true);
@@ -131,7 +133,7 @@ public class SelectVegetableAdapter extends BaseAdapter {
             }
         });
 
-        cbVegetableSelected.setChecked(veg.isSelected());
+        cbVegetableSelected.setChecked(veg.isSelected());*/
 
         return view;
     }

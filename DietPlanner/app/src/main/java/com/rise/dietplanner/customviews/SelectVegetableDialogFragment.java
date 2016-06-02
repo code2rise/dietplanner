@@ -1,22 +1,19 @@
 package com.rise.dietplanner.customviews;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import com.rise.dietplanner.R;
 import com.rise.dietplanner.adapters.SelectVegetableAdapter;
 import com.rise.dietplanner.db.DatabaseHelper;
-import com.rise.dietplanner.fragments.HomeFragment;
 import com.rise.dietplanner.interfaces.SelectVegetableInterface;
-import com.rise.dietplanner.model.DietPlanInfo;
 import com.rise.dietplanner.model.Meal;
 import com.rise.dietplanner.model.Vegetable;
 
@@ -28,7 +25,7 @@ import java.util.ArrayList;
 public class SelectVegetableDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private View rootView = null;
-    private ListView lvVegetableList = null;
+    private GridView gvVegetableList = null;
     private Button btnOk = null;
     private Button btnCancel = null;
     private SelectVegetableInterface selectVegetableInterface;
@@ -49,7 +46,7 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
         getDialog().setTitle(getResources().getString(R.string.add_vegetable_dialog_box_title));
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
-        lvVegetableList = (ListView) rootView.findViewById(R.id.lvVegetableList);
+        gvVegetableList = (GridView) rootView.findViewById(R.id.gvVegetableList);
 
         if(selectedMeal != null && selectedMeal.getVegetables() != null) {
             selectedVegetables = selectedMeal.getVegetables();
@@ -67,7 +64,7 @@ public class SelectVegetableDialogFragment extends DialogFragment implements Vie
         }
 
         selectVegetableAdapter = new SelectVegetableAdapter(getActivity(), vegetablesList, selectedVegetables);
-        lvVegetableList.setAdapter(selectVegetableAdapter);
+        gvVegetableList.setAdapter(selectVegetableAdapter);
 
         btnOk = (Button) rootView.findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);

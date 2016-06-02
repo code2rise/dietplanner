@@ -24,8 +24,8 @@
     <dimen name="week_list_spinner_item_padding">7dp</dimen>
 
     <dimen name="week_title_textsize">20sp</dimen>
-    <dimen name="week_chooser_spinner_item_textsize">18sp</dimen>
-    <dimen name="diet_plan_week_header_textsize">17sp</dimen>
+    <dimen name="week_chooser_spinner_item_textsize">15sp</dimen>
+    <dimen name="diet_plan_week_header_textsize">15sp</dimen>
 
     <dimen name="nutrient_list_autocomplete_item_padding">10dp</dimen>
     <dimen name="nutrient_list_autocomplete_item_left_padding">10dp</dimen>
@@ -42,7 +42,7 @@
     <dimen name="selected_veg_list_label_top_margin">2dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="vegetable_list_item_textsize">17sp</dimen>
+    <dimen name="vegetable_list_item_textsize">15sp</dimen>
     <dimen name="daily_diet_card_view_height">100dp</dimen>
     <dimen name="daily_diet_date_view_height">90dp</dimen>
 </resources>
