@@ -45,4 +45,7 @@
     <dimen name="vegetable_list_item_textsize">15sp</dimen>
     <dimen name="daily_diet_card_view_height">100dp</dimen>
     <dimen name="daily_diet_date_view_height">90dp</dimen>
+
+    <!-- Daily Diet Fragment -->
+    <dimen name="selected_day_title_textsize">25sp</dimen>
 </resources>

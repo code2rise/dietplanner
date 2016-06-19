@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rise.dietplanner.fragments.DailyDietFragment">
+    tools:context="com.rise.mealplanner.fragments.DailyDietFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,8 @@
             android:layout_marginTop="10dp"
             android:background="@color/gray"
             android:gravity="center"
-            android:textSize="24dp" />
+            android:textSize="@dimen/selected_day_title_textsize"
+            android:textStyle="normal"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

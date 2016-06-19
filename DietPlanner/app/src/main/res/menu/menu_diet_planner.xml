@@ -2,28 +2,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".DietPlannerActivity">
+
+    <item
+        android:id="@+id/action_view"
+        android:orderInCategory="200"
+        android:icon="@drawable/ic_list_view"
+        android:title="@string/action_view"
+        app:showAsAction="always" />
+
     <item
         android:id="@+id/action_add"
         android:orderInCategory="100"
         android:icon="@drawable/ic_add_vegetable"
         android:title="@string/action_add"
-        app:showAsAction="withText|always" />
-
-    <item
-        android:id="@+id/action_weekly_view"
-        android:orderInCategory="200"
-        android:title="@string/action_weekly_view"
-        app:showAsAction="withText|never" />
-
-    <item
-        android:id="@+id/action_daily_view"
-        android:orderInCategory="200"
-        android:title="@string/action_daily_view"
-        app:showAsAction="withText|never" />
-
-    <!--<item
-        android:id="@+id/action_settings"
-        android:orderInCategory="101"
-        android:title="@string/action_settings"
-        app:showAsAction="withText|collapseActionView" />-->
+        app:showAsAction="always" />
 </menu>

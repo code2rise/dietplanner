@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">Diet Planner</string>
+    <string name="app_name">Meal Planner</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="action_add">Add</string>
+    <string name="action_view">View</string>
     <string name="action_weekly_view">GridView</string>
     <string name="action_daily_view">ListView</string>
 

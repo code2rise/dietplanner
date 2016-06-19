@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/week_list_spinner_item_padding"
     android:paddingRight="@dimen/week_list_spinner_item_padding"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:paddingTop="7dp"
+    android:paddingBottom="7dp"
     android:orientation="horizontal">
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewRobotoRegularFont
         android:id="@+id/tvWeekname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/week_name_margin"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"/>
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewRobotoRegularFont
         android:id="@+id/tvWeekDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
