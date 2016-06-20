@@ -21,6 +21,7 @@ import com.rise.mealplanner.model.Meal;
 import com.rise.mealplanner.model.Meals;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by rise on 16/4/16.
@@ -72,9 +73,13 @@ public class DailyDietListRecyclerviewAdapter extends
 
         final Meal meal = meals.get(position);
 
+//        holder.dietVegetableListRecyclerview.setLayoutParams(new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.MATCH_PARENT,
+//                mContext.getResources().getDimensionPixelSize(R.dimen.daily_diet_card_view_height)));
+
         holder.dietVegetableListRecyclerview.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                mContext.getResources().getDimensionPixelSize(R.dimen.daily_diet_card_view_height)));
+                LinearLayout.LayoutParams.WRAP_CONTENT));
 
         if (meal.getVegetables() != null) {
             holder.addMealCardviewLayout.setVisibility(View.GONE);
@@ -131,6 +136,7 @@ public class DailyDietListRecyclerviewAdapter extends
 
         // Update meal information in the database.
         mDatabaseHelper.addSelectedVegetables(selectedMeal);
+        meals = mDatabaseHelper.getMealInformation(new Date(selectedMeal.getMealDateTime()));
         mDatabaseHelper.close();
 
         notifyDataSetChanged();

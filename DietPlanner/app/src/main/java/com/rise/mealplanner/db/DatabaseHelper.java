@@ -344,10 +344,28 @@ public class DatabaseHelper extends SQLiteAssetHelper {
                 String vegName = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableName"));
                 String vegetableImagePath = getVegetablesListCursor.getString(getVegetablesListCursor.getColumnIndex("VegetableImagePath"));
 
+                String getVegetableNutrientsQuery = "SELECT Nutrients.Id, Nutrients.NutrientName " +
+                        "FROM Nutrients, VegNutrients WHERE VegNutrients.NutrientId = Nutrients.Id " +
+                        "AND VegNutrients.VegId = ?";
+                Cursor getVegetableNutrientsCursor = database.rawQuery(getVegetableNutrientsQuery,
+                        new String[] {String.valueOf(vegId)});
+                ArrayList<Nutrient> nutrientList = new ArrayList<>();
+                while (getVegetableNutrientsCursor.moveToNext()) {
+                    int nutrientId = getVegetableNutrientsCursor.getInt(getVegetableNutrientsCursor.getColumnIndex("Id"));
+                    String nutrientName = getVegetableNutrientsCursor.getString(
+                            getVegetableNutrientsCursor.getColumnIndex("NutrientName"));
+
+                    Nutrient nutrient = new Nutrient();
+                    nutrient.setNutrientId(String.valueOf(nutrientId));
+                    nutrient.setNutrientName(nutrientName);
+                    nutrientList.add(nutrient);
+                }
+
                 Vegetable vegetable = new Vegetable();
                 vegetable.setId(vegId);
                 vegetable.setTitle(vegName);
                 vegetable.setImageUrl(vegetableImagePath);
+                vegetable.setNutrientsList(nutrientList);
                 vegetableList.add(vegetable);
             }
 

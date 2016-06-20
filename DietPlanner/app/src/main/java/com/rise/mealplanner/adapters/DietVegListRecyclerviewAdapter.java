@@ -17,6 +17,7 @@ import com.rise.mealplanner.R;
 import com.rise.mealplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.mealplanner.interfaces.SelectVegetableInterface;
 import com.rise.mealplanner.model.Meal;
+import com.rise.mealplanner.model.Nutrient;
 import com.rise.mealplanner.model.Vegetable;
 import com.rise.mealplanner.util.HandyFunctions;
 
@@ -97,8 +98,21 @@ public class DietVegListRecyclerviewAdapter extends RecyclerView.Adapter<DietVeg
 
         holder.tvVegetableName.setText(vegetable.getTitle());
 
-//        holder.tvNutrientsList.setText(vegetable.getNutrientsList());
-        holder.tvNutrientsList.setText("Nutrient Information Unavailable!");
+        StringBuilder nutrients = new StringBuilder();
+        for (Nutrient nutrient : vegetable.getNutrientsList()) {
+            if(nutrients.length() > 0) {
+                nutrients.append(", ");
+            }
+
+            nutrients.append(nutrient.getNutrientName());
+        }
+
+        if(nutrients.length() > 0) {
+            holder.tvNutrientsList.setText(nutrients.toString());
+        }
+        else {
+            holder.tvNutrientsList.setText("Nutrient Information Unavailable!");
+        }
 
         holder.tvMealName.setText(meal.getMealCode());
 
