@@ -12,31 +12,31 @@ import com.rise.mealplanner.util.FontCache;
 /**
  * Created by rise on 15/6/16.
  */
-public class CustomTextViewRobotoRegularFont extends TextView {
+public class CustomTextViewMontSerratRegularFont extends TextView {
 
-    public CustomTextViewRobotoRegularFont(Context context) {
+    public CustomTextViewMontSerratRegularFont(Context context) {
         super(context);
         setFont(context);
     }
 
-    public CustomTextViewRobotoRegularFont(Context context, AttributeSet attrs) {
+    public CustomTextViewMontSerratRegularFont(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFont(context);
     }
 
-    public CustomTextViewRobotoRegularFont(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CustomTextViewMontSerratRegularFont(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setFont(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public CustomTextViewRobotoRegularFont(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CustomTextViewMontSerratRegularFont(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setFont(context);
     }
 
     private void setFont(Context context) {
-        Typeface font = FontCache.get("fonts/Arvo-Regular.ttf", context);
+        Typeface font = FontCache.get("fonts/Montserrat-Regular.otf", context);
 
         if(getTypeface().isBold()) {
             setTypeface(font, Typeface.BOLD);

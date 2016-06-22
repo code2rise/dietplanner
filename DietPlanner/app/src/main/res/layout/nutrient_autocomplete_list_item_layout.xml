@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
         android:id="@+id/tv_nutrient_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

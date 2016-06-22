@@ -4,18 +4,18 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/week_list_spinner_item_padding"
     android:paddingRight="@dimen/week_list_spinner_item_padding"
-    android:paddingTop="7dp"
-    android:paddingBottom="7dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     android:orientation="horizontal">
 
-    <com.rise.mealplanner.customviews.CustomTextViewRobotoRegularFont
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
         android:id="@+id/tvWeekname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/week_name_margin"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"/>
 
-    <com.rise.mealplanner.customviews.CustomTextViewRobotoRegularFont
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
         android:id="@+id/tvWeekDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

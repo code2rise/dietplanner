@@ -88,6 +88,9 @@ public class SelectVegetableAdapter extends BaseAdapter {
                 imgVegetablePhoto.setImageBitmap(imageBitmap);
             }
         }
+        else {
+            imgVegetablePhoto.setImageResource(R.drawable.ic_veg);
+        }
 
         final RelativeLayout rlVegetableContainer = (RelativeLayout) view.findViewById(
                 R.id.rlVegetableContainer);
@@ -133,52 +136,6 @@ public class SelectVegetableAdapter extends BaseAdapter {
                 }
             }
         });
-
-        /*CheckBox cbVegetableSelected = (CheckBox) view.findViewById(R.id.cbVegetableSelected);
-        if (veg.isSelected()) {
-            cbVegetableSelected.setOnCheckedChangeListener(null);
-            cbVegetableSelected.setChecked(true);
-        }
-        else {
-            cbVegetableSelected.setOnCheckedChangeListener(null);
-            cbVegetableSelected.setChecked(false);
-        }
-
-        cbVegetableSelected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-
-                Vegetable veg = vegetables.get(i);
-                if (isChecked) {
-                    boolean isVegetableExist = false;
-                    for(Vegetable vegetable : selectedVegetables) {
-                        if (vegetable.getId() == veg.getId()) {
-                            isVegetableExist = true;
-                            break;
-                        }
-                    }
-
-                    if (!isVegetableExist) {
-                        veg.setSelected(true);
-                        selectedVegetables.add(veg);
-                    }
-                } else {
-                    int index = 0;
-                    for(Vegetable vegetable : selectedVegetables) {
-                        if (vegetable.getId() == veg.getId()) {
-                            veg.setSelected(false);
-                            selectedVegetables.remove(index);
-                            break;
-                        }
-
-                        index++;
-                    }
-                }
-            }
-        });
-
-        cbVegetableSelected.setChecked(veg.isSelected());*/
 
         return view;
     }

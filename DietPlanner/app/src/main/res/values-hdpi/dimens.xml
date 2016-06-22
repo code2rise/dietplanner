@@ -47,5 +47,5 @@
     <dimen name="daily_diet_date_view_height">90dp</dimen>
 
     <!-- Daily Diet Fragment -->
-    <dimen name="selected_day_title_textsize">25sp</dimen>
+    <dimen name="selected_day_title_textsize">24sp</dimen>
 </resources>

@@ -73,10 +73,6 @@ public class DailyDietListRecyclerviewAdapter extends
 
         final Meal meal = meals.get(position);
 
-//        holder.dietVegetableListRecyclerview.setLayoutParams(new LinearLayout.LayoutParams(
-//                LinearLayout.LayoutParams.MATCH_PARENT,
-//                mContext.getResources().getDimensionPixelSize(R.dimen.daily_diet_card_view_height)));
-
         holder.dietVegetableListRecyclerview.setLayoutParams(new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));

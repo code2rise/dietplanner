@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.rise.mealplanner.R;
 import com.rise.mealplanner.adapters.WeeksListAdapter;
+import com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont;
 import com.rise.mealplanner.customviews.SelectVegetableDialogFragment;
 import com.rise.mealplanner.customviews.ShowVegetablesListDialogFragment;
 import com.rise.mealplanner.db.DatabaseHelper;
@@ -155,7 +156,7 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
                         Vegetable vegetable = vegetables.get(count);
 
-                        TextView tvVegetableName = new TextView(getActivity());
+                        CustomTextViewMontSerratRegularFont tvVegetableName = new CustomTextViewMontSerratRegularFont(getActivity());
                         tvVegetableName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
                         tvVegetableName.setSingleLine(true);
                         tvVegetableName.setEllipsize(TextUtils.TruncateAt.END);

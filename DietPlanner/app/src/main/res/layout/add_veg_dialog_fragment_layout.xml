@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
+        <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:layout_marginBottom="5dp"
             android:background="@color/dark_gray" />
 
-        <EditText
+        <com.rise.mealplanner.customviews.CustomEditTextMontSerratLightFont
             android:id="@+id/etVegetableName"
             android:layout_width="match_parent"
             android:layout_height="35dp"
@@ -48,7 +48,7 @@
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
             android:background="@drawable/rounded_corner_edittext_background">
 
-            <AutoCompleteTextView
+            <com.rise.mealplanner.customviews.CustomAutoCompleteTextViewMontSerratLightFont
                     android:id="@+id/etNutrients"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:layout_marginBottom="5dp"
             android:weightSum="1">
 
-            <Button
+            <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
                 android:id="@+id/btnAdd"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
@@ -104,7 +104,7 @@
                 android:text="@string/add_veg_btn_title"
                 android:textColor="@color/dark_gray" />
 
-            <Button
+            <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
                 android:layout_height="35dp"

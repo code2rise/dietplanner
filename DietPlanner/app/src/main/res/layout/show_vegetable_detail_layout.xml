@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
         android:id="@+id/tvVegetableName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,11 +14,12 @@
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
         android:textSize="20sp"/>
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
         android:id="@+id/tvNutrients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"

@@ -11,22 +11,15 @@
         android:layout_height="80dp"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/food"/>
-<!--
-    <CheckBox
-        android:id="@+id/cbVegetableSelected"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:padding="5dp"/>-->
+        android:src="@drawable/ic_veg"/>
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
         android:id="@+id/tvVegetableName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/imgVegetablePhoto"
+        android:gravity="center"
         android:paddingBottom="5dp"
         android:textSize="@dimen/vegetable_list_item_textsize"/>
 

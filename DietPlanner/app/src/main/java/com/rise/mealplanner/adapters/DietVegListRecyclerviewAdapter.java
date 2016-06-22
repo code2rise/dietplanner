@@ -75,25 +75,29 @@ public class DietVegListRecyclerviewAdapter extends RecyclerView.Adapter<DietVeg
 
         ViewGroup.LayoutParams cardViewParent = holder.mealVegetableDetailCardviewLayout.getLayoutParams();
         cardViewParent.width = (int) (mContext.getResources().getDisplayMetrics().widthPixels - (2 * mContext.getResources().getDisplayMetrics().density));
-//        cardViewParent.width = cardViewParent.width - new HandyFunctions(mContext).dpToPx(10);
         cardViewParent.width = cardViewParent.width - new HandyFunctions(mContext).dpToPx(20);
 
         String protocol = "file:///android_asset/";
-        if(vegetable.getImageUrl().contains(protocol)) {
+        if(vegetable.getImageUrl() != null && vegetable.getImageUrl().length() > 0) {
+            if(vegetable.getImageUrl().contains(protocol)) {
 
-            try {
-                String imageUrl = vegetable.getImageUrl().substring(protocol.length());
-                AssetManager assetManager = mContext.getAssets();
-                InputStream inputStream = assetManager.open(imageUrl);
-                Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                try {
+                    String imageUrl = vegetable.getImageUrl().substring(protocol.length());
+                    AssetManager assetManager = mContext.getAssets();
+                    InputStream inputStream = assetManager.open(imageUrl);
+                    Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                    holder.imgVegetablePic.setImageBitmap(imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Bitmap imageBitmap = BitmapFactory.decodeFile(vegetable.getImageUrl());
                 holder.imgVegetablePic.setImageBitmap(imageBitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         else {
-            Bitmap imageBitmap = BitmapFactory.decodeFile(vegetable.getImageUrl());
-            holder.imgVegetablePic.setImageBitmap(imageBitmap);
+            holder.imgVegetablePic.setImageResource(R.drawable.ic_veg);
         }
 
         holder.tvVegetableName.setText(vegetable.getTitle());

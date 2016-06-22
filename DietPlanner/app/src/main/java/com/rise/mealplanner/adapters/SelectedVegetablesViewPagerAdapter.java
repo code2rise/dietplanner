@@ -74,27 +74,28 @@ public class SelectedVegetablesViewPagerAdapter extends PagerAdapter {
         }
 
 
-        String protocol = "file:///android_asset/";
-        if(vegetable.getImageUrl().contains(protocol)) {
+        if(vegetable.getImageUrl() != null && vegetable.getImageUrl().trim().length() > 0) {
+            String protocol = "file:///android_asset/";
+            if(vegetable.getImageUrl().contains(protocol)) {
 
-            try {
-                String imageUrl = vegetable.getImageUrl().substring(protocol.length());
-                AssetManager assetManager = mContext.getAssets();
-                InputStream inputStream = assetManager.open(imageUrl);
-                Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                try {
+                    String imageUrl = vegetable.getImageUrl().substring(protocol.length());
+                    AssetManager assetManager = mContext.getAssets();
+                    InputStream inputStream = assetManager.open(imageUrl);
+                    Bitmap imageBitmap = BitmapFactory.decodeStream(inputStream);
+                    imgVegetablePhoto.setImageBitmap(imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                Bitmap imageBitmap = BitmapFactory.decodeFile(vegetable.getImageUrl());
                 imgVegetablePhoto.setImageBitmap(imageBitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         else {
-            Bitmap imageBitmap = BitmapFactory.decodeFile(vegetable.getImageUrl());
-            imgVegetablePhoto.setImageBitmap(imageBitmap);
+            imgVegetablePhoto.setImageResource(R.drawable.ic_veg_large);
         }
-
-//        Uri fileUri = Uri.parse(vegetable.getImageUrl());
-//        Bitmap vegetableBitmap = BitmapFactory.decodeFile();
-//        imgVegetablePhoto.setImageURI(fileUri);
 
         ((ViewPager) container).addView(rootView);
 

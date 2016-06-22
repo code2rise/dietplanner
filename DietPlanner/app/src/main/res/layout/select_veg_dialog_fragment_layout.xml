@@ -6,7 +6,7 @@
     android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
     android:orientation="vertical">
 
-    <TextView
+    <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
         android:id="@+id/tvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
-        <Button
+        <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
             android:id="@+id/btnOk"
             android:layout_width="0dp"
             android:layout_height="35dp"
@@ -65,7 +65,7 @@
             android:text="@string/select_veg_ok_btn_title"
             android:textColor="@color/dark_gray" />
 
-        <Button
+        <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="35dp"

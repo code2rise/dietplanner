@@ -24,6 +24,7 @@ import com.rise.mealplanner.model.Vegetable;
 import com.wefika.flowlayout.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Created by rise on 28/8/15.
@@ -42,7 +43,8 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
     private DatabaseHelper mDatabaseHelper = null;
     private LayoutInflater inflater = null;
     private String capturedImagePath = "";
-    private ArrayList<Nutrient> selectedNutrientsList = new ArrayList<>();
+//    private ArrayList<Nutrient> selectedNutrientsList = new ArrayList<>();
+    private HashSet<Nutrient> selectedNutrientsList = new HashSet<>();
 
     @Nullable
     @Override
@@ -66,7 +68,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
         llNutrientAutoCompleteContainer = (FlowLayout) rootView.findViewById(R.id.llNutrientAutoCompleteContainer);
 
         final ArrayList<Nutrient> nutrientsList = mDatabaseHelper.getNutrientsList();
-        NutrientListAutoCompleteAdapter adapter = new NutrientListAutoCompleteAdapter(getActivity(),
+        final NutrientListAutoCompleteAdapter adapter = new NutrientListAutoCompleteAdapter(getActivity(),
                 R.layout.nutrient_autocomplete_list_item_layout, nutrientsList);
         etNutrients.setAdapter(adapter);
         etNutrients.setDropDownAnchor(llNutrientAutoCompleteContainer.getId());
@@ -78,7 +80,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
 
                 if(llNutrientAutoCompleteContainer.getChildCount() > 0) {
                     addSelectedVegetableLabel(nutrientsList.get(i).getNutrientName());
-                    selectedNutrientsList.add(nutrientsList.get(i));
+                        selectedNutrientsList.add(nutrientsList.get(i));
                 }
             }
         });
@@ -126,7 +128,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
 
                 Vegetable vegetable = new Vegetable();
                 vegetable.setTitle(vegetableName);
-                vegetable.setNutrientsList(selectedNutrientsList);
+                vegetable.setNutrientsList(new ArrayList<Nutrient>(selectedNutrientsList));
                 vegetable.setImageUrl(capturedImagePath);
 
                 mDatabaseHelper.addVegetable(vegetable);
