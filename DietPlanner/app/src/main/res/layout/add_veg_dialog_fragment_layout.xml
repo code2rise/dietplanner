@@ -70,10 +70,10 @@
                 android:layout_height="250dp"
                 android:layout_centerInParent="true"
                 android:scaleType="fitXY"
-                android:src="@drawable/vegetables"
+                android:src="@drawable/camera"
                 android:background="@drawable/rounded_corner_edittext_background"/>
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/imgEditPhoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
                 android:layout_marginTop="@dimen/add_vegetable_dialog_margin"
-                android:src="@drawable/edit_photo" />
+                android:src="@drawable/edit_photo" />-->
         </RelativeLayout>
 
         <LinearLayout

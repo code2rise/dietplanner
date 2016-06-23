@@ -16,8 +16,9 @@
             android:layout_height="@dimen/daily_diet_date_view_height"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/gray"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/card_view_border_drawable"
             android:gravity="center"
             android:textSize="@dimen/selected_day_title_textsize"
             android:textStyle="normal"/>
@@ -27,8 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:orientation="vertical"
-            android:paddingTop="3dp">
+            android:orientation="vertical" >
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/daily_diet_list"

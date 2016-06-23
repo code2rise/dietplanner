@@ -95,7 +95,7 @@ public class SelectVegetableAdapter extends BaseAdapter {
         final RelativeLayout rlVegetableContainer = (RelativeLayout) view.findViewById(
                 R.id.rlVegetableContainer);
         if(veg.isSelected()) {
-            rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.gray));
+            rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.primary_light));
         }
         else {
             rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
@@ -118,7 +118,7 @@ public class SelectVegetableAdapter extends BaseAdapter {
                 if (!isVegetableExist) {
                     veg.setSelected(true);
                     selectedVegetables.add(veg);
-                    rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.gray));
+                    rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.primary_light));
                 }
                 else {
                     int index = 0;

@@ -36,7 +36,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
     private Button btnCancel = null;
     private EditText etVegetableName = null;
     private AutoCompleteTextView etNutrients = null;
-    private ImageView imgEditPhoto = null;
+//    private ImageView imgEditPhoto = null;
     private ImageView imgVegetablePhoto = null;
     private FlowLayout llNutrientAutoCompleteContainer = null;
     private ICaptureImage iCaptureImage = null;
@@ -61,7 +61,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
 
         btnAdd = (Button) rootView.findViewById(R.id.btnAdd);
         btnCancel = (Button) rootView.findViewById(R.id.btnCancel);
-        imgEditPhoto = (ImageView) rootView.findViewById(R.id.imgEditPhoto);
+//        imgEditPhoto = (ImageView) rootView.findViewById(R.id.imgEditPhoto);
         imgVegetablePhoto = (ImageView) rootView.findViewById(R.id.imgVegetablePhoto);
         etVegetableName = (EditText) rootView.findViewById(R.id.etVegetableName);
         etNutrients = (AutoCompleteTextView) rootView.findViewById(R.id.etNutrients);
@@ -87,7 +87,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
 
         btnAdd.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
-        imgEditPhoto.setOnClickListener(this);
+        imgVegetablePhoto.setOnClickListener(this);
 
         return rootView;
     }
@@ -141,7 +141,7 @@ public class AddVegetableDialogFragment extends DialogFragment implements View.O
                 getDialog().dismiss();
                 break;
             }
-            case R.id.imgEditPhoto: {
+            case R.id.imgVegetablePhoto: {
 
                 iCaptureImage.captureImage();
                 break;

@@ -15,6 +15,7 @@
             android:id="@+id/spWeeks"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="3dp"
             android:layout_marginBottom="@dimen/weeks_chooser_margin"
             android:spinnerMode="dialog"
             android:background="@drawable/spinner_bg"/>
