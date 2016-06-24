@@ -24,7 +24,7 @@
     <string name="tm_activity_not_found">Oops! Activity not found.</string>
     <string name="title_activity_dummy">DummyActivity</string>
 
-    <string name="add_daily_meal_msg">Let\'s prepare your</string>
+    <string name="add_daily_meal_msg">Let\'s prepare </string>
 
     <!--<string-array name="vegetables_list">
         <item>Mat Bean</item>

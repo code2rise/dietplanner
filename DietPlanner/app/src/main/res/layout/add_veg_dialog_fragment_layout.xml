@@ -93,18 +93,6 @@
             android:weightSum="1">
 
             <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
-                android:id="@+id/btnAdd"
-                android:layout_width="0dp"
-                android:layout_height="35dp"
-                android:layout_marginLeft="@dimen/add_vegetable_dialog_button_margin"
-                android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
-                android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
-                android:layout_weight="0.5"
-                android:background="@drawable/selector_rounded_corner_btn"
-                android:text="@string/add_veg_btn_title"
-                android:textColor="@color/dark_gray" />
-
-            <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
                 android:id="@+id/btnCancel"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
@@ -114,7 +102,19 @@
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_rounded_corner_btn"
                 android:text="@string/cancel_veg_btn_title"
-                android:textColor="@color/dark_gray" />
+                android:textColor="@color/primary" />
+
+            <com.rise.mealplanner.customviews.CustomButtonMontSerratRegularFont
+                android:id="@+id/btnAdd"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/add_vegetable_dialog_button_margin"
+                android:layout_marginRight="@dimen/add_vegetable_dialog_title_padding"
+                android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
+                android:layout_weight="0.5"
+                android:background="@drawable/selector_rounded_corner_green_btn"
+                android:text="@string/add_veg_btn_title"
+                android:textColor="@color/white" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

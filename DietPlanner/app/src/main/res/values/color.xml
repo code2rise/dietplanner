@@ -31,6 +31,11 @@
     <color name="divider">#B6B6B6</color>
     <color name="card_view_background">#A5D6A7</color>
 
+    <color name="add_veg_btn_color">@color/primary</color>
+    <color name="add_veg_btn_selected_color">#CE4CAF50</color>
+    <color name="cancel_btn_selected_color">#CEd3d3d3</color>
+
+
     <!-- Blue -->
     <!--<color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>

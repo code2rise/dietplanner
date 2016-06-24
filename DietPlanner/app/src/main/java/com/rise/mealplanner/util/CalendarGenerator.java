@@ -31,6 +31,7 @@ public class CalendarGenerator {
 
     public ArrayList<Week> getWeeksList() {
 
+        weeks.clear();
         for (int index=1; index<=53; index++) {
             Week week = new Week();
             week.setWeekNumber(index);

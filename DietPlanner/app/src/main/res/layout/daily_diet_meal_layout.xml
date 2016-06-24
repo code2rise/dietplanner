@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clickable="false"
     android:orientation="vertical"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="1dp">
 
     <LinearLayout
@@ -35,7 +36,7 @@
             android:layout_weight="0.70"
             android:orientation="vertical">
 
-            <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
+            <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
                 android:id="@+id/tv_vegetable_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,7 +44,8 @@
                 android:paddingRight="5dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
-                android:textSize="18sp"/>
+                android:textSize="19sp"
+                android:textColor="@color/primary"/>
 
             <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
                 android:id="@+id/tv_nutrients_list"
@@ -64,7 +66,7 @@
                 android:paddingRight="5dp"
                 android:paddingTop="2dp"
                 android:paddingBottom="5dp"
-                android:textSize="13sp" />
+                android:textSize="13sp"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="1dp"
     android:visibility="gone">
 
@@ -12,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:background="@color/white"
         android:weightSum="1">
 
         <LinearLayout
@@ -35,7 +37,7 @@
             android:layout_weight="0.70"
             android:orientation="vertical">
 
-            <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
+            <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
                 android:id="@+id/tv_prepare_meal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -43,7 +45,7 @@
                 android:gravity="center_vertical"
                 android:padding="3dp"
                 android:textSize="18sp"
-                android:text="Let's Prepare Your Lunch!"/>
+                android:text="Let's Prepare Your Lunch!" />
         </LinearLayout>
     </LinearLayout>
 

@@ -116,29 +116,28 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
     private void displayWeeklyDietDashboard(Week selectedWeek) {
 
-        if(glWeeklyDietDetails != null) {
+        if (glWeeklyDietDetails != null) {
             glWeeklyDietDetails.removeAllViews();
         }
 
         dashboardData = getDashboardDietData(selectedWeek);
-        for(int index=0; index<dashboardData.length; index++) {
+        for (int index = 0; index < dashboardData.length; index++) {
 
             final View dashboardGridItemLayout;
-            if(dashboardData[index].isHeader()) {
+            if (dashboardData[index].isHeader()) {
                 dashboardGridItemLayout = inflater.inflate(R.layout.grid_header_item_layout, null);
 
                 TextView tvTitle = (TextView) dashboardGridItemLayout.findViewById(R.id.tvTitle);
                 tvTitle.setVisibility(View.VISIBLE);
                 tvTitle.setText(dashboardData[index].getTitle());
-            }
-            else {
+            } else {
                 dashboardGridItemLayout = inflater.inflate(R.layout.week_data_grid_view_item_layout, null);
                 final ImageView imgAddVeg = (ImageView) dashboardGridItemLayout.findViewById(R.id.imgAddVeg);
                 LinearLayout llSelectedVegContainer = (LinearLayout) dashboardGridItemLayout.findViewById(R.id.llSelectedVegContainer);
 
                 Meal meal = dashboardData[index].getMeal();
 
-                if(meal != null && meal.getVegetables() != null && meal.getVegetables().size() > 0) {
+                if (meal != null && meal.getVegetables() != null && meal.getVegetables().size() > 0) {
                     ArrayList<Vegetable> vegetables = meal.getVegetables();
 
                     llSelectedVegContainer.setVisibility(View.VISIBLE);
@@ -165,28 +164,26 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
                                 handyFunctions.dpToPx(2), handyFunctions.dpToPx(0));
                         tvVegetableName.setTextColor(getResources().getColor(R.color.white));
 
-                        if(count % 3 == 0) {
+                        if (count % 3 == 0) {
 
                             Drawable mDrawable = handyFunctions.getVegetableBackground("#FA8258");
-                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                                 tvVegetableName.setBackgroundDrawable(mDrawable);
                             } else {
                                 tvVegetableName.setBackground(mDrawable);
                             }
-                        }
-                        else if(count % 2 == 0) {
+                        } else if (count % 2 == 0) {
 
                             Drawable mDrawable = handyFunctions.getVegetableBackground("#D358F7");
-                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                                 tvVegetableName.setBackgroundDrawable(mDrawable);
                             } else {
                                 tvVegetableName.setBackground(mDrawable);
                             }
-                        }
-                        else {
+                        } else {
 
                             Drawable mDrawable = handyFunctions.getVegetableBackground("#04B486");
-                            if(Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                            if (Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
                                 tvVegetableName.setBackgroundDrawable(mDrawable);
                             } else {
                                 tvVegetableName.setBackground(mDrawable);
@@ -212,24 +209,22 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
                         selectedItem = (int) dashboardGridItemLayout.getTag();
                         dialogFragment = new SelectVegetableDialogFragment();
                         DietPlanInfo dietPlanInfo = null;
-                        if(dashboardData != null) {
+                        if (dashboardData != null) {
                             dietPlanInfo = dashboardData[selectedItem];
 
-                            if(dietPlanInfo.getMeal() != null &&
+                            if (dietPlanInfo.getMeal() != null &&
                                     dietPlanInfo.getMeal().getVegetables() != null &&
                                     dietPlanInfo.getMeal().getVegetables().size() > 0) {
                                 ShowVegetablesListDialogFragment showVegetablesListDialogFragment = new ShowVegetablesListDialogFragment();
                                 showVegetablesListDialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                                 showVegetablesListDialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                                 showVegetablesListDialogFragment.show(getFragmentManager(), "Show Vegetables");
-                            }
-                            else {
+                            } else {
                                 dialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                                 dialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                                 dialogFragment.show(getFragmentManager(), "Select Vegetable");
                             }
-                        }
-                        else {
+                        } else {
                             dialogFragment.setSelectedMeal(dietPlanInfo.getMeal());
                             dialogFragment.setCommunicationInterface(WeeklyDietFragment.this);
                             dialogFragment.show(getFragmentManager(), "Select Vegetable");
@@ -311,9 +306,9 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
         long dayOfWeek = startOfWeek.getTimeInMillis();
 
         while (counter <= gridItemCount) {
-            if(counter % 4 == 0) {
+            if (counter % 4 == 0) {
 
-                if(counter / 4 > 1 ) {
+                if (counter / 4 > 1) {
                     startOfWeek.add(Calendar.DAY_OF_WEEK, 1);
                     dayOfWeek = startOfWeek.getTimeInMillis();
                 }
@@ -339,37 +334,38 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     @Override
     public void selectVegetables(Meal meal) {
 
-        // 4 represents number of columns in grid view.
-        int day = (selectedItem / 4);
-        Calendar startOfWeek = Calendar.getInstance();
-        startOfWeek.setTime(new Date(meal.getMealDateTime()));
+        if (meal != null && meal.getVegetables().size() > 0) {
+            // 4 represents number of columns in grid view.
+            int day = (selectedItem / 4);
+            Calendar startOfWeek = Calendar.getInstance();
+            startOfWeek.setTime(new Date(meal.getMealDateTime()));
 
-        // Get selected meal timing
-        Meals selectedMeal;
-        if ((selectedItem-(day*4)) % 3 == 1) {
-            selectedMeal = Meals.BREAKFAST;
-        } else if ((selectedItem-(day*4)) % 3 == 2) {
-            selectedMeal = Meals.LUNCH;
-        }
-        else {
-            selectedMeal = Meals.DINNER;
-        }
+            // Get selected meal timing
+            Meals selectedMeal;
+            if ((selectedItem - (day * 4)) % 3 == 1) {
+                selectedMeal = Meals.BREAKFAST;
+            } else if ((selectedItem - (day * 4)) % 3 == 2) {
+                selectedMeal = Meals.LUNCH;
+            } else {
+                selectedMeal = Meals.DINNER;
+            }
 
-        // TODO Save these values to database table DietPlan
-        long timestamp = startOfWeek.getTimeInMillis();
+            // TODO Save these values to database table DietPlan
+            long timestamp = startOfWeek.getTimeInMillis();
 
-        Meal selectedMealInfo = new Meal();
-        selectedMealInfo.setMealCode(selectedMeal.name());
-        selectedMealInfo.setMealDateTime(timestamp);
-        selectedMealInfo.setVegetables(meal.getVegetables());
+            Meal selectedMealInfo = new Meal();
+            selectedMealInfo.setMealCode(selectedMeal.name());
+            selectedMealInfo.setMealDateTime(timestamp);
+            selectedMealInfo.setVegetables(meal.getVegetables());
 
-        mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
+            mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
 
-        if(glWeeklyDietDetails != null) {
-            glWeeklyDietDetails.removeAllViews();
+            if (glWeeklyDietDetails != null) {
+                glWeeklyDietDetails.removeAllViews();
 
-            Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
-            displayWeeklyDietDashboard(selectedWeek);
+                Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
+                displayWeeklyDietDashboard(selectedWeek);
+            }
         }
     }
 }

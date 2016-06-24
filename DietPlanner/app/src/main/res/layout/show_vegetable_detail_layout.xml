@@ -12,7 +12,8 @@
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:textColor="@color/primary"/>
 
     <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
         android:id="@+id/tvNutrients"
