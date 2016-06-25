@@ -42,8 +42,7 @@
         android:layout_marginBottom="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="3dp"
         android:layout_below="@id/divider"
-        android:layout_above="@+id/llBottomBtnLayout"
-        android:background="@color/white"/>
+        android:layout_above="@+id/llBottomBtnLayout" />
 
     <LinearLayout
         android:id="@id/llBottomBtnLayout"

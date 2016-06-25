@@ -31,8 +31,9 @@
         android:layout_width="240dp"
         android:layout_height="240dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
-        android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
-        android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
+        android:paddingLeft="@dimen/add_vegetable_dialog_title_padding"
+        android:paddingRight="@dimen/add_vegetable_dialog_title_padding"
+        android:paddingTop="@dimen/add_vegetable_dialog_title_padding"
+        android:paddingBottom="@dimen/add_vegetable_dialog_title_padding"
         android:scaleType="fitXY" />
 </LinearLayout>

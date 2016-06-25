@@ -70,7 +70,7 @@ public class DietPlannerActivity extends AppCompatActivity implements
         handyFunctions = new HandyFunctions(getApplicationContext());
 
         WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
-        switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
+        switchFragment(fragment, WEEKLY_DIET_FRAGMENT, false);
     }
 
     @Override
@@ -100,18 +100,17 @@ public class DietPlannerActivity extends AppCompatActivity implements
         }
         else if(id == R.id.action_view) {
 
-            Fragment weeklyViewFragment = getSupportFragmentManager().findFragmentByTag(WEEKLY_DIET_FRAGMENT);
-            Fragment dailyViewFragment = getSupportFragmentManager().findFragmentByTag(DAILY_DIET_FRAGMENT);
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.flFragmentContainer);
 
-            if(weeklyViewFragment != null) {
+            if(fragment != null && fragment instanceof WeeklyDietFragment) {
                 item.setIcon(R.drawable.ic_grid_view);
-                DailyDietFragment fragment = DailyDietFragment.newInstance();
-                switchFragment(fragment, DAILY_DIET_FRAGMENT);
+                DailyDietFragment dailyDietFragment = DailyDietFragment.newInstance();
+                switchFragment(dailyDietFragment, DAILY_DIET_FRAGMENT, true);
             }
-            else if(dailyViewFragment != null) {
+            else if(fragment != null && fragment instanceof DailyDietFragment) {
                 item.setIcon(R.drawable.ic_list_view);
-                WeeklyDietFragment fragment = WeeklyDietFragment.newInstance();
-                switchFragment(fragment, WEEKLY_DIET_FRAGMENT);
+                WeeklyDietFragment weeklyDietFragment = WeeklyDietFragment.newInstance();
+                switchFragment(weeklyDietFragment, WEEKLY_DIET_FRAGMENT, false);
             }
 
             return true;
@@ -120,14 +119,29 @@ public class DietPlannerActivity extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void switchFragment(Fragment fragment, String fragmentTag) {
+    private void switchFragment(Fragment fragment, String fragmentTag, boolean isAddToBackstack) {
 
-        Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.flFragmentContainer);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if(currentFragment == null) {
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.flFragmentContainer, fragment, fragmentTag);
+            fragmentTransaction.add(R.id.flFragmentContainer, fragment, fragmentTag);
+            if(isAddToBackstack) {
+                fragmentTransaction.addToBackStack(fragmentTag);
+            }
             fragmentTransaction.commit();
+        }
+        else {
+            if(isAddToBackstack) {
+                fragmentTransaction.add(R.id.flFragmentContainer, fragment, fragmentTag);
+                fragmentTransaction.addToBackStack(fragmentTag);
+                fragmentTransaction.commit();
+            }
+            else if(currentFragment instanceof DailyDietFragment) {
+                getSupportFragmentManager().popBackStack();
+                fragmentTransaction.replace(R.id.flFragmentContainer, fragment, fragmentTag);
+                fragmentTransaction.commit();
+            }
         }
     }
 

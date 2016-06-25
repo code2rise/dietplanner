@@ -98,7 +98,8 @@ public class SelectVegetableAdapter extends BaseAdapter {
             rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.primary_light));
         }
         else {
-            rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+//            rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
         }
 
         rlVegetableContainer.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +133,8 @@ public class SelectVegetableAdapter extends BaseAdapter {
                         index++;
                     }
 
-                    rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+//                    rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+                    rlVegetableContainer.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
                 }
             }
         });
