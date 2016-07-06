@@ -10,13 +10,17 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.rise.mealplanner.R;
+import com.rise.mealplanner.customviews.ActionBarCustomTitleTypeface;
 import com.rise.mealplanner.customviews.AddVegetableDialogFragment;
 import com.rise.mealplanner.db.DatabaseHelper;
+import com.rise.mealplanner.fragments.AboutUsActivity;
 import com.rise.mealplanner.fragments.DailyDietFragment;
 import com.rise.mealplanner.fragments.HomeFragment;
 import com.rise.mealplanner.fragments.WeeklyDietFragment;
@@ -55,6 +59,12 @@ public class DietPlannerActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_planner);
+
+        SpannableString appTitle = new SpannableString("Meal Planner");
+        appTitle.setSpan(new ActionBarCustomTitleTypeface(this, "fonts/Montserrat-Regular.otf"),
+                0, appTitle.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(appTitle);
 
         databaseHelper = new DatabaseHelper(this);
         SharedPreferences preferences = getSharedPreferences(PREFERENCE_NAME, MODE_PRIVATE);
@@ -112,6 +122,22 @@ public class DietPlannerActivity extends AppCompatActivity implements
                 WeeklyDietFragment weeklyDietFragment = WeeklyDietFragment.newInstance();
                 switchFragment(weeklyDietFragment, WEEKLY_DIET_FRAGMENT, false);
             }
+
+            return true;
+        }
+        else if(id == R.id.action_about_us) {
+            Intent aboutUsActivityIntent = new Intent(DietPlannerActivity.this,
+                    AboutUsActivity.class);
+            startActivity(aboutUsActivityIntent);
+
+            return true;
+        }
+        else if(id == R.id.action_feedback) {
+            Intent launchEmailIntent = new Intent(Intent.ACTION_SENDTO);
+            launchEmailIntent.setData(Uri.parse("mailto:"));
+            launchEmailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"cr.rupesh@gmail.com"});
+            launchEmailIntent.putExtra(Intent.EXTRA_SUBJECT, "MealPlanner Feedback");
+            startActivity(Intent.createChooser(launchEmailIntent, "Send Email"));
 
             return true;
         }

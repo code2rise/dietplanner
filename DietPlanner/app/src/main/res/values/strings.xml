@@ -7,6 +7,8 @@
     <string name="action_view">View</string>
     <string name="action_weekly_view">GridView</string>
     <string name="action_daily_view">ListView</string>
+    <string name="action_about_us">About Us</string>
+    <string name="action_feedback">Feedback</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -25,50 +27,6 @@
     <string name="title_activity_dummy">DummyActivity</string>
 
     <string name="add_daily_meal_msg">Let\'s prepare </string>
-
-    <!--<string-array name="vegetables_list">
-        <item>Mat Bean</item>
-        <item>Green Gram</item>
-        <item>Beaten Rice</item>
-        <item>Chickpeas Brown</item>
-        <item>Black Gram Sabut</item>
-        <item>Black Eyed Beans</item>
-        <item>Chickpeas Green</item>
-        <item>Chickpeas White</item>
-        <item>Gram Flour</item>
-        <item>Red Kidney Beans</item>
-        <item>Red Lentil</item>
-        <item>Refined Flour</item>
-        <item>Split Green Gram</item>
-        <item>Split Black Gram</item>
-        <item>Split Red Gram</item>
-        <item>Split Red Lentil</item>
-        <item>Pea</item>
-        <item>Silk Squash</item>
-        <item>Pumpkin</item>
-        <item>Bitter Gourd</item>
-        <item>Cucumber</item>
-        <item>Bottle Gourd</item>
-        <item>Ridge Gourd</item>
-        <item>Ivy Gourd</item>
-        <item>Colocasia leaves</item>
-        <item>Green Amaranth</item>
-        <item>Coriander</item>
-        <item>Drumstick</item>
-        <item>Fenugreek</item>
-        <item>Radish</item>
-        <item>Spinach</item>
-        <item>Cabbage</item>
-        <item>Mint Leaves</item>
-        <item>Mustard Leaves</item>
-        <item>Potato</item>
-        <item>Carrot</item>
-        <item>Sweet Potato</item>
-        <item>Beetroot</item>
-        <item>Brinjal</item>
-        <item>Lady\'s Finger</item>
-        <item>Cauliflower</item>
-        <item>Capsicum</item>
-    </string-array>-->
+    <string name="app_description">This application is for all the health conscious and enthusiasts who wants to manage there diet intake. It will display the nutrient values of vegetables helping in managing the nutritional needs of body. This app will also track the vegetables consumed in the previous weeks.</string>
 
 </resources>

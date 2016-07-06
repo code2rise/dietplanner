@@ -20,6 +20,7 @@
         android:layout_below="@id/imgVegetablePhoto"
         android:gravity="center"
         android:paddingBottom="5dp"
+        android:paddingRight="2dp"
         android:textSize="@dimen/vegetable_list_item_textsize"/>
 
 </RelativeLayout>
