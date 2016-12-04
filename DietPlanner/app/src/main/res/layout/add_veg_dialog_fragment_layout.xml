@@ -16,6 +16,7 @@
             android:layout_marginRight="@dimen/select_veg_popup_header_top_margin"
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_top_margin"
             android:layout_marginBottom="@dimen/add_veg_dialog_header_bottom_margin"
+            android:textStyle="normal"
             android:text="@string/add_vegetable_dialog_box_title"
             android:textAllCaps="true"
             android:textSize="@dimen/add_vegetable_dialog_title_textsize"
@@ -37,7 +38,8 @@
             android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
             android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
             android:background="@drawable/rounded_corner_edittext_background"
-            android:hint="@string/add_vegetable_title_hint" />
+            android:hint="@string/add_vegetable_title_hint"
+            android:textStyle="normal"/>
 
         <com.wefika.flowlayout.FlowLayout
             android:id="@+id/llNutrientAutoCompleteContainer"
@@ -53,7 +55,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/add_nutrient_hint"
-                    android:background="@color/transparent"/>
+                    android:background="@color/transparent"
+                    android:textStyle="normal"/>
 
         </com.wefika.flowlayout.FlowLayout>
 
@@ -101,6 +104,7 @@
                 android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_rounded_corner_btn"
+                android:textStyle="normal"
                 android:text="@string/cancel_veg_btn_title"
                 android:textColor="@color/primary" />
 
@@ -113,6 +117,7 @@
                 android:layout_marginBottom="@dimen/add_vegetable_dialog_button_margin"
                 android:layout_weight="0.5"
                 android:background="@drawable/selector_rounded_corner_green_btn"
+                android:textStyle="normal"
                 android:text="@string/add_veg_btn_title"
                 android:textColor="@color/white" />
         </LinearLayout>

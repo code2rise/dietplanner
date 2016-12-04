@@ -44,6 +44,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
                 android:padding="3dp"
+                android:textStyle="normal"
                 android:textSize="18sp"
                 android:text="Let's Prepare Your Lunch!" />
         </LinearLayout>

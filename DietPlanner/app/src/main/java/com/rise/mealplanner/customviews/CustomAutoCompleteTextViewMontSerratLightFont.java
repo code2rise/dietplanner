@@ -37,6 +37,10 @@ public class CustomAutoCompleteTextViewMontSerratLightFont extends AutoCompleteT
     }
 
     private void setFont(Context context) {
+
+        if(getTypeface() == null)
+            return;
+
         Typeface font = FontCache.get("fonts/Montserrat-Light.otf", context);
 
         if(getTypeface().isBold()) {

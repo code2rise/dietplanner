@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textStyle="normal"
         android:textSize="@dimen/diet_plan_week_header_textsize" />
 
 </android.support.v7.widget.CardView>

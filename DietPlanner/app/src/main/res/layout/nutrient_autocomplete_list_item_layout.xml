@@ -7,6 +7,7 @@
         android:id="@+id/tv_nutrient_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textStyle="normal"
         android:padding="@dimen/nutrient_list_autocomplete_item_padding"/>
 
 </RelativeLayout>

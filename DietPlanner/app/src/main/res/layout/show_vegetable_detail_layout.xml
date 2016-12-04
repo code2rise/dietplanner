@@ -12,6 +12,7 @@
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
+        android:textStyle="normal"
         android:textSize="20sp"
         android:textColor="@color/primary"/>
 
@@ -24,6 +25,7 @@
         android:layout_marginLeft="@dimen/add_vegetable_dialog_margin"
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
+        android:textStyle="normal"
         android:textSize="16sp"/>
 
     <ImageView

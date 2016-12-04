@@ -9,4 +9,5 @@
     android:paddingLeft="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:paddingRight="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:paddingTop="@dimen/nutrient_list_autocomplete_item_top_padding"
-    android:paddingBottom="@dimen/nutrient_list_autocomplete_item_top_padding"/>
+    android:paddingBottom="@dimen/nutrient_list_autocomplete_item_top_padding"
+    android:textStyle="normal"/>

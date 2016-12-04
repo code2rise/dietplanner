@@ -36,6 +36,9 @@ public class CustomButtonMontSerratRegularFont extends Button {
     }
 
     private void setFont(Context context) {
+        if(getTypeface() == null)
+            return;
+
         Typeface font = FontCache.get("fonts/Montserrat-Regular.otf", context);
 
         if(getTypeface().isBold()) {

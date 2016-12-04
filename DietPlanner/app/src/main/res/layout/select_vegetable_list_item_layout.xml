@@ -21,6 +21,7 @@
         android:gravity="center"
         android:paddingBottom="5dp"
         android:paddingRight="2dp"
+        android:textStyle="normal"
         android:textSize="@dimen/vegetable_list_item_textsize"/>
 
 </RelativeLayout>

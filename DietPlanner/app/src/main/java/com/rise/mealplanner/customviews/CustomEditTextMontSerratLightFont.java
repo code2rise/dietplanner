@@ -37,6 +37,9 @@ public class CustomEditTextMontSerratLightFont extends EditText {
     }
 
     private void setFont(Context context) {
+        if(getTypeface() == null)
+            return;
+
         Typeface font = FontCache.get("fonts/Montserrat-Light.otf", context);
 
         if(getTypeface().isBold()) {
