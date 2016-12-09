@@ -77,7 +77,7 @@ public class DailyDietListRecyclerviewAdapter extends
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT));
 
-        if (meal.getVegetables() != null) {
+        if (meal.getVegetables() != null && meal.getVegetables().size() > 0) {
             holder.addMealCardviewLayout.setVisibility(View.GONE);
             holder.dietVegetableListRecyclerview.setVisibility(View.VISIBLE);
 

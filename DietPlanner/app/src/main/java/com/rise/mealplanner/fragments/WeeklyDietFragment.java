@@ -200,6 +200,10 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
 
                         count++;
                     }
+                } else {
+                    llSelectedVegContainer.setVisibility(View.GONE);
+                    imgAddVeg.setVisibility(View.VISIBLE);
+                    llSelectedVegContainer.removeAllViews();
                 }
 
                 dashboardGridItemLayout.setTag(index);
@@ -334,7 +338,7 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
     @Override
     public void selectVegetables(Meal meal) {
 
-        if (meal != null && meal.getVegetables().size() > 0) {
+        if (meal != null) {
             // 4 represents number of columns in grid view.
             int day = (selectedItem / 4);
             Calendar startOfWeek = Calendar.getInstance();
@@ -359,13 +363,14 @@ public class WeeklyDietFragment extends Fragment implements SelectVegetableInter
             selectedMealInfo.setVegetables(meal.getVegetables());
 
             mDatabaseHelper.addSelectedVegetables(selectedMealInfo);
+        }
 
-            if (glWeeklyDietDetails != null) {
-                glWeeklyDietDetails.removeAllViews();
+        // Update the weekly diet UI post vegetable selection by the user.
+        if (glWeeklyDietDetails != null) {
+            glWeeklyDietDetails.removeAllViews();
 
-                Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
-                displayWeeklyDietDashboard(selectedWeek);
-            }
+            Week selectedWeek = CalendarGenerator.getInstance().getWeekDetails(selectedWeekIndex);
+            displayWeeklyDietDashboard(selectedWeek);
         }
     }
 }
