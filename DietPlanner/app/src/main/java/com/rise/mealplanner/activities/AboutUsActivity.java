@@ -1,4 +1,4 @@
-package com.rise.mealplanner.fragments;
+package com.rise.mealplanner.activities;
 
 
 import android.os.Bundle;

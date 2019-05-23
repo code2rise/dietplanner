@@ -20,7 +20,6 @@ import com.rise.mealplanner.R;
 import com.rise.mealplanner.customviews.ActionBarCustomTitleTypeface;
 import com.rise.mealplanner.customviews.AddVegetableDialogFragment;
 import com.rise.mealplanner.db.DatabaseHelper;
-import com.rise.mealplanner.fragments.AboutUsActivity;
 import com.rise.mealplanner.fragments.DailyDietFragment;
 import com.rise.mealplanner.fragments.HomeFragment;
 import com.rise.mealplanner.fragments.WeeklyDietFragment;

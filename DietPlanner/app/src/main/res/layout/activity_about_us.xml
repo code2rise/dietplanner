@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background_material_light"
-    tools:context=".fragments.AboutUsActivity">
+    tools:context=".activities.AboutUsActivity">
 
     <ImageView
         android:id="@+id/img_app_logo"
