@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.rise.mealplanner.R;
 import com.rise.mealplanner.customviews.ActionBarCustomTitleTypeface;
-import com.rise.mealplanner.customviews.AddVegetableDialogFragment;
+import com.rise.mealplanner.fragments.AddVegetableDialogFragment;
 import com.rise.mealplanner.db.DatabaseHelper;
 import com.rise.mealplanner.fragments.DailyDietFragment;
 import com.rise.mealplanner.fragments.HomeFragment;

@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rise.mealplanner.R;
-import com.rise.mealplanner.customviews.SelectVegetableDialogFragment;
+import com.rise.mealplanner.fragments.SelectVegetableDialogFragment;
 import com.rise.mealplanner.interfaces.SelectVegetableInterface;
 import com.rise.mealplanner.model.Meal;
 import com.rise.mealplanner.model.Nutrient;

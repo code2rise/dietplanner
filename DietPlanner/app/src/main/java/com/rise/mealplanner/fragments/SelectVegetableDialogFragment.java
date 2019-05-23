@@ -1,4 +1,4 @@
-package com.rise.mealplanner.customviews;
+package com.rise.mealplanner.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

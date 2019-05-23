@@ -1,4 +1,4 @@
-package com.rise.mealplanner.customviews;
+package com.rise.mealplanner.customviews.snappyrecycler;
 
 import android.content.Context;
 import android.graphics.PointF;

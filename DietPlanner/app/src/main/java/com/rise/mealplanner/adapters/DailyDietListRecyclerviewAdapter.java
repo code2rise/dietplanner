@@ -12,9 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rise.mealplanner.R;
-import com.rise.mealplanner.customviews.SelectVegetableDialogFragment;
-import com.rise.mealplanner.customviews.SnappyLinearLayoutManager;
-import com.rise.mealplanner.customviews.SnappyRecyclerView;
+import com.rise.mealplanner.fragments.SelectVegetableDialogFragment;
+import com.rise.mealplanner.customviews.snappyrecycler.SnappyLinearLayoutManager;
+import com.rise.mealplanner.customviews.snappyrecycler.SnappyRecyclerView;
 import com.rise.mealplanner.db.DatabaseHelper;
 import com.rise.mealplanner.interfaces.SelectVegetableInterface;
 import com.rise.mealplanner.model.Meal;

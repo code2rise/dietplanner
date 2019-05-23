@@ -6,7 +6,7 @@
 
     <include layout="@layout/add_daily_diet_meal_layout" />
 
-    <com.rise.mealplanner.customviews.SnappyRecyclerView
+    <com.rise.mealplanner.customviews.snappyrecycler.SnappyRecyclerView
         android:id="@+id/diet_vegetable_list_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

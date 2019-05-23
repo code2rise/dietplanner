@@ -19,8 +19,6 @@ import android.widget.TextView;
 import com.rise.mealplanner.R;
 import com.rise.mealplanner.adapters.WeeksListAdapter;
 import com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont;
-import com.rise.mealplanner.customviews.SelectVegetableDialogFragment;
-import com.rise.mealplanner.customviews.ShowVegetablesListDialogFragment;
 import com.rise.mealplanner.db.DatabaseHelper;
 import com.rise.mealplanner.interfaces.SelectVegetableInterface;
 import com.rise.mealplanner.model.DietPlanInfo;

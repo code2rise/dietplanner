@@ -247,7 +247,7 @@ public class HandyFunctions {
 		}
 	}
 
-	public String getEmailAssocitedToDevice() {
+	public String getEmailAssociatedToDevice() {
 		String myEmail = null;
 		Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
 		Account[] accounts = AccountManager.get(_context).getAccounts();

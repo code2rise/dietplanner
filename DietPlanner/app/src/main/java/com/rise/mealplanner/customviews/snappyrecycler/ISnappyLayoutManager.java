@@ -1,4 +1,4 @@
-package com.rise.mealplanner.customviews;
+package com.rise.mealplanner.customviews.snappyrecycler;
 
 /**
  * An interface that LayoutManagers that should snap to grid should implement.
