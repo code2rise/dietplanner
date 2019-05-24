@@ -36,7 +36,7 @@
             android:layout_weight="0.70"
             android:orientation="vertical">
 
-            <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
+            <com.rise.mealplanner.customviews.CustomTextView
                 android:id="@+id/tv_vegetable_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,9 +46,10 @@
                 android:paddingBottom="2dp"
                 android:textStyle="normal"
                 android:textSize="19sp"
-                android:textColor="@color/primary"/>
+                android:textColor="@color/primary"
+                app:font="Montserrat-Regular.otf"/>
 
-            <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
+            <com.rise.mealplanner.customviews.CustomTextView
                 android:id="@+id/tv_nutrients_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,9 +58,10 @@
                 android:paddingRight="5dp"
                 android:paddingBottom="2dp"
                 android:textStyle="normal"
-                android:textSize="13sp" />
+                android:textSize="13sp"
+                app:font="Montserrat-Light.otf"/>
 
-            <com.rise.mealplanner.customviews.CustomTextViewMontSerratRegularFont
+            <com.rise.mealplanner.customviews.CustomTextView
                 android:id="@+id/tv_meal_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +71,8 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="5dp"
                 android:textStyle="normal"
-                android:textSize="13sp"/>
+                android:textSize="13sp"
+                app:font="Montserrat-Regular.otf"/>
         </RelativeLayout>
     </LinearLayout>
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
+        <com.rise.mealplanner.customviews.CustomTextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +21,8 @@
             android:text="@string/add_vegetable_dialog_box_title"
             android:textAllCaps="true"
             android:textSize="@dimen/add_vegetable_dialog_title_textsize"
-            android:textColor="@color/dark_gray"/>
+            android:textColor="@color/dark_gray"
+            app:font="Montserrat-SemiBold.otf"/>
 
         <View
             android:layout_width="match_parent"

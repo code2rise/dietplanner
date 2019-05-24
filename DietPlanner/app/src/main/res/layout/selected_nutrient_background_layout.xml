@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
+<com.rise.mealplanner.customviews.CustomTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tvSelectedNutrient"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -10,4 +11,5 @@
     android:paddingRight="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:paddingTop="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:paddingBottom="@dimen/nutrient_list_autocomplete_item_top_padding"
-    android:textStyle="normal"/>
+    android:textStyle="normal"
+    app:font="Montserrat-Light.otf"/>

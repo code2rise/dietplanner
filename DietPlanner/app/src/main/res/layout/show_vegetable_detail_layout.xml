@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical">
 
-    <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
+    <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tvVegetableName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,9 +15,10 @@
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
         android:textStyle="normal"
         android:textSize="20sp"
-        android:textColor="@color/primary"/>
+        android:textColor="@color/primary"
+        app:font="Montserrat-SemiBold.otf"/>
 
-    <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
+    <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tvNutrients"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +28,8 @@
         android:layout_marginRight="@dimen/add_vegetable_dialog_margin"
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
         android:textStyle="normal"
-        android:textSize="16sp"/>
+        android:textSize="16sp"
+        app:font="Montserrat-Light.otf"/>
 
     <ImageView
         android:id="@+id/imgVegetablePhoto"

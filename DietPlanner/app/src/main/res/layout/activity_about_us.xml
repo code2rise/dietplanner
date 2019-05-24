@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background_material_light"
-    tools:context=".activities.AboutUsActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:background="@color/background_material_light"
+              tools:context=".activities.AboutUsActivity">
 
     <ImageView
         android:id="@+id/img_app_logo"
@@ -15,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_launcher"/>
 
-    <com.rise.mealplanner.customviews.CustomTextViewMontSerratBoldFont
+    <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tv_app_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +24,8 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="normal"
         android:textSize="18sp"
-        android:text="MealPlanner v1.0"/>
+        android:text="MealPlanner v1.0"
+        app:font="Montserrat-SemiBold.otf"/>
 
     <WebView
         android:id="@+id/wv_credits"

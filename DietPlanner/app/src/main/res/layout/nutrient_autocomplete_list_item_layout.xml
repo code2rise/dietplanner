@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.rise.mealplanner.customviews.CustomTextViewMontSerratLightFont
+    <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tv_nutrient_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textStyle="normal"
-        android:padding="@dimen/nutrient_list_autocomplete_item_padding"/>
+        android:padding="@dimen/nutrient_list_autocomplete_item_padding"
+        app:font="Montserrat-Light.otf"/>
 
 </RelativeLayout>
