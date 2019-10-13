@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "488116718949",
+    "firebase_url": "https://meal-planner-4fa71.firebaseio.com",
+    "project_id": "meal-planner-4fa71",
+    "storage_bucket": "meal-planner-4fa71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488116718949:android:68fef252fc99cea34fa58c",
+        "android_client_info": {
+          "package_name": "com.rise.mealplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488116718949-cdqueser8mi9esf8g1d7jtfv6c6mong8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDohi3jmWz2LR3pvgtCRhu0cEBiQvPl6gs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488116718949-cdqueser8mi9esf8g1d7jtfv6c6mong8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,14 +20,14 @@
             android:spinnerMode="dialog"
             android:background="@drawable/spinner_bg"/>
 
-        <android.support.v7.widget.GridLayout
+        <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gl_weekly_diet_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:columnCount="4"
             app:rowCount="8">
 
-        </android.support.v7.widget.GridLayout>
+        </androidx.gridlayout.widget.GridLayout>
     </LinearLayout>
 
 </RelativeLayout>

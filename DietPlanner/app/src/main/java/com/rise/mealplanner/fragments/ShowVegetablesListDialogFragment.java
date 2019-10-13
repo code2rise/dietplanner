@@ -1,8 +1,8 @@
 package com.rise.mealplanner.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.DialogFragment;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,6 @@ import com.rise.mealplanner.R;
 import com.rise.mealplanner.adapters.SelectVegetableAdapter;
 import com.rise.mealplanner.adapters.SelectedVegetablesViewPagerAdapter;
 import com.rise.mealplanner.db.DatabaseHelper;
-import com.rise.mealplanner.fragments.SelectVegetableDialogFragment;
 import com.rise.mealplanner.interfaces.SelectVegetableInterface;
 import com.rise.mealplanner.model.Meal;
 import com.rise.mealplanner.model.Vegetable;

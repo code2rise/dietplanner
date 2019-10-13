@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/meal_vegetable_detail_cardview_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clickable="false"
-    android:orientation="vertical"
-    app:cardUseCompatPadding="true"
-    app:cardCornerRadius="1dp">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/meal_vegetable_detail_cardview_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:clickable="false"
+                                    android:orientation="vertical"
+                                    app:cardUseCompatPadding="true"
+                                    app:cardCornerRadius="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,4 +76,4 @@
         </RelativeLayout>
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
