@@ -16,7 +16,7 @@
         android:layout_margin="@dimen/week_name_margin"
         android:textStyle="normal"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"
-        app:font="Montserrat-Regular.otf"/>
+        app:fontName="Montserrat-Regular.otf"/>
 
     <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tvWeekDetails"
@@ -27,5 +27,5 @@
         android:layout_marginTop="@dimen/week_name_margin"
         android:textStyle="normal"
         android:textSize="@dimen/week_chooser_spinner_item_textsize"
-        app:font="Montserrat-Regular.otf"/>
+        app:fontName="Montserrat-Regular.otf"/>
 </LinearLayout>

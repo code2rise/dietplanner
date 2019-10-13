@@ -24,7 +24,7 @@
             android:gravity="center"
             android:textSize="@dimen/selected_day_title_textsize"
             android:textStyle="normal"
-            app:font="Montserrat-Regular.otf"/>
+            app:fontName="Montserrat-Regular.otf"/>
 
         <RelativeLayout
             android:layout_width="match_parent"

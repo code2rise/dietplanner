@@ -10,6 +10,6 @@
         android:layout_height="wrap_content"
         android:textStyle="normal"
         android:padding="@dimen/nutrient_list_autocomplete_item_padding"
-        app:font="Montserrat-Light.otf"/>
+        app:fontName="Montserrat-Light.otf"/>
 
 </RelativeLayout>

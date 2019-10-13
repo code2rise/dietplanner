@@ -16,7 +16,7 @@
         android:textStyle="normal"
         android:textSize="20sp"
         android:textColor="@color/primary"
-        app:font="Montserrat-SemiBold.otf"/>
+        app:fontName="Montserrat-SemiBold.otf"/>
 
     <com.rise.mealplanner.customviews.CustomTextView
         android:id="@+id/tvNutrients"
@@ -29,7 +29,7 @@
         android:layout_marginTop="@dimen/add_vegetable_dialog_title_padding"
         android:textStyle="normal"
         android:textSize="16sp"
-        app:font="Montserrat-Light.otf"/>
+        app:fontName="Montserrat-Light.otf"/>
 
     <ImageView
         android:id="@+id/imgVegetablePhoto"

@@ -22,7 +22,7 @@
             android:textAllCaps="true"
             android:textSize="@dimen/add_vegetable_dialog_title_textsize"
             android:textColor="@color/dark_gray"
-            app:font="Montserrat-SemiBold.otf"/>
+            app:fontName="Montserrat-SemiBold.otf"/>
 
         <View
             android:layout_width="match_parent"

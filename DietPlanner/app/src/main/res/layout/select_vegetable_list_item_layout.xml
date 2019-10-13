@@ -24,6 +24,6 @@
         android:paddingRight="2dp"
         android:textStyle="normal"
         android:textSize="@dimen/vegetable_list_item_textsize"
-        app:font="Montserrat-Light.otf"/>
+        app:fontName="Montserrat-Light.otf"/>
 
 </RelativeLayout>

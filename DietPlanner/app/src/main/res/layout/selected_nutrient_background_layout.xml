@@ -12,4 +12,4 @@
     android:paddingTop="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:paddingBottom="@dimen/nutrient_list_autocomplete_item_top_padding"
     android:textStyle="normal"
-    app:font="Montserrat-Light.otf"/>
+    app:fontName="Montserrat-Light.otf"/>

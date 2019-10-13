@@ -25,7 +25,7 @@
         android:textStyle="normal"
         android:textSize="18sp"
         android:text="MealPlanner v1.0"
-        app:font="Montserrat-SemiBold.otf"/>
+        app:fontName="Montserrat-SemiBold.otf"/>
 
     <WebView
         android:id="@+id/wv_credits"

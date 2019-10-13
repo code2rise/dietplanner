@@ -47,7 +47,7 @@
                 android:textStyle="normal"
                 android:textSize="18sp"
                 android:text="Let's Prepare Your Lunch!"
-                app:font="Montserrat-Light.otf"/>
+                app:fontName="Montserrat-Light.otf"/>
         </LinearLayout>
     </LinearLayout>
 
