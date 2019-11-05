@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
@@ -183,7 +185,8 @@ public class DietPlannerActivity extends AppCompatActivity implements
 
             if(resultCode == RESULT_OK) {
 
-                Bitmap decodedBitmap = imageUtility.decodeFile(capturedImagePath);
+//                Bitmap decodedBitmap = imageUtility.decodeFile(capturedImagePath);
+                Bitmap decodedBitmap = (Bitmap) data.getExtras().get("data");
                 String capturedImagePath = imageUtility.saveCapturedImage(decodedBitmap);
 
                 //set image bitmap to image view
@@ -213,7 +216,9 @@ public class DietPlannerActivity extends AppCompatActivity implements
         /*create instance of File with name img.jpg*/
         capturedImagePath = getVegetableImagePath();
         /*put uri as extra in intent object*/
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(capturedImagePath));
+        Uri photoURI = FileProvider.getUriForFile(this, getApplicationContext().getPackageName() + ".provider", capturedImagePath);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+
         /*start activity for result pass intent as argument and request code */
         startActivityForResult(intent, 1);
     }
